@@ -30,7 +30,14 @@ public class Main extends javax.swing.JFrame {
   
     public static void main(String args[]) {
        
+        /*
         
+        
+        Hello islammmmmm
+        
+        
+        
+        */
         int numEmployee = 3;
         Employee [] employee = new Employee[numEmployee];
         employee[0] = new Employee("Ali" , "Tarek" , "nas city" , "leader" , "cs" , 2023 , "Excellent");
