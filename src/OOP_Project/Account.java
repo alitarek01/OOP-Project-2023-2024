@@ -83,6 +83,23 @@ public class Account {
         }
     }
 
+    public boolean equals(Object obj) {
+        // Check if the objects are the same instance
+        if (this == obj) {
+            return true;
+        }
+
+        // Check if the object is null or of a different class
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+
+        Account other = (Account) obj;
+
+        return accountNumber == other.accountNumber;
+    }
+
 
 
     public void DisplayInfo() {
