@@ -1,3 +1,5 @@
+package OOP_Project;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,8 +36,8 @@ public class Account {
     }
     public void AskTypeOfAccount( String accountHolder, double balance)
     {
-        System.out.println("Choose The Type Of Account ");
-        System.out.println("For Saving Account Choose 1 \n For Current Account Choose 2");
+        System.out.println("Choose The Type Of OOP_Project.Account ");
+        System.out.println("For Saving OOP_Project.Account Choose 1 \n For Current OOP_Project.Account Choose 2");
         Type.nextInt(choice);
         if (choice == 1)
         {
@@ -84,8 +86,8 @@ public class Account {
 
 
     public void DisplayInfo() {
-        System.out.println("Account Number: " + accountNumber);
-        System.out.println("Account Holder: " + customerName);
+        System.out.println("OOP_Project.Account Number: " + accountNumber);
+        System.out.println("OOP_Project.Account Holder: " + customerName);
         System.out.println("Balance: $" + balance);
     }
 }

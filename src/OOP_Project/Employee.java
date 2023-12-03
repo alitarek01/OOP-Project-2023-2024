@@ -1,4 +1,4 @@
-/*
+package OOP_Project;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -48,7 +48,7 @@ public class Employee {
         }
     }
     
-//    void EmployeeCreatingAccount(Client [] clients , Account newAccount)
+//    void EmployeeCreatingAccount(Client [] clients , OOP_Project.Account newAccount)
 //    {
 //        
 //        for (int i = 0; i < clients.length; i++) 
@@ -79,7 +79,7 @@ public class Employee {
     
     
     
-     Account[] addAccountToClient(Client [] clients,  Account newAccount) {
+     Account[] addAccountToClient(Client [] clients, Account newAccount) {
         
         Boolean availble = this.employeeUPChecker(clients);
         
