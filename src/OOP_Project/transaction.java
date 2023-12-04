@@ -1,5 +1,6 @@
 package OOP_Project;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class transaction {
@@ -8,14 +9,17 @@ public class transaction {
     private String customerId;
     private String recipientId;
     private String employeeId;
-    private boolean transactionStatus;
+    private boolean transactionStatus ;
     private Date transactionDate;
     private double transactionAmount;
     private String transactionType;//deposit,withdrawl,transfer
     private String transactionDescription;//transfer reason
-    
-    public transaction(String customerId, Date transactionDate, double transactionAmount
-    , String transactionType, String transactionDescription,String recipientId, String employeeId) {
+    private static ArrayList<Account> Account = new ArrayList<>();
+    int index;
+    int indexOfRecipient;
+
+    public transaction(String customerId, Date transactionDate, double transactionAmount,String transactionType,
+    String transactionDescription, String recipientId, String employeeId) {
         this.transactionId = Integer.toString(counter++);
         this.customerId = customerId;
         this.transactionDate = transactionDate;
@@ -24,51 +28,89 @@ public class transaction {
         this.transactionDescription = transactionDescription;
         this.recipientId = recipientId;
         this.employeeId = employeeId;
-        if (transactionAmount > 0) {
-            if (Account.checkSufficientBalance(customerId, transactionAmount)) {
-                    Account.updateBalance(-transactionAmount);
-                    Account.updateBalance(transactionAmount);
-                    this.transactionStatus = true;
+        index = findAccountIndex(customerId);
+        indexOfRecipient = findAccountIndex(recipientId);
+
+        if(customerId != recipientId){
+            if (index != -1 || indexOfRecipient != -1) {
+                if (transactionAmount > 0) {
+                    if (Account.get(index).checkSufficientBalance(transactionAmount)) {
+                        Account.get(index).updateBalance(-transactionAmount);
+                        Account.get(indexOfRecipient).updateBalance(transactionAmount);
+                        this.transactionStatus = true;
+                    } else {
+                        this.transactionStatus = false;
+                        System.out.println("Insufficient balance.");
+                    }
                 } else {
                     this.transactionStatus = false;
-                    System.out.println("Insufficient balance.");
+                    System.out.println("Invalid transfer amount.");
+                }
+            } else {
+                this.transactionStatus = false;
+                System.out.println("Customer or Recipient not found.");
             }
-        } else {
+        }else{
             this.transactionStatus = false;
-            System.out.println("Invalid deposit amount.");
+            System.out.println("Customer account number can not be equal to Recipient account number.");
         }
     }
-    public transaction(String customerId, Date transactionDate, double transactionAmount
-    , String transactionType, String employeeId) {
+
+    public transaction(String customerId, Date transactionDate, double transactionAmount,
+    String transactionType, String employeeId) {
         this.transactionId = Integer.toString(counter++);
         this.customerId = customerId;
         this.transactionDate = transactionDate;
         this.transactionAmount = transactionAmount;
         this.employeeId = employeeId;
-        if(transactionType.equals("Deposit")){
-            if (transactionAmount > 0) {
-                this.transactionStatus = true;
-                transactionDescription = "Deposit to account";
-                Account.updateBalance(customerId, transactionAmount);
+        index = findAccountIndex(customerId);
+
+        if (index != -1) {
+            if (transactionType.equals("Deposit")) {
+                handleDeposit();
             } else {
-                this.transactionStatus = false;
-                System.out.println("Invalid deposit amount.");
+                handleWithdrawal();
             }
-        }else{
-            if (transactionAmount > 0) {
-                if (Account.checkSufficientBalance(customerId, transactionAmount)) {
-                    this.transactionStatus = true;
-                    transactionDescription = "Withdrawal from account";
-                    Account.updateBalance(customerId, -transactionAmount);
-                } else {
-                    this.transactionStatus = false;
-                    System.out.println("Insufficient balance.");
-                }
+        } else {
+            this.transactionStatus = false;
+            System.out.println("Customer not found.");
+        }
+    }
+
+    private void handleDeposit() {
+        if (transactionAmount > 0) {
+            this.transactionStatus = true;
+            transactionDescription = "Deposit to account";
+            Account.get(index).updateBalance(transactionAmount);
+        } else {
+            this.transactionStatus = false;
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    private void handleWithdrawal() {
+        if (transactionAmount > 0) {
+            if (Account.get(index).checkSufficientBalance(transactionAmount)) {
+                this.transactionStatus = true;
+                transactionDescription = "Withdrawal from account";
+                Account.get(index).updateBalance(-transactionAmount);
             } else {
                 this.transactionStatus = false;
-                System.out.println("Invalid withdrawal amount.");
+                System.out.println("Insufficient balance.");
+            }
+        } else {
+            this.transactionStatus = false;
+            System.out.println("Invalid withdrawal amount.");
+        }
+    }
+
+    private int findAccountIndex(String customerId) {
+        for (int i = 0; i < Account.size(); i++) {
+            if (Account.get(i).getAccountNumber().equals(customerId)) {
+                return i;
             }
         }
+        return -1; // Customer not found
     }
 
     public String getemployeeId() {
@@ -136,6 +178,7 @@ public class transaction {
 
     @Override
     public String toString() {
+        String status = transactionStatus ? "Successful" : "Failed";
         return "Transaction{" +
                 "transactionId='" + transactionId + '\'' +
                 ", customerId='" + customerId + '\'' +
@@ -145,6 +188,7 @@ public class transaction {
                 ", transactionDescription='" + transactionDescription + '\'' +
                 ", RecipientId='" + recipientId + '\'' +
                 ", employeeId='" + employeeId +
+                ", transactionStatus='" + status + '\'' +
                 '}';
     }
 

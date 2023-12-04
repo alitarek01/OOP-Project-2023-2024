@@ -1,10 +1,12 @@
 package OOP_Project;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Account {
     protected int accountNumber;
+    public String getAccountNumber() {
+        return Integer.toString(accountNumber);
+    }
     protected String customerName;
 
     double balance;
@@ -72,7 +74,7 @@ public class Account {
 
     }
 
-    public boolean checkSufficientbalance (double amount)
+    public boolean checkSufficientBalance (double amount)
     {
         if(amount <= this.balance )
         {
