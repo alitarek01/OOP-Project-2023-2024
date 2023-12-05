@@ -20,8 +20,16 @@ public class Employee {
     int yearOfGraduation;
     String totalGrade;
     static int counter = 1;
-    
-    Employee(String username , String password , String firtName, String lastName ,String address , String position  , String graduatedCollage , int yearOfGraduation ,  String totalGrade)
+
+    //For testing
+
+    public Employee(String username, String password, int id) {
+        this.username = username;
+        this.password = password;
+        this.id = id;
+    }
+
+    Employee(String username , String password , String firtName, String lastName , String address , String position  , String graduatedCollage , int yearOfGraduation , String totalGrade)
     {
         this.id = counter;
         this.username = username;
@@ -36,7 +44,7 @@ public class Employee {
         counter++;
  
     }
-    
+
     
     void EmployeeEditInfo(Employee [] employee , String address , String position)
     {
@@ -62,42 +70,42 @@ public class Employee {
 //        
 //    }
     
-    Boolean employeeUPChecker(Client [] clients)
-    {
-        for (int i = 0; i < clients.length; i++) 
-        {
-            if (clients[i].username == this.username && clients[i].password == this.password) 
-            {
-             return True;   
-            }
-   
-        }
-        
-        return False;
-    }
+//    Boolean employeeUPChecker(Client [] clients)
+//    {
+//        for (int i = 0; i < clients.length; i++)
+//        {
+//            if (clients[i].username == this.username && clients[i].password == this.password)
+//            {
+//             return True;
+//            }
+//
+//        }
+//
+//        return False;
+//    }
     
     
     
     
-     Account[] addAccountToClient(Client [] clients, Account newAccount) {
-        
-        Boolean availble = this.employeeUPChecker(clients);
-        
-         if (availble) 
-         {
-            int length = clients.length;
-
-        // Create a new array with increased size
-            Client[] newArray = new Client[length + 1];
-
-        // Copy the elements from the original array to the new array
-             System.arraycopy(clients, 0, newArray, 0, length);
-
-        // Add the new item to the last index
-             newArray[length] = newAccount;
-
-              return newArray;   
-         }
+//     Account[] addAccountToClient(Client [] clients, Account newAccount) {
+//
+//        Boolean availble = this.employeeUPChecker(clients);
+//
+//         if (availble)
+//         {
+//            int length = clients.length;
+//
+//        // Create a new array with increased size
+//            Client[] newArray = new Client[length + 1];
+//
+//        // Copy the elements from the original array to the new array
+//             System.arraycopy(clients, 0, newArray, 0, length);
+//
+//        // Add the new item to the last index
+//             newArray[length] = newAccount;
+//
+//              return newArray;
+//         }
 
          
          /*
@@ -107,7 +115,7 @@ public class Employee {
          
          */
          
-     }
+//     }
     
      static Employee[] addToArray(Employee[] array, Employee newItem) {
         int length = array.length;
@@ -124,15 +132,21 @@ public class Employee {
         return newArray;
     }
      
-     static EmployeeSearchForClient(Client [] clients , int id)
-     {
-         for(Client client : clients)
-         {
-             if (client.id == id) 
-             {
-                 // Display all data of the client
-             }
-         }
-     }
+//     static EmployeeSearchForClient(Client [] clients , int id)
+//     {
+//         for(Client client : clients)
+//         {
+//             if (client.id == id)
+//             {
+//                 // Display all data of the client
+//             }
+//         }
+//     }
+
+    public Client create_a_client (Client clients_arr){
+        clients_arr = new Client(2022170873,"Youssef", "Mahmoud","joe","1234",1060113886);
+        return clients_arr;
+        // add_acc_to_client(clients_arr , 2);
+    }
     
 }

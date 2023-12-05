@@ -57,14 +57,14 @@ public class Account {
         }
 
     }
-    public Account [] (SavingAccount temp)
-    {
-        int arrayOfLength = this.length ;
-        Account [] array  = new Account[arrayOfLength + 1];
-        System.arraycopy(this , 0 , array , 0 ,arrayOfLength);
-        array[arrayOfLength] = temp ;
-        return array ;
-    }
+//    public Account [] (SavingAccount temp)
+//    {
+//        int arrayOfLength = this.length ;
+//        Account [] array  = new Account[arrayOfLength + 1];
+//        System.arraycopy(this , 0 , array , 0 ,arrayOfLength);
+//        array[arrayOfLength] = temp ;
+//        return array ;
+//    }
 
     public void  updateBalance (double amount)
     {

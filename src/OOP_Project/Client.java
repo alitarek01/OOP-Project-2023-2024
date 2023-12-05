@@ -12,7 +12,7 @@ public class Client {
     long telephoneNumber;
     boolean stateOfTheAccount = true;
    public static int acc_num=0;
-   public Accounts [] MyAccounts = new Accounts[4];
+   public Account [] MyAccounts = new Account[4];
    Scanner scanner = new Scanner(System.in);
     //Constructors
     public Client(int ID, String firstName, String lastName, String username, String password, long telephoneNumber) {
@@ -23,10 +23,12 @@ public class Client {
         this.password = password;
         this.telephoneNumber = telephoneNumber;
     }
-
-
-
-
+    //For testing
+    public Client(int ID, String username, String password) {
+        this.ID = ID;
+        this.username = username;
+        this.password = password;
+    }
     //Methods
 
     //● Edit personal information.
