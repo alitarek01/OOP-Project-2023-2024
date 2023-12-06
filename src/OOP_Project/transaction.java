@@ -12,7 +12,7 @@ public class transaction {
     private boolean transactionStatus ;
     private Date transactionDate;
     private double transactionAmount;
-    private String transactionType;//deposit,withdrawl,transfer
+    private String transactionType;//deposit,withdraw,transfer
     private String transactionDescription;//transfer reason
     private static ArrayList<Account> Account = new ArrayList<>();
     int index;
