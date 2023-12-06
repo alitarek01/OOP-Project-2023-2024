@@ -1,4 +1,5 @@
 package OOP_Project;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -13,6 +14,11 @@ public class Client {
     boolean stateOfTheAccount = true;
    public static int acc_num=0;
    public Account [] MyAccounts = new Account[4];
+
+
+   // written by ali
+   public ArrayList<Account> myAccounts;
+
    Scanner scanner = new Scanner(System.in);
     //Constructors
     public Client(int ID, String firstName, String lastName, String username, String password, long telephoneNumber) {
@@ -22,7 +28,37 @@ public class Client {
         this.username = username;
         this.password = password;
         this.telephoneNumber = telephoneNumber;
+
+        // Written by ali
+        this.myAccounts = new ArrayList<>();
+        System.out.println("Enter 1 to create a saving account or 2 to create a current account:");
+        int num = scanner.nextInt();
+        if (num == 1)
+        {
+            // Write a statement asking the user to enter details of the account and give it to the constructor
+
+            SavingAccount temp = new SavingAccount();
+            this.addAccount(temp);
+
+        }
+        else if (num == 2)
+        {
+            // Write a statement asking the user to enter details of the account and give it to the constructor
+
+            CurrentAccount temp = new CurrentAccount();
+            this.addAccount(temp);
+        }
     }
+
+// Written by ali for testing
+
+    public void addAccount(Account account) {
+        myAccounts.add(account);
+    }
+
+
+
+
     //For testing
     public Client(int ID, String username, String password) {
         this.ID = ID;

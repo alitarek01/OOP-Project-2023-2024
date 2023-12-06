@@ -30,7 +30,7 @@ public class transaction {
         this.employeeId = employeeId;
         index = findAccountIndex(customerId);
         indexOfRecipient = findAccountIndex(recipientId);
-
+// use equals() instead of != with strings
         if(customerId != recipientId){
             if (index != -1 || indexOfRecipient != -1) {
                 if (transactionAmount > 0) {
