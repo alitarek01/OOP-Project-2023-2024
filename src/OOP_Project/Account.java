@@ -1,18 +1,16 @@
 package OOP_Project;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
-import java.text.SimpleDateFormat;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
+import java.time.LocalDateTime;  // import the LocalDate class
+import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 
 
 
 public class Account {
     protected int accountNumber;
-    public String getAccountNumber() {
-        return Integer.toString(accountNumber);
+    public int getAccountNumber() {
+        return accountNumber;
     }
 
 
@@ -26,6 +24,7 @@ public class Account {
 
     double transactionAmount = 0.0 ;
 
+    Scanner type = new Scanner(System.in) ;
 
 
     ArrayList <transaction> accountTransaction = new ArrayList<>();
@@ -105,49 +104,51 @@ public class Account {
         return accountNumber == other.accountNumber;
     }
 
-    public void makeTransaction ()
-    {
-        int transactionType = 0 ;
-
-        System.out.println("choose your transaction type \n for deposit press 1 \n for withdraw press 2 \n for transfer press 3  ");
-        Scanner type = new Scanner(System.in) ;
-        type.nextInt(transactionType) ;
+    public void makeTransaction () {
+        System.out.println("choose your transaction type \n press 1 to make a deposit \n press 2 to make a Withdraw \n press 3 to make a transfer  ");
+        int transactionType = type.nextInt() ;
+        double transactionAmount ;
+        int recipientAccountNumber;
+        LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        boolean addnote;
+        String transactionnote;
         if (transactionType == 1)
         {
 
-            Date transactionDate = null;
-            double transactionAmount = 0.0 ;
+            transactionAmount = type.nextDouble();
+            //System.out.println(formattedDate);  // Display the current date
+            System.out.println("enter the amount you want to deposit ");
+            accountTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Deposit"));
+
+        }
+        else if (transactionType == 2) {
+            System.out.println("enter the amount you want to deposit ");
+            transactionAmount = type.nextDouble();
+            accountTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Withdraw"));
+        }
+        else if (transactionType == 3){
             System.out.println("enter the amount you want to deposit ");
             transactionAmount = type.nextDouble();
 
+            System.out.println("Enter the recipient Account number:");
+            recipientAccountNumber=type.nextInt();
 
-            // Define the date format expected from the user
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println("\n\nPress 1 if you want to add note");
+            addnote = type.nextBoolean();
 
-            try {
-                // Parse the user input to a Date object
-                System.out.print("Enter a date (yyyy-MM-dd): ");
-                String userInput = type.nextLine();
-                Date transactiondate = dateFormat.parse(userInput);
-
-                // Print the parsed date
-                System.out.println("Parsed Date: " + transactiondate);
-            } catch (ParseException e) {
-                // Handle the case where the entered date is not in the expected format
-                System.out.println("Invalid date format. Please enter the date in yyyy-MM-dd format.");
-            } finally {
-                // Close the scanner to prevent resource leak
-                type.close();
+            if(addnote) {
+                System.out.println("Write Note for the transaction:");
+                transactionnote = type.next();
+                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"شيلها",
+                    transactionnote,  recipientAccountNumber));
             }
-
-            accountTransaction.add(new transaction( accountNumber ,transactionDate, transactionAmount,
-             "deposit",  ""));
-
-
-
+            else {
+                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"شيلها",
+                        "",  recipientAccountNumber));
+            }
         }
-
-
     }
 
 

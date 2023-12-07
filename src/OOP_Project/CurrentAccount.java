@@ -2,9 +2,9 @@ package OOP_Project;
 
 public class CurrentAccount extends Account {
     protected static final double MIN_BALANCE = 3000;
-      public CurrentAccount( String customerName, double balance )
+      public CurrentAccount(double balance )
       {
-          super(customerName , balance);
+          super( balance);
 
       }
     protected void checkMinimumBalance() {

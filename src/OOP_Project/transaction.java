@@ -1,33 +1,33 @@
 package OOP_Project;
 
 import java.util.ArrayList;
-import java.util.Date;
-
+//import java.util.Date;
 public class transaction {
     private static int counter = 0;
-    private String transactionId;
-    private String customerId;
-    private String recipientId;
-    private String employeeId;
+    private int transactionId;
+    private int customerId;
+    private int recipientId;
+    private int employeeId;
     private boolean transactionStatus ;
-    private Date transactionDate;
+    private String transactionDate;
     private double transactionAmount;
     private String transactionType;//deposit,withdraw,transfer
     private String transactionDescription;//transfer reason
     private static ArrayList<Account> Account = new ArrayList<>();
+
     int index;
     int indexOfRecipient;
 
-    public transaction(String customerId, Date transactionDate, double transactionAmount,String transactionType,
-    String transactionDescription, String recipientId, String employeeId) {
-        this.transactionId = Integer.toString(counter++);
+    public transaction(int customerId, String transactionDate, double transactionAmount,String transactionType,
+    String transactionDescription, int recipientId) {
+        this.transactionId = counter++;
         this.customerId = customerId;
         this.transactionDate = transactionDate;
         this.transactionAmount = transactionAmount;
         this.transactionType = transactionType;
         this.transactionDescription = transactionDescription;
         this.recipientId = recipientId;
-        this.employeeId = employeeId;
+       // this.employeeId = employeeId;
         index = findAccountIndex(customerId);
         indexOfRecipient = findAccountIndex(recipientId);
 // use equals() instead of != with strings
@@ -56,13 +56,13 @@ public class transaction {
         }
     }
 
-    public transaction(String customerId, Date transactionDate, double transactionAmount,
-    String transactionType, String employeeId) {
-        this.transactionId = Integer.toString(counter++);
+    public transaction(int customerId, String transactionDate, double transactionAmount,
+    String transactionType) {
+        this.transactionId = counter++;
         this.customerId = customerId;
         this.transactionDate = transactionDate;
         this.transactionAmount = transactionAmount;
-        this.employeeId = employeeId;
+//        this.employeeId = employeeId;
         index = findAccountIndex(customerId);
 
         if (index != -1) {
@@ -104,51 +104,51 @@ public class transaction {
         }
     }
 
-    private int findAccountIndex(String customerId) {
+    private int findAccountIndex(int customerId) {
         for (int i = 0; i < Account.size(); i++) {
-            if (Account.get(i).getAccountNumber().equals(customerId)) {
+            if (Account.get(i).getAccountNumber() == customerId) {
                 return i;
             }
         }
         return -1; // Customer not found
     }
 
-    public String getemployeeId() {
+    public int getemployeeId() {
         return employeeId;
     }
     
-    public void setemployeeId(String employeeId) {
+    public void setemployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 
-    public String getTransactionId() {
+    public int getTransactionId() {
         return transactionId;
     }
     
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
     }
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-    public String getRecipientId() {
+    public int getRecipientId() {
         return recipientId;
     }
 
-    public void setRecipientId(String recipientId) {
+    public void setRecipientId(int recipientId) {
         this.recipientId = recipientId;
     }
 
-    public Date getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 

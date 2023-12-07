@@ -3,8 +3,8 @@ package OOP_Project;
 public class SavingAccount extends Account {
     protected final double interestRate = 0.2;
 
-    public SavingAccount( String customerName, double balance) {
-        super( customerName, balance);
+    public SavingAccount(  double balance) {
+        super(balance);
     }
 
 

@@ -4,11 +4,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Client[] clients = new Client[4];
+         Client[] clients = new Client[4];
 
         //Done by ali
-        ArrayList<Client> clientsss = new ArrayList<>();
-
+        ArrayList<Client> clients2 = new ArrayList<>();
+        clients2.add(new Client(2022170873,"Youssef", "Mahmoud","joe","1230",1060113886));
         clients[0] = new Client(2022170873,"Youssef", "Mahmoud","joe","1230",1060113886);
         clients[1] = new Client(2022170873,"aly", "maklad","loe","1231",1060113886);
         clients[2] = new Client(2022170873,"ahmed", "attia","mido","1232",1060113886);
