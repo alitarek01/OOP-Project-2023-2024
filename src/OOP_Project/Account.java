@@ -112,8 +112,8 @@ public class Account {
         LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedDate = myDateObj.format(myFormatObj);
-        boolean addnote;
-        String transactionnote;
+        boolean addNote;
+        String transactionNote;
         if (transactionType == 1)
         {
 
@@ -135,17 +135,17 @@ public class Account {
             System.out.println("Enter the recipient Account number:");
             recipientAccountNumber=type.nextInt();
 
-            System.out.println("\n\nPress 1 if you want to add note");
-            addnote = type.nextBoolean();
+            System.out.println("\nPress 1 if you want to add note");
+            addNote = type.nextBoolean();
 
-            if(addnote) {
+            if(addNote) {
                 System.out.println("Write Note for the transaction:");
-                transactionnote = type.next();
-                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"شيلها",
-                    transactionnote,  recipientAccountNumber));
+                transactionNote = type.next();
+                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"transfer",
+                        transactionNote,  recipientAccountNumber));
             }
             else {
-                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"شيلها",
+                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"",
                         "",  recipientAccountNumber));
             }
         }
