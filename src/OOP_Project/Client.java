@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Client {
     //Client: (ID, FirstName, LastName, Account number (must be unique),Username, Password, Telephone number,
     // State of the account (Active or closed), Type of the account, Balance)
-    int ID;
+    public int ID;
     String firstName;
     String lastName;
     String username;
@@ -14,12 +14,12 @@ public class Client {
     boolean stateOfTheAccount = true;
    public static int acc_num=0;
    public Account [] MyAccounts = new Account[4];
+   public ArrayList<Account> myAccounts = new ArrayList<>();
+   Scanner scanner = new Scanner(System.in);
 
 
    // written by ali
-   public ArrayList<Account> myAccounts = new ArrayList<>();
 
-   Scanner scanner = new Scanner(System.in);
     //Constructors
     public Client(int ID, String firstName, String lastName, String username, String password, long telephoneNumber) {
         this.ID = ID;
@@ -28,33 +28,8 @@ public class Client {
         this.username = username;
         this.password = password;
         this.telephoneNumber = telephoneNumber;
-        while (true) {
-            System.out.println("Press 1 to Create saving account\nPress 2 to Create current account");
-            int inputAccountType;
-            inputAccountType = scanner.nextInt();
-            System.out.println("enter initial balance:");
-            double initialbalance;
-            initialbalance = scanner.nextDouble();
-            if (inputAccountType == 1) {
-                myAccounts.add(new SavingAccount(initialbalance));
-                break;
-            }
-            if (inputAccountType == 2) {
-                myAccounts.add(new CurrentAccount(initialbalance));
-                break;
-            }
-            else{continue;}
-        }
+
     }
-
-// Written by ali for testing
-
-    public void addAccount(Account account) {
-        myAccounts.add(account);
-    }
-
-
-
 
     //For testing
     public Client(int ID, String username, String password) {
@@ -81,12 +56,12 @@ public class Client {
 
     //● Display details of his account.
     public void DisplayDetailsofhisAccount (){
-        System.out.println(getFirstName());
-        System.out.println(getLastName());
-        System.out.println(getUsername());
-        System.out.println(getPassword());
-        System.out.println(getID());
-        System.out.println(getTelephoneNumber());
+        System.out.println("FirstName: "+getFirstName());
+        System.out.println("LastName: "+getLastName());
+        System.out.println("ID: "+getID());
+        System.out.println("Username: "+getUsername());
+        System.out.println("Password: "+getPassword());
+        System.out.println("TelephoneNumber: "+getTelephoneNumber());
         System.out.println(isStateOfTheAccount());
     }
 

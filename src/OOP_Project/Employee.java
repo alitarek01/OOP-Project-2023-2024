@@ -2,13 +2,11 @@ package OOP_Project;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-import java.util.ArrayList;
-import org.w3c.dom.ls.LSOutput;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
  * @author alit7
  */
 public class Employee {
@@ -29,7 +27,6 @@ public class Employee {
     static int counter = 1;
 
 
-
     //For testing
 
     public Employee(String username, String password, int id) {
@@ -38,8 +35,7 @@ public class Employee {
         this.id = id;
     }
 
-    Employee(String username , String password , String firstName, String lastName , String address , String position  , String graduatedCollage , int yearOfGraduation , String totalGrade)
-    {
+    Employee(String username, String password, String firstName, String lastName, String address, String position, String graduatedCollage, int yearOfGraduation, String totalGrade) {
         this.id = counter;
         this.username = username;
         this.password = password;
@@ -51,44 +47,34 @@ public class Employee {
         this.yearOfGraduation = yearOfGraduation;
         this.totalGrade = totalGrade;
         counter++;
- 
+
     }
 
-    
-    void EmployeeEditInfo(  )
-    {
+    // Methods
+    void EmployeeEditInfo() {
         System.out.println("Enter 1 to ");  // ask him what to change
         System.out.println("Enter your new address:");
         String address = scanner.nextLine();
         String position = scanner.nextLine();
-                this.address = address;
-                this.position = position;
+        this.address = address;
+        this.position = position;
 
 
     }
 
-    /*
-    *
-    * Create a method to add an account to the client
-
-    *
-    * */
-
-
     // This function is used to check if the username and password of the client are correct
-    Boolean UPcheckerForClient(String user , String pass , Client [] clients)
-    {
+    Boolean UPcheckerForClient(String user, String pass, Client[] clients) {
 
-        for (int i = 0 ; i < clients.length ; i++ )
-        {
-            if (clients[i].username.equals(user) && clients[i].password.equals(pass)){return true;}
+        for (int i = 0; i < clients.length; i++) {
+            if (clients[i].username.equals(user) && clients[i].password.equals(pass)) {
+                return true;
+            }
         }
 
         return false;
     }
 
-
-    void createAClient (ArrayList <Client>  clients2){
+    void createAClient(ArrayList<Client> clients2) {
         System.out.println("Enter Client's ID:");
         int ID = scanner.nextInt();
 
@@ -103,25 +89,31 @@ public class Employee {
         String password = scanner.next();
         System.out.println("Enter Client's telephoneNumber:");
         long telephoneNumber = scanner.nextLong();
-        clients2.add(new Client(ID,  firstName,  lastName,  username,  password,  telephoneNumber));
+        clients2.add(new Client(ID, firstName, lastName, username, password, telephoneNumber));
 
     }
 
-
-    // this method is used to create an account to an existing client
-    void EmployeeCreatingAccount(ArrayList <Client> clients2  , int ID) {
+    void EmployeeCreatingAccount(ArrayList<Client> clients2, int ID) {
         String clientUsername;
         String clientPassword;
+        int clientIndex=-1;
+        boolean clientFounded = false;
         for (int i = 0; i < clients2.size(); i++) {
             if (clients2.get(i).ID == ID) {
-
+                clientFounded = true;
+                clientIndex = i;
+                break;
+            }
+        }
+        if (clientFounded) {
+            while (true) {
                 System.out.println("Enter the username and password of the client "); // the program asking the employee to enter the username and password of the client to proceed
-                System.out.println("Username:");
+                System.out.println("1Username:");
                 clientUsername = scanner.nextLine();
 
                 System.out.println("Password:");
                 clientPassword = scanner.nextLine();
-                if (clients2.get(i).username.equals(clientUsername) && clients2.get(i).password.equals(clientPassword)) {
+                if (clients2.get(clientIndex).username.equals(clientUsername) && clients2.get(clientIndex).password.equals(clientPassword)) {
                     System.out.println("Press 1 to Create saving account\nPress 2 to Create current account\nPress 0 to cancel:");
                     int inputAccountType;
                     inputAccountType = scanner.nextInt();
@@ -129,28 +121,32 @@ public class Employee {
                     double initialbalance;
                     initialbalance = scanner.nextDouble();
                     if (inputAccountType == 1) {
-                        clients2.get(i).myAccounts.add(new SavingAccount(initialbalance));
+                        clients2.get(clientIndex).myAccounts.add(new SavingAccount(initialbalance));
+                        break;
                     }
-                    if (inputAccountType == 2) {
-                        clients2.get(i).myAccounts.add(new CurrentAccount(initialbalance));
+                    else if (inputAccountType == 2) {
+                        clients2.get(clientIndex).myAccounts.add(new CurrentAccount(initialbalance));
+                        break;
                     }
 
+                } else {
+                    System.out.println("wrong input");
+
                 }
-            } else {
-                System.out.println("ID not found\nTry Again!");
             }
 
         }
-
+        else {
+            System.out.println("ID not found\nTry Again!");
+        }
     }
 
-    Boolean employeeUPChecker(Client [] clients)
-    {
-        for (int i = 0; i < clients.length; i++)
-        {
-            if (clients[i].username == this.username && clients[i].password == this.password)
-            {
-             return true;
+
+
+    Boolean employeeUPChecker(Client[] clients) {
+        for (int i = 0; i < clients.length; i++) {
+            if (clients[i].username == this.username && clients[i].password == this.password) {
+                return true;
             }
 
         }
@@ -175,7 +171,7 @@ public class Employee {
 
 //     }
 
-     static Employee[] addToArray(Employee[] array, Employee newItem) {
+    static Employee[] addToArray(Employee[] array, Employee newItem) {
         int length = array.length;
 
         // Create a new array with increased size

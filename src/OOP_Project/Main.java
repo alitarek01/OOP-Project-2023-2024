@@ -4,16 +4,23 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-         Client[] clients = new Client[4];
+        Client[] clients = new Client[4];
+        clients[0] = new Client(2022170873, "Youssef", "Mahmoud", "joe", "1230", 1060113886);
+        clients[1] = new Client(2022170873, "aly", "maklad", "loe", "1231", 1060113886);
+        clients[2] = new Client(2022170873, "ahmed", "attia", "mido", "1232", 1060113886);
+        clients[3] = new Client(2022170873, "omar", "amged", "mego", "1233", 1060113886);
 
-        //Done by ali
         ArrayList<Client> clients2 = new ArrayList<>();
-        clients2.add(new Client(2022170873,"Youssef", "Mahmoud","joe","1230",1060113886));
-        clients[0] = new Client(2022170873,"Youssef", "Mahmoud","joe","1230",1060113886);
-        clients[1] = new Client(2022170873,"aly", "maklad","loe","1231",1060113886);
-        clients[2] = new Client(2022170873,"ahmed", "attia","mido","1232",1060113886);
-        clients[3] = new Client(2022170873,"omar", "amged","mego","1233",1060113886);
+        clients2.add (new Client(2022170873, "Youssef", "Mahmoud", "joe", "1230", 1060113886));
+        clients2.add (new Client(2022170873, "aly", "maklad", "loe", "1231", 1060113886));
+        clients2.add (new Client(2022170873, "ahmed", "attia", "mido", "1232", 1060113886));
+        clients2.add (new Client(2022170873, "omar", "amged", "mego", "1233", 1060113886));
 
+        ArrayList<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("dude","streamgamed",100 ));
+        employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
+        employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
+      //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
         while (true) {
             System.out.println("press 1 to sign in as a Client");
             System.out.println("press 2 to sign in as a Employee");
@@ -26,9 +33,9 @@ public class Main {
                     String Username = scanner.next();
                     System.out.print("Enter Password:");
                     String Password = scanner.next();
-                    int clientindex=-1;
+                    int clientindex = -1;
                     for (int i = 0; i < 4; i++) {
-                        if (Username.equals(clients[i].username) && Password.equals(clients[i].password)) {
+                        if (Username.equals(clients2.get(i).username) && Password.equals(clients2.get(i).password)) {
                             signInStatus = true;
                             clientindex = i;
                             break;
@@ -37,25 +44,56 @@ public class Main {
                     if (signInStatus) {
                         System.out.println("\nSigned in Successfully\n");
                         System.out.println("This is Operations that you can do on your account:");
-                        System.out.println("1-Display Details of Your account");
-                        clients[clientindex].DisplayDetailsofhisAccount();
 
-                    } else {
+                        System.out.println("1-Display Details of Your account");
+                        System.out.println("2-Edit personal information");
+                        System.out.println("3-Enter Account");
+                        System.out.println("Your Accounts:");
+                        for (int j = 0; j < clients2.get(clientindex).myAccounts.size(); j++) {
+                            System.out.println("Account " + (j + 1) + ":");
+                            System.out.println("Account no.= " + clients2.get(clientindex).myAccounts.get(j).getAccountNumber());
+                            System.out.println("Balance= " + clients2.get(clientindex).myAccounts.get(j).getBalance()+"\n\n");
+
+                        }
+                        System.out.println("Choice: ");
+                        int clientoperations = scanner.nextInt();
+                        if(clientoperations==1){clients2.get(clientindex).DisplayDetailsofhisAccount();}
+                        else if(clientoperations==2){clients2.get(clientindex).EditPersonalInformation();}
+                        else if(clientoperations==3) {
+                            System.out.print("choose Account (1,2,3,4)");
+                            int chooseaccount = scanner.nextInt();
+                            if (chooseaccount == 1 || chooseaccount == 2 || chooseaccount == 3 || chooseaccount == 4) {
+                                clients2.get(clientindex).myAccounts.get(chooseaccount - 1);
+                                
+                            }
+                        }
+                    }
+                    else {
                         System.out.println("Wrong Username or Password");
                         System.out.println("Please try again!");
                         continue;
 
                     }
-                    if (signas == 2) {
-
-                    }
-                    if (signas == 3) {
-
+                if (signas == 2) {
+                    //h7tago wna b3ed al create account ll client
+                    System.out.println("Do you want to Create another account?");
+                    System.out.println("1:Yes\n2:NO");
+                    if (scanner.nextInt() == 1) {
+                        continue;
+                    } else if (scanner.nextInt() == 2) {
+                        break;
+                    } else {
+                        System.out.println("wrong Input,Try Again!");
                     }
 
                 }
+                if (signas == 3) {
+
+                }
+
+                }
+
             }
-        }
             // Client[] clients_arr = new Client[2];
 
 //        clients_arr[0] = new Client();
@@ -116,6 +154,6 @@ public class Main {
             //  clients_arr[2].display_balance(5);
 
 
-
+        }
     }
 }
