@@ -108,7 +108,7 @@ public class Employee {
         if (clientFounded) {
             while (true) {
                 System.out.println("Enter the username and password of the client "); // the program asking the employee to enter the username and password of the client to proceed
-                System.out.println("1Username:");
+                System.out.println("Username:");
                 clientUsername = scanner.nextLine();
 
                 System.out.println("Password:");
@@ -129,7 +129,8 @@ public class Employee {
                         break;
                     }
 
-                } else {
+                }
+                else {
                     System.out.println("wrong input");
 
                 }
