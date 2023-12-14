@@ -7,10 +7,16 @@ public class CurrentAccount extends Account {
           super( balance);
 
       }
+
+    public CurrentAccount(int accountNumber, double balance) {
+        super(accountNumber, balance);
+    }
+
     protected void checkMinimumBalance() {
         if (balance < MIN_BALANCE)
             System.out.println("Sorry Your Balance Amount Not Allowed \n Please aCheck If Your Balance Amount < 3000");
             // if balance < 3000 fees include we make try and catch for that exception
         }
+
     }
 

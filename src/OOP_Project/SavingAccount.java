@@ -7,11 +7,14 @@ public class SavingAccount extends Account {
         super(balance);
     }
 
-
+    public SavingAccount(int accountNumber, double balance) {
+        super(accountNumber, balance);
+    }
 
     public void CalculateInterest() {
         double interest = balance * interestRate ;
         balance += interest;
         System.out.println("New balance: $" + balance);
     }
+
 }

@@ -1,4 +1,5 @@
 package OOP_Project;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -139,4 +140,106 @@ public class Client {
     public void setStateOfTheAccount(boolean stateOfTheAccount) {
         this.stateOfTheAccount = stateOfTheAccount;
     }
+
+    ///////////////////////////////////////Files/////////////////////////////////////////////////////////
+    public static void readClient(ArrayList<Client> clients){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("CLIENTS.txt"));
+
+            String temp;
+            while ((temp= reader.readLine())!= null){
+                int clientID = Integer.parseInt(temp);
+                String firstName=reader.readLine();
+                String lastName=reader.readLine();
+                String username=reader.readLine();
+                String password=reader.readLine();
+                long telephoneNumber=Long.parseLong(reader.readLine());
+                boolean stateOfTheAccount = Boolean.parseBoolean(reader.readLine());
+                ArrayList<Account> clientAccounts=new ArrayList<>();
+                temp= reader.readLine();
+                while (temp!=null&&!(temp.equals("#"))) {
+                    int accountNumber=Integer.parseInt(temp);
+                    double balance=Double.parseDouble(reader.readLine());
+                    String type=reader.readLine();
+                    if (type.equals("saving")){
+                        clientAccounts.add(new SavingAccount(accountNumber,balance));
+                    }
+                    else if (type.equals("current")) {
+                        clientAccounts.add(new CurrentAccount(accountNumber,balance));
+                    }
+                     //int lastindex=accountNumber;
+
+                    //setLastIndex(accountNumber);
+                    if(Account.getCounter()<accountNumber)
+                    Account.setCounter(accountNumber);
+
+
+                }
+                clients.add(new Client(clientID, firstName, lastName, username, password,
+                        telephoneNumber, stateOfTheAccount, clientAccounts));
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public Client(int ID, String firstName, String lastName, String username, String password,
+                  long telephoneNumber, boolean stateOfTheAccount, ArrayList<Account> myAccounts) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.telephoneNumber = telephoneNumber;
+        this.stateOfTheAccount = stateOfTheAccount;
+        this.myAccounts = myAccounts;
+    }
+
+    public ArrayList<Account> getMyAccounts() {
+        return myAccounts;
+    }
+
+    public static void SaveClient(ArrayList<Client> clients){
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("CLIENTS.txt"));
+            for (Client client : clients) {
+                if (client != null) {
+                    writer.write(client.ID + "\n");
+                    writer.write(client.firstName + "\n");
+                    writer.write(client.lastName + "\n");
+                    writer.write(client.username + "\n");
+                    writer.write(client.password + "\n");
+                    writer.write(client.telephoneNumber + "\n");
+                    writer.write(client.stateOfTheAccount + "\n");
+
+                    ArrayList<Account> clientAccounts = client.getMyAccounts();
+                    for (Account account : clientAccounts) {
+                        writer.write(account.getAccountNumber() + "\n");
+                        writer.write(account.getBalance() + "\n");
+                        if (account instanceof SavingAccount) {
+                            writer.write("saving\n");
+                        } else if (account instanceof CurrentAccount) {
+                            writer.write("current\n");
+                        }
+
+
+                    }
+
+                    // Add a marker to indicate the end of the accounts for this client
+                    writer.write("#\n");
+                }
+            }
+
+            writer.close();
+            System.out.println("Data saved to files successfully");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

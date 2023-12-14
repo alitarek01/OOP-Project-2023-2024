@@ -11,16 +11,24 @@ public class Account {
     double balance;
 
     protected int choice ;
-    static int counter = 10000;
+    private static int counter=0;
 
+    public static void setCounter(int index) {
+        counter=index;
+    }
+
+    public static int getCounter() {
+        return counter;
+    }
 
     Scanner type = new Scanner(System.in) ;
     ArrayList <transaction> accountTransaction = new ArrayList<>();
     //Constructor
     public Account( double balance) {
-        this.accountNumber = counter ++;
+        this.accountNumber = ++counter ;
         this.balance = balance;
     }
+
 
 
     public void  updateBalance (double amount){
@@ -140,4 +148,10 @@ public class Account {
         }
 
     }*/
+    //second constructor
+
+    public Account(int accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
 }
