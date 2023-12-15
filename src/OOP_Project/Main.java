@@ -18,8 +18,8 @@ public class Main {
 
         ArrayList<Employee> employees = new ArrayList<>();
         employees.add(new Employee("dude", "streamgamed", 100));
-        employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
-        employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
+        //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
+        //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
         while (true) {
             System.out.println("press 1 to sign in as a Client");
@@ -34,7 +34,7 @@ public class Main {
                     System.out.print("Enter Password:");
                     String Password = scanner.next();
                     int clientindex = -1;
-                    for (int i = 0; i < 4; i++) {
+                    for (int i = 0; i < clients2.size(); i++) {
                         if (Username.equals(clients2.get(i).username) && Password.equals(clients2.get(i).password)) {
                             signInStatus = true;
                             clientindex = i;
@@ -48,6 +48,7 @@ public class Main {
                         System.out.println("1-Display Details of Your account");
                         System.out.println("2-Edit personal information");
                         System.out.println("3-Enter Account");
+                        System.out.println("4-Sign out");
                         System.out.println("Your Accounts:");
                         for (int j = 0; j < clients2.get(clientindex).myAccounts.size(); j++) {
                             System.out.println("Account " + (j + 1) + ":");
@@ -56,18 +57,93 @@ public class Main {
 
                         }
                         System.out.println("Choice: ");
-                        int clientoperations = scanner.nextInt();
-                        if (clientoperations == 1) {
+                        int clientOperationChoice = scanner.nextInt();
+                        if (clientOperationChoice == 1) {
                             clients2.get(clientindex).DisplayDetailsofhisAccount();
-                        } else if (clientoperations == 2) {
+                        } else if (clientOperationChoice == 2) {
                             clients2.get(clientindex).EditPersonalInformation();
-                        } else if (clientoperations == 3) {
+                        } else if (clientOperationChoice == 3) {
                             System.out.print("choose Account (1,2,3,4)");
-                            int chooseaccount = scanner.nextInt();
-                            if (chooseaccount == 1 || chooseaccount == 2 || chooseaccount == 3 || chooseaccount == 4) {
-                                System.out.println(clients2.get(clientindex).myAccounts.get(chooseaccount - 1).getAccountNumber());
+                            int chooseAccount = scanner.nextInt();
+                            if (chooseAccount == 1 || chooseAccount == 2 || chooseAccount == 3 || chooseAccount == 4) {
+                                System.out.println(clients2.get(clientindex).myAccounts.get(chooseAccount - 1).getAccountNumber());
 
                             }
+                        } else if (clientOperationChoice == 4) {
+                            break;
+                        }
+                    }
+                    else {
+                        System.out.println("Wrong Username or Password");
+                        System.out.println("Please try again!");
+                        continue;
+                    }
+                }
+
+                if (signAs == 2) {
+                    System.out.print("Enter Username:");
+                    String Username = scanner.next();
+                    System.out.print("Enter Password:");
+                    String Password = scanner.next();
+                    int empindex = -1;
+                    for (int i = 0; i < employees.size(); i++) {
+                        if (Username.equals(employees.get(i).username) && Password.equals(employees.get(i).password)) {
+                            signInStatus = true;
+                            empindex = i;
+                            break;
+                        }
+                    }
+                    if (signInStatus) {
+                        System.out.println("\nSigned in Successfully\n");
+                        while(true) {
+                            System.out.println("This is Operations that you can do on your account:");
+                            System.out.println("1-Edit his personal information");
+                            System.out.println("2-Create a client account");
+                            System.out.println("3-Create an account for a client");
+                            System.out.println("4-Edit a client account");
+                            System.out.println("5-Search for client by (Name or account number)");
+                            System.out.println("6-Delete client account");
+                            System.out.println("7-Sign out");
+
+                            System.out.println("Choice: ");
+                            int empOperationsChoice = scanner.nextInt();
+                            if (empOperationsChoice == 1) {
+                                employees.get(empindex).EmployeeEditInfo();
+                            } else if (empOperationsChoice == 2) {
+                                employees.get(empindex).createAClient(clients2);
+                            } else if (empOperationsChoice == 3) {
+                                while (true) {
+                                    System.out.println("Enter Client ID: ");
+                                    if (employees.get(empindex).EmployeeCreatingAccount(clients2, scanner.nextInt())) {
+                                        break;
+                                    }
+
+                                }
+                            } else if (empOperationsChoice == 4) {
+                                while (true) {
+                                    System.out.println("Enter Client ID: ");
+                                    if (employees.get(empindex).EmployeeEditClient(clients2, scanner.nextInt())) {
+                                        break;
+                                    }
+
+                                }
+                            } else if (empOperationsChoice == 5) {
+                            } else if (empOperationsChoice == 6) {
+                            } else if (empOperationsChoice == 7) {
+                            } else {
+                                System.out.println("Please try again!");
+                            }
+                            //h7tago wna b3ed al create account ll client
+
+//                        System.out.println("Do you want to Create another account?");
+//                        System.out.println("1:Yes\n2:NO");
+//                        if (scanner.nextInt() == 1) {
+//                            continue;
+//                        } else if (scanner.nextInt() == 2) {
+//                            break;
+//                        } else {
+//                            System.out.println("wrong Input,Try Again!");
+//                        }
                         }
                     }
                     else {
@@ -77,49 +153,35 @@ public class Main {
 
                     }
                 }
+                    if (signAs == 3) {
 
-                if (signAs == 2) {
-                    //h7tago wna b3ed al create account ll client
-                    System.out.println("Do you want to Create another account?");
-                    System.out.println("1:Yes\n2:NO");
-                    if (scanner.nextInt() == 1) {
-                        continue;
-                    } else if (scanner.nextInt() == 2) {
-                        break;
-                    } else {
-                        System.out.println("wrong Input,Try Again!");
                     }
 
-                }
-                if (signAs == 3) {
 
-                }
 
             }
-
-        }
-        // Client[] clients_arr = new Client[2];
+            // Client[] clients_arr = new Client[2];
 
 //        clients_arr[0] = new Client();
 //        clients_arr[1] = new Client();
 
 
-        //give client some data
+            //give client some data
 //        clients_arr[0].ID =2022170873;
 //        clients_arr[0].username ="Mr.J";
 //        clients_arr[1].ID =2022170825;
 //        clients_arr[1].username ="Aly";
 
 
-        //two account for client0
+            //two account for client0
 //        clients_arr[0].create_C_account(4000);
 //        clients_arr[0].create_S_account(5000);
 
-        //two account for client1
+            //two account for client1
 //        clients_arr[1].create_C_account(6000);
 //        clients_arr[1].create_S_account(7000);
 
-        //test for client1
+            //test for client1
 //        System.out.println("Client 1:");
 //        clients_arr[0].display_balance(0);
 //        clients_arr[0].MyAccounts[0].add_balance(500);
@@ -128,7 +190,7 @@ public class Main {
 //        clients_arr[0].MyAccounts[1].display_type();
 //        clients_arr[0].display_balance(1);
 
-        //test for client2
+            //test for client2
 //        System.out.println("Client 2:");
 //        clients_arr[1].display_balance(2);
 //        clients_arr[1].MyAccounts[2].add_balance(750);
@@ -138,12 +200,12 @@ public class Main {
 //        clients_arr[1].display_balance(3);
 
 
-        //Admin
+            //Admin
 //        Admin Admin1 = new Admin();
 //        Admin1.Display_Clients(clients_arr); //admin display clients
 
-        //Employee
-        //employee index is the employee num
+            //Employee
+            //employee index is the employee num
 //        Client c1 = null;
 //        Employee employees_arr[] = new Employee[2];
 //        employees_arr[0] = new Employee("Hazem","12345",2022);
@@ -151,12 +213,13 @@ public class Main {
 //        c1 = employees_arr[0].createCurrentAccount(c1);
 //        c1.DisplayDetailsofhisAccount();
 //        c1.MyAccounts[0].display_balance();
-        //c1.EditPersonalInformation();
+            //c1.EditPersonalInformation();
 //        c1.MyAccounts[0].display_type();
 //        c1.MyAccounts[0].add_balance(500);
-        //employees_arr[0].add_acc_to_client(clients_arr,2);
-        //  clients_arr[2].display_balance(5);
+            //employees_arr[0].add_acc_to_client(clients_arr,2);
+            //  clients_arr[2].display_balance(5);
 
 
+        }
     }
 }

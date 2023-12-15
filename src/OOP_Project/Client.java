@@ -43,16 +43,17 @@ public class Client {
     //● Edit personal information.
      void EditPersonalInformation (){
         int choice;
-        System.out.println("enter 1 to change your Telephone Number: ");
-        choice = scanner.nextInt();
-        if (choice==1) {
-            long newtelephonenum;
-            newtelephonenum = scanner.nextLong();
-            setTelephoneNumber(newtelephonenum);
-            System.out.println("your new telephone num is:");
-            System.out.println(getTelephoneNumber());
-        }
+        while(true) {
+            System.out.println("Press 1 to change your Telephone Number: ");
+            choice = scanner.nextInt();
+            if (choice == 1) {
+                setTelephoneNumber(scanner.nextLong());
+                break;
+            } else {
+                System.out.println("wrong Input,Try Again!");
+            }
 
+        }
     }
 
     //● Display details of his account.

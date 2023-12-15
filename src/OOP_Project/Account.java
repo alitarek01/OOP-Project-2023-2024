@@ -11,7 +11,7 @@ public class Account {
     double balance;
 
     protected int choice ;
-    private static int counter=0;
+    private static int counter=10000;
 
     public static void setCounter(int index) {
         counter=index;

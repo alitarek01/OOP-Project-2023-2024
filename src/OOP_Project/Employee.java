@@ -52,13 +52,23 @@ public class Employee {
 
     // Methods
     void EmployeeEditInfo() {
-        System.out.println("Enter 1 to ");  // ask him what to change
-        System.out.println("Enter your new address:");
-        String address = scanner.nextLine();
-        String position = scanner.nextLine();
-        this.address = address;
-        this.position = position;
 
+        while (true) {
+            System.out.println("Press 1 to change your address\nPress 2 to change your position");  // ask him what to change
+            int editInfoInput = scanner.nextInt();
+            if (editInfoInput == 1) {
+                System.out.println("Enter your new address:");
+                this.address = scanner.nextLine();
+                break;
+            }
+            else if (editInfoInput == 2) {
+                this.position = scanner.nextLine();
+                break;
+            }
+            else{
+                System.out.println("Wrong Input!, try Again");
+            }
+        }
 
     }
 
@@ -69,6 +79,16 @@ public class Employee {
             if (clients[i].username.equals(user) && clients[i].password.equals(pass)) {
                 return true;
             }
+        }
+
+        return false;
+    }
+    Boolean employeeUPChecker(Client[] clients) {
+        for (int i = 0; i < clients.length; i++) {
+            if (clients[i].username == this.username && clients[i].password == this.password) {
+                return true;
+            }
+
         }
 
         return false;
@@ -93,10 +113,10 @@ public class Employee {
 
     }
 
-    void EmployeeCreatingAccount(ArrayList<Client> clients2, int ID) {
+    boolean EmployeeCreatingAccount(ArrayList<Client> clients2, int ID) {
         String clientUsername;
         String clientPassword;
-        int clientIndex=-1;
+        int clientIndex = -1;
         boolean clientFounded = false;
         for (int i = 0; i < clients2.size(); i++) {
             if (clients2.get(i).ID == ID) {
@@ -107,7 +127,7 @@ public class Employee {
         }
         if (clientFounded) {
             while (true) {
-                System.out.println("Enter the username and password of the client "); // the program asking the employee to enter the username and password of the client to proceed
+                System.out.println("Enter the username and password of the client ");
                 System.out.println("Username:");
                 clientUsername = scanner.nextLine();
 
@@ -117,49 +137,83 @@ public class Employee {
                     System.out.println("Press 1 to Create saving account\nPress 2 to Create current account\nPress 0 to cancel:");
                     int inputAccountType;
                     inputAccountType = scanner.nextInt();
-                    System.out.println("enter initial balance:");
                     double initialbalance;
-                    initialbalance = scanner.nextDouble();
                     if (inputAccountType == 1) {
+                    System.out.println("enter initial balance:");
+                        initialbalance = scanner.nextDouble();
                         clients2.get(clientIndex).myAccounts.add(new SavingAccount(initialbalance));
-                        break;
-                    }
-                    else if (inputAccountType == 2) {
+                        return true;
+
+                    } else if (inputAccountType == 2) {
+                        System.out.println("enter initial balance:");
+                        initialbalance = scanner.nextDouble();
                         clients2.get(clientIndex).myAccounts.add(new CurrentAccount(initialbalance));
-                        break;
+                        return true;
+
                     }
+                    else {return true;}
 
-                }
-                else {
+                } else {
                     System.out.println("wrong input");
-
                 }
             }
 
         }
         else {
             System.out.println("ID not found\nTry Again!");
+            return false;
         }
     }
 
 
-
-    Boolean employeeUPChecker(Client[] clients) {
-        for (int i = 0; i < clients.length; i++) {
-            if (clients[i].username == this.username && clients[i].password == this.password) {
-                return true;
+    boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
+        int clientIndex = -1;
+        boolean clientFounded = false;
+        for (int i = 0; i < clients2.size(); i++) {
+            if (clients2.get(i).ID == ID) {
+                clientFounded = true;
+                clientIndex = i;
+                break;
             }
-
+        }
+        if (clientFounded) {
+            while (true) {
+                System.out.println("Press 1 to change Client's username\nPress 2 to change Client's password");  // ask him what to change
+                int editInfoInput = scanner.nextInt();
+                if (editInfoInput == 1) {
+                    System.out.println("Enter new Username:");
+                    clients2.get(clientIndex).username = scanner.nextLine();
+                    return true;
+                } else if (editInfoInput == 2) {
+                    clients2.get(clientIndex).password = scanner.nextLine();
+                    return true;
+                } else {
+                    System.out.println("Wrong Input!, try Again");
+                }
+            }
+        } else {
+            System.out.println("ID not found\nTry Again!");
+            return false;
         }
 
-        return false;
     }
-
+// Working on it don't edit any thing
+    
+//    boolean EmployeeSearchClient(ArrayList<Client> clients2, int ID){
+//        int clientIndex = -1;
+//        boolean clientFounded = false;
+//        for (int i = 0; i < clients2.size(); i++) {
+//            if (clients2.get(i).ID == ID) {
+//                clientFounded = true;
+//                clientIndex = i;
+//                break;
+//            }
+//        }
+//    }
 
     // create a method that takes an array of client and an id to update his username and password
     // Or use index() and get() in arraylist
 
-    //void EmployeeEditClient
 
 
 
