@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Employee {
 
     Scanner scanner = new Scanner(System.in);
+    private static Scanner in = new Scanner(System.in);
 
 
     String username;
@@ -198,101 +199,103 @@ public class Employee {
         }
 
     }
-// Working on it don't edit any thing
-
-//    boolean EmployeeSearchClient(ArrayList<Client> clients2, int ID){
-//        int clientIndex = -1;
-//        boolean clientFounded = false;
-//        for (int i = 0; i < clients2.size(); i++) {
-//            if (clients2.get(i).ID == ID) {
-//                clientFounded = true;
-//                clientIndex = i;
-//                break;
-//            }
-//        }
-//    }
-
-    // create a method that takes an array of client and an id to update his username and password
-    // Or use index() and get() in arraylist
 
 
-
-
-         /*
-
-         Raise an exception here if the username and password were not found
-
-
-         */
-
-//     }
-
-    static Employee[] addToArray(Employee[] array, Employee newItem) {
-        int length = array.length;
-
-        // Create a new array with increased size
-        Employee[] newArray = new Employee[length + 1];
-
-        // Copy the elements from the original array to the new array
-        System.arraycopy(array, 0, newArray, 0, length);
-
-        // Add the new item to the last index
-        newArray[length] = newItem;
-
-        return newArray;
-    }
-
-//     static EmployeeSearchForClient(Client [] clients , int id)
-//     {
-//         for(Client client : clients)
-//         {
-//             if (client.id == id)
-//             {
-//                 // Display all data of the client
-//             }
-//         }
-//     }
-
-
-    // this method is used to add new created account to the client's account array
-    // omar and samir must complete it
-   /* public void AddingNewAccountToAccountArray(String username , Client [] clients)
-    {
-        System.out.println("Enter 1 to create a saving account or 2 to create a current account:");
-        int num = scanner.nextInt();
-        if (num == 1)
-        {
-            // Write a statement asking the user to enter details of the account and give it to the constructor
-
-            SavingAccount temp = new SavingAccount();
-            for (int i = 0 ; i < clients.length ; i++ ) {
-                int num = clients.indexOf(client[i].username);
+     static void EmployeeSearchForClient(ArrayList <Client> clients2 )
+     {
+        while(true) {
+            System.out.println("Enter 1 to search for the client by ID or 2 to search by account number.");
+            System.out.println("Enter 0 to cancel.");
+            System.out.println("Input:");
+            int x = in.nextInt();
+            if (x == 1) {
+                System.out.println("Please enter the ID of the client:");
+                int ID = in.nextInt();
+                for (Client obj : clients2) {
+                    if (obj.ID == ID) {
+                        obj.toString();
+                        break;
+                    } else {
+                        System.out.println("No client was found.");
+                    }
+                }
+            } else if (x == 2) {
+                boolean found = false;
+                System.out.println("Please enter the account number of the client:");
+                int n = in.nextInt();
+                for (Client obj : clients2) {
+                    for (Account acc : obj.myAccounts) {
+                        if (acc.accountNumber == n) {
+                            found = true;
+                            obj.toString();
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    System.out.println("No client was found.");
+                }
+            } else if (x == 0) {
+                return;
+            } else {
+                System.out.println("Wrong input");
             }
         }
-        else if (num == 2)
-        {
-            // Write a statement asking the user to enter details of the account and give it to the constructor
+     }
 
-            CurrentAccount temp = new CurrentAccount();
-            this.addAccount(temp);
-        }
 
-    }*/
-//    public void EmployeeAddAccount( Client [] clients)
-//    {
-//        System.out.println("Please enter username and password of the client");
-//        System.out.println("Username:"); String user = scanner.nextLine();
-//        System.out.println("Password:"); String pass = scanner.nextLine();
-//        if (UPcheckerForClient(user , pass  , clients))
-//        {
-//            System.out.println("Enter 1 for saving account or 2 for current account or 0 to cancel:");
-//
-//
-//            // Call the method that adds new account to the array of accounts of a specific client
-//        }
-//
-//
-//
-//    }
+     static void EmployeeDeletingAccount(ArrayList <Client> clients2)
+     {
+         System.out.println("Please enter the username and password of the Client account.");
+         System.out.println("Enter C in the username if you want to cancel");
+         System.out.println("Username: ");String user = in.nextLine();
+         if (user.equals("C") || user.equals("c")){return;}
+         System.out.println("Password: ");String pass = in.nextLine();
+         for (Client obj: clients2)
+         {
+             if (obj.username.equals(user) && obj.password.equals(pass))
+             {
+
+                 for (Account acc:obj.myAccounts)
+                 {
+                     System.out.println("--------------------------------");
+                     System.out.println("     Account Number: " + acc.accountNumber);
+                     System.out.println("     Balance: $" + acc.balance);
+                     System.out.println("--------------------------------");
+
+                 }
+
+                 System.out.println("Enter the account number of the account you want to delete:");
+                 int accNum = in.nextInt();
+
+                 System.out.println("Enter 1 to confirm deletion or 0 to cancel.");
+                 int ans = in.nextInt();
+                 if (ans == 1)
+                 {
+                     for (Account acc:obj.myAccounts)
+                     {
+                         if (acc.accountNumber == accNum)
+                         {
+                             obj.myAccounts.remove(acc);
+                         }
+                     }
+                     System.out.println("Account deleted successfully.");
+
+                 } else if (ans == 0) {
+                     return;
+                 }
+
+
+             }
+             else
+             {
+                 System.out.println("/nNo client was found./n");
+             }
+         }
+
+     }
+
+
+
 
 }

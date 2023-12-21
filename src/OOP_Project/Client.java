@@ -261,4 +261,16 @@ public class Client {
         }
     }
 
+    @Override
+    public String toString() {
+        return
+                "/n/n________________________________________________________" +
+                "ID :" + ID +
+                "/nFirstName :" + firstName + '\'' +
+                "/nLastName :'" + lastName + '\'' +
+                "/nTelephoneNumber :" + telephoneNumber +
+                "/nStateOfTheAccount :" + stateOfTheAccount +
+                "/n/n________________________________________________________"
+                ;
+    }
 }
