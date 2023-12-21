@@ -6,10 +6,7 @@ import java.time.LocalDateTime;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 public class Account {
     protected int accountNumber;
-
-
     double balance;
-
     protected int choice ;
     private static int counter=10000;
 
@@ -22,7 +19,9 @@ public class Account {
     }
 
     Scanner type = new Scanner(System.in) ;
-    ArrayList <transaction> accountTransaction = new ArrayList<>();
+    //ArrayList <transaction> accountTransaction = new ArrayList<>();
+
+
     //Constructor
     public Account( double balance) {
         this.accountNumber = ++counter ;
@@ -61,9 +60,8 @@ public class Account {
         return accountNumber == other.accountNumber;
     }
 
-    public void makeTransaction () {
+    public void makeTransaction (int transactionType,ArrayList <transaction> AllTransaction) {
         System.out.println("choose your transaction type \n press 1 to make a deposit \n press 2 to make a Withdraw \n press 3 to make a transfer  ");
-        int transactionType = type.nextInt() ;
         double transactionAmount ;
         int recipientAccountNumber;
         LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
@@ -74,19 +72,18 @@ public class Account {
         if (transactionType == 1)
         {
 
-            transactionAmount = type.nextDouble();
-            //System.out.println(formattedDate);  // Display the current date
             System.out.println("enter the amount you want to deposit ");
-            accountTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Deposit"));
+            transactionAmount = type.nextDouble();
+            AllTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Deposit"));
 
         }
         else if (transactionType == 2) {
             System.out.println("enter the amount you want to Withdraw ");
             transactionAmount = type.nextDouble();
-            accountTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Withdraw"));
+            AllTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Withdraw"));
         }
         else if (transactionType == 3){
-            System.out.println("enter the amount you want to Transfer ");
+            System.out.println("Enter the amount you want to Transfer ");
             transactionAmount = type.nextDouble();
 
             System.out.println("Enter the recipient Account number:");
@@ -98,11 +95,11 @@ public class Account {
             if(addNote) {
                 System.out.println("Write Note for the transaction:");
                 transactionNote = type.next();
-                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"Transfer",
+                AllTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"Transfer",
                         transactionNote,  recipientAccountNumber));
             }
             else {
-                accountTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"Transfer",
+                AllTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"Transfer",
                         "",  recipientAccountNumber));
             }
         }
@@ -112,8 +109,10 @@ public class Account {
 
 
     public void DisplayInfo() {
+        System.out.println("--------------------------------");
         System.out.println("Account Number: " + accountNumber);
         System.out.println("Balance: $" + balance);
+        System.out.println("--------------------------------");
     }
     public int getAccountNumber() {
         return accountNumber;
@@ -127,6 +126,16 @@ public class Account {
     {
         return balance;
     }
+
+    public Account(int accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+}
+
+
+
+
      /* public void AskTypeOfAccount( String accountHolder, double balance)
     {
         System.out.println("Choose The Type Of Account ");
@@ -149,9 +158,3 @@ public class Account {
 
     }*/
     //second constructor
-
-    public Account(int accountNumber, double balance) {
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-    }
-}

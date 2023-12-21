@@ -11,13 +11,20 @@ public class Main {
 //        clients[3] = new Client(2022170873, "omar", "amged", "mego", "1233", 1060113886);
 
         ArrayList<Client> clients2 = new ArrayList<>();
+        ArrayList<Employee> employees = new ArrayList<>();
+        ArrayList <transaction> allTransaction = new ArrayList<>();
+
+
+
+
         clients2.add(new Client(2022170873, "Youssef", "Mahmoud", "joe", "1230", 1060113886));
+
         clients2.add(new Client(2022170873, "aly", "maklad", "loe", "1231", 1060113886));
         clients2.add(new Client(2022170873, "ahmed", "attia", "mido", "1232", 1060113886));
         clients2.add(new Client(2022170873, "omar", "amged", "mego", "1233", 1060113886));
 
-        ArrayList<Employee> employees = new ArrayList<>();
         employees.add(new Employee("dude", "streamgamed", 100));
+        employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
@@ -27,8 +34,10 @@ public class Main {
             System.out.println("press 3 to sign in as a Admin");
             int signAs = scanner.nextInt();
             boolean signInStatus = false;
-            while (true) {
+            boolean signAsClient = true;
+            while (signAsClient) {
                 if (signAs == 1) {
+                    System.out.println("Sign in as a Client\n===================");
                     System.out.print("Enter Username:");
                     String Username = scanner.next();
                     System.out.print("Enter Password:");
@@ -43,44 +52,79 @@ public class Main {
                     }
                     if (signInStatus) {
                         System.out.println("\nSigned in Successfully\n");
-                        System.out.println("This is Operations that you can do on your account:");
+                        while(true) {
+                            System.out.println("This is Operations that you can do on your account:");
 
-                        System.out.println("1-Display Details of Your account");
-                        System.out.println("2-Edit personal information");
-                        System.out.println("3-Enter Account");
-                        System.out.println("4-Sign out");
-                        System.out.println("Your Accounts:");
-                        for (int j = 0; j < clients2.get(clientindex).myAccounts.size(); j++) {
-                            System.out.println("Account " + (j + 1) + ":");
-                            System.out.println("Account no.= " + clients2.get(clientindex).myAccounts.get(j).getAccountNumber());
-                            System.out.println("Balance= " + clients2.get(clientindex).myAccounts.get(j).getBalance() + "\n\n");
+                            System.out.println("1-Display Details of Your account");
+                            System.out.println("2-Edit personal information");
+                            System.out.println("3-Enter Account");
+                            System.out.println("4-Sign out");
+                            System.out.print("\nChoice: ");
+                            int clientOperationChoice = scanner.nextInt();
+                            if (clientOperationChoice == 1) {
+                                clients2.get(clientindex).DisplayDetailsofhisAccount();
+                            } else if (clientOperationChoice == 2) {
+                                clients2.get(clientindex).EditPersonalInformation();
+                            } else if (clientOperationChoice == 3) {
+                                System.out.println("\n\nYour Accounts:");
+                                for (int j = 0; j < clients2.get(clientindex).myAccounts.size(); j++) {
+                                    System.out.println("=========================");
+                                    System.out.println("Account " + (j + 1) + ":");
+                                    clients2.get(clientindex).myAccounts.get(j).DisplayInfo();
+                                }
+                                System.out.println("=========================");
+                                System.out.print("Choose Account (1,2,3,4): ");
+                                int chooseAccount = scanner.nextInt();
+                                if (chooseAccount == 1 || chooseAccount == 2 || chooseAccount == 3 || chooseAccount == 4) {
+                                    int currentAccNum = clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountNumber;
+                                    System.out.println("----------------------------");
+                                    System.out.println("Account " + chooseAccount + " info:");
+                                    clients2.get(clientindex).myAccounts.get(chooseAccount - 1).DisplayInfo();
+                                    System.out.println("----------------------------\n\n");
+                                    System.out.println("press 1 to Deposit");
+                                    System.out.println("press 2 to Withdraw");
+                                    System.out.println("press 3 to make a transaction");
+                                    System.out.println("press 4 to show transaction history");
+                                    System.out.print("\nChoice: ");
+                                    int accountOperation = scanner.nextInt();
+                                    if (accountOperation == 1) {
+                                        System.out.println("check");
+                                        clients2.get(clientindex).myAccounts.get(chooseAccount-1).makeTransaction(1, allTransaction);
+                                    }
+                                    if (accountOperation == 2) {
+                                        clients2.get(clientindex).myAccounts.get(chooseAccount-1).makeTransaction(2, allTransaction);
+                                    }
+                                    if (accountOperation == 3) {
+                                        clients2.get(clientindex).myAccounts.get(chooseAccount-1).makeTransaction(3, allTransaction);
+                                    }
+                                    if (accountOperation == 4) {
+                                        for (OOP_Project.transaction transaction : allTransaction) {
+                                            if (currentAccNum == transaction.getCustomerId() || currentAccNum == transaction.getRecipientId()) {
+                                                //if transaction between two persons call func1 else call func2 know by function type
+                                            }
+                                        }
+                                    }
 
-                        }
-                        System.out.println("Choice: ");
-                        int clientOperationChoice = scanner.nextInt();
-                        if (clientOperationChoice == 1) {
-                            clients2.get(clientindex).DisplayDetailsofhisAccount();
-                        } else if (clientOperationChoice == 2) {
-                            clients2.get(clientindex).EditPersonalInformation();
-                        } else if (clientOperationChoice == 3) {
-                            System.out.print("choose Account (1,2,3,4)");
-                            int chooseAccount = scanner.nextInt();
-                            if (chooseAccount == 1 || chooseAccount == 2 || chooseAccount == 3 || chooseAccount == 4) {
-                                System.out.println(clients2.get(clientindex).myAccounts.get(chooseAccount - 1).getAccountNumber());
+                                    //mkae transaction,deposit,withdraw,show transaction history
+                                }
 
+
+                            } else if (clientOperationChoice == 4) {
+                                signAsClient=false;
+                                break;
                             }
-                        } else if (clientOperationChoice == 4) {
-                            break;
                         }
                     }
                     else {
+                        System.out.println("\n\n\n------------------------------");
                         System.out.println("Wrong Username or Password");
                         System.out.println("Please try again!");
+                        System.out.println("------------------------------\n\n\n");
                         continue;
                     }
                 }
 
-                if (signAs == 2) {
+                else if (signAs == 2) {
                     System.out.print("Enter Username:");
                     String Username = scanner.next();
                     System.out.print("Enter Password:");
@@ -153,13 +197,20 @@ public class Main {
 
                     }
                 }
-                    if (signAs == 3) {
+                else if (signAs == 3) {
 
-                    }
+                }
+
+                else{break;}
 
 
 
             }
+
+
+        }
+    }
+}
             // Client[] clients_arr = new Client[2];
 
 //        clients_arr[0] = new Client();
@@ -218,8 +269,3 @@ public class Main {
 //        c1.MyAccounts[0].add_balance(500);
             //employees_arr[0].add_acc_to_client(clients_arr,2);
             //  clients_arr[2].display_balance(5);
-
-
-        }
-    }
-}

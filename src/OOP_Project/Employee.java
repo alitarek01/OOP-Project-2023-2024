@@ -110,6 +110,7 @@ public class Employee {
         System.out.println("Enter Client's telephoneNumber:");
         long telephoneNumber = scanner.nextLong();
         clients2.add(new Client(ID, firstName, lastName, username, password, telephoneNumber));
+        EmployeeCreatingAccount(clients2,ID);
 
     }
 
@@ -198,7 +199,7 @@ public class Employee {
 
     }
 // Working on it don't edit any thing
-    
+
 //    boolean EmployeeSearchClient(ArrayList<Client> clients2, int ID){
 //        int clientIndex = -1;
 //        boolean clientFounded = false;

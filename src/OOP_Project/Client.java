@@ -30,6 +30,7 @@ public class Client {
         this.password = password;
         this.telephoneNumber = telephoneNumber;
 
+
     }
 
     //For testing
@@ -44,13 +45,27 @@ public class Client {
      void EditPersonalInformation (){
         int choice;
         while(true) {
-            System.out.println("Press 1 to change your Telephone Number: ");
+            System.out.println("=================================");
+            System.out.println("Press 1 to change your First Name");
+            System.out.println("Press 2 to change your Last Name");
+            System.out.println("Press 3 to change your Telephone Number\n\nchoice:\n");
             choice = scanner.nextInt();
             if (choice == 1) {
+                System.out.print("Enter New First Name: ");
+                setFirstName(scanner.next());
+                break;
+            } else if (choice == 2) {
+                System.out.print("Enter New Last Name: ");
+                setLastName(scanner.next());
+                break;
+            }
+            else if (choice ==3){
+                System.out.print("Enter New Telephone Number: ");
                 setTelephoneNumber(scanner.nextLong());
                 break;
-            } else {
-                System.out.println("wrong Input,Try Again!");
+            }
+            else {
+                System.out.println("wrong Input,Try Again!\n\n");
             }
 
         }
@@ -58,13 +73,16 @@ public class Client {
 
     //● Display details of his account.
     public void DisplayDetailsofhisAccount (){
+        System.out.println("=====================================");
         System.out.println("FirstName: "+getFirstName());
         System.out.println("LastName: "+getLastName());
         System.out.println("ID: "+getID());
         System.out.println("Username: "+getUsername());
         System.out.println("Password: "+getPassword());
         System.out.println("TelephoneNumber: "+getTelephoneNumber());
-        System.out.println(isStateOfTheAccount());
+//        if(stateOfTheAccount){System.out.println("State of the account: Active");}
+//        else {System.out.println("State of the account: Active");}
+        System.out.println("=====================================");
     }
 
 
