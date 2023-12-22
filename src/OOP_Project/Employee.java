@@ -3,6 +3,7 @@ package OOP_Project;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,6 +26,7 @@ public class Employee {
     String graduatedCollage;
     int yearOfGraduation;
     String totalGrade;
+    boolean status=false; //to allow admin to authorize Employees' accounts
     static int counter = 1;
 
 
@@ -295,7 +297,68 @@ public class Employee {
 
      }
 
+     //////////////////////////////////Files////////////////////////////////////////////////////////
+     public String save(){
+         return username+"\n"+password+"\n" +id+"\n"+firstName+"\n"+lastName+
+                 "\n"+address+"\n"+position+"\n"+graduatedCollage+"\n"+yearOfGraduation+"\n"+totalGrade+"\n"+status+"\n";
+
+     }
+    public static void saveEmp(ArrayList<Employee> emps){
+
+        try {
+            BufferedWriter writer=new BufferedWriter(new FileWriter("EMPLOYEES.txt"));
+            for(Employee e:emps){
+                if(e!=null){
+                    writer.write(e.save());}
+            }
+            writer.close();
+            System.out.println("written to files successfully");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 
+    public static void readEmp(ArrayList<Employee> emps) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("EMPLOYEES.txt"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String password = reader.readLine();
+                int id = Integer.parseInt(reader.readLine());
+                String firstName = reader.readLine();
+                String lastName = reader.readLine();
+                String address = reader.readLine();
+                String position = reader.readLine();
+                String graduatedCollage = reader.readLine();
+                int yearOfGraduation = Integer.parseInt(reader.readLine());
+                String totalGrade = reader.readLine();
+                boolean status = Boolean.parseBoolean(reader.readLine());
+
+                emps.add(new Employee(line, password, id, firstName, lastName, address, position,
+                        graduatedCollage, yearOfGraduation, totalGrade, status));
+
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Employee(String username, String password, int id, String firstName, String lastName, String address,
+               String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
+        this.username = username;
+        this.password = password;
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.position = position;
+        this.graduatedCollage = graduatedCollage;
+        this.yearOfGraduation = yearOfGraduation;
+        this.totalGrade = totalGrade;
+        this.status=status;
+    }
 }

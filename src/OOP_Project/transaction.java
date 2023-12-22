@@ -1,5 +1,8 @@
 package OOP_Project;
 
+import java.io.*;
+import java.util.ArrayList;
+
 public class transaction {
     private static int counter = 0;
     private int transactionId;
@@ -212,6 +215,53 @@ public class transaction {
             }
         }
     }
+
+    public static void ReadTransactions(ArrayList<transaction> transactions) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Transactions.txt"));
+            int line;
+            while ((line = Integer.parseInt(reader.readLine())) != -1)
+            {
+                int transactionId;
+                int customerId=Integer.parseInt(reader.readLine());
+                int recipientId=Integer.parseInt(reader.readLine());
+                int employeeId=Integer.parseInt(reader.readLine());
+                boolean transactionStatus=Boolean.parseBoolean(reader.readLine()) ;
+                String transactionDate= reader.readLine();
+                double transactionAmount=Double.parseDouble(reader.readLine());
+                String transactionType= reader.readLine();           //deposit,withdraw,transfer
+                String transactionDescription= reader.readLine();
+                transactions.add(new transaction(customerId,transactionDate,transactionAmount,transactionType,
+                        transactionDescription,recipientId,line));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void saveTransactions(ArrayList<transaction> transactions){
+        try {
+            BufferedWriter writer =new BufferedWriter(new FileWriter("Transactions.txt"));
+            for (transaction t: transactions) {
+                writer.write(t.save());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public  String save(){
+        return transactionId+"\n"+ customerId+"\n"+ recipientId+"\n"+ employeeId+"\n"+ transactionStatus+"\n"+
+                transactionDate+"\n"+ transactionAmount+"\n"+ transactionType+"\n"+ transactionDescription+"\n";
+    }
+    public transaction(int customerId, String transactionDate, double transactionAmount,String transactionType,
+                       String transactionDescription, int recipientId,int TransactionID) {
+        this.transactionId = TransactionID;
+        this.customerId = customerId;
+        this.transactionDate = transactionDate;
+        this.transactionAmount = transactionAmount;
+        this.transactionType = transactionType;
+        this.transactionDescription = transactionDescription;
+        this.recipientId = recipientId;}
 
 }
 
