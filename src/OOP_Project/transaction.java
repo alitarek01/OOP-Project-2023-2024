@@ -218,7 +218,7 @@ public class transaction {
 
     public static void ReadTransactions(ArrayList<transaction> transactions) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("Transactions.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("TRANSACTIONS.txt"));
             int line;
             while ((line = Integer.parseInt(reader.readLine())) != -1)
             {
@@ -240,7 +240,7 @@ public class transaction {
     }
     public static void saveTransactions(ArrayList<transaction> transactions){
         try {
-            BufferedWriter writer =new BufferedWriter(new FileWriter("Transactions.txt"));
+            BufferedWriter writer =new BufferedWriter(new FileWriter("TRANSACTIONS.txt"));
             for (transaction t: transactions) {
                 writer.write(t.save());
             }
