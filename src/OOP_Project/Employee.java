@@ -16,7 +16,7 @@ public class Employee {
     private static Scanner in = new Scanner(System.in);
 
 
-    String username;
+    //String username;
     String password;
     int id;
     String firstName;
@@ -32,15 +32,13 @@ public class Employee {
 
     //For testing
 
-    public Employee(String username, String password, int id) {
-        this.username = username;
+    public Employee(String password, int id) {
         this.password = password;
         this.id = id;
     }
 
-    Employee(String username, String password, String firstName, String lastName, String address, String position, String graduatedCollage, int yearOfGraduation, String totalGrade) {
+    Employee(String password, String firstName, String lastName, String address, String position, String graduatedCollage, int yearOfGraduation, String totalGrade) {
         this.id = counter;
-        this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,11 +59,11 @@ public class Employee {
             int editInfoInput = scanner.nextInt();
             if (editInfoInput == 1) {
                 System.out.println("Enter your new address:");
-                this.address = scanner.nextLine();
+                this.address = scanner.next();
                 break;
             }
             else if (editInfoInput == 2) {
-                this.position = scanner.nextLine();
+                this.position = scanner.next();
                 break;
             }
             else{
@@ -75,27 +73,6 @@ public class Employee {
 
     }
 
-    // This function is used to check if the username and password of the client are correct
-    Boolean UPcheckerForClient(String user, String pass, Client[] clients) {
-
-        for (int i = 0; i < clients.length; i++) {
-            if (clients[i].username.equals(user) && clients[i].password.equals(pass)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    Boolean employeeUPChecker(Client[] clients) {
-        for (int i = 0; i < clients.length; i++) {
-            if (clients[i].username == this.username && clients[i].password == this.password) {
-                return true;
-            }
-
-        }
-
-        return false;
-    }
 
     void createAClient(ArrayList<Client> clients2) {
         System.out.println("Enter Client's ID:");
@@ -118,7 +95,7 @@ public class Employee {
     }
 
     boolean EmployeeCreatingAccount(ArrayList<Client> clients2, int ID) {
-        String clientUsername;
+        int clientID;
         String clientPassword;
         int clientIndex = -1;
         boolean clientFounded = false;
@@ -131,13 +108,13 @@ public class Employee {
         }
         if (clientFounded) {
             while (true) {
-                System.out.println("Enter the username and password of the client ");
-                System.out.println("Username:");
-                clientUsername = scanner.next();
+                System.out.println("Enter the ID and password of the client ");
+                System.out.println("ID:");
+                clientID = scanner.nextInt();
 
                 System.out.println("Password:");
                 clientPassword = scanner.next();
-                if (clients2.get(clientIndex).username.equals(clientUsername) && clients2.get(clientIndex).password.equals(clientPassword)) {
+                if (clients2.get(clientIndex).ID==clientID && clients2.get(clientIndex).password.equals(clientPassword)) {
                     System.out.println("Press 1 to Create saving account\nPress 2 to Create current account\nPress 0 to cancel:");
                     int inputAccountType;
                     inputAccountType = scanner.nextInt();
@@ -203,7 +180,7 @@ public class Employee {
     }
 
 
-     static void EmployeeSearchForClient(ArrayList <Client> clients2 )
+    void EmployeeSearchForClient(ArrayList <Client> clients2 )
      {
         while(true) {
             System.out.println("Enter 1 to search for the client by ID or 2 to search by account number.");
@@ -215,7 +192,7 @@ public class Employee {
                 int ID = in.nextInt();
                 for (Client obj : clients2) {
                     if (obj.ID == ID) {
-                        obj.toString();
+                        System.out.println(obj.toString());
                         break;
                     } else {
                         System.out.println("No client was found.");
@@ -246,16 +223,16 @@ public class Employee {
      }
 
 
-     static void EmployeeDeletingAccount(ArrayList <Client> clients2)
+     void EmployeeDeletingAccount(ArrayList <Client> clients2)
      {
-         System.out.println("Please enter the username and password of the Client account.");
-         System.out.println("Enter C in the username if you want to cancel");
-         System.out.println("Username: ");String user = in.nextLine();
-         if (user.equals("C") || user.equals("c")){return;}
-         System.out.println("Password: ");String pass = in.nextLine();
+         System.out.println("Please enter the ID and password of the Client account.");
+         System.out.println("Enter 0 in the ID if you want to cancel");
+         System.out.println("ID: ");int userID = in.nextInt();
+         if (userID ==0 ){return;}
+         System.out.println("Password: ");String pass = in.next();
          for (Client obj: clients2)
          {
-             if (obj.username.equals(user) && obj.password.equals(pass))
+             if (obj.ID==userID && obj.password.equals(pass))
              {
 
                  for (Account acc:obj.myAccounts)
@@ -279,6 +256,7 @@ public class Employee {
                          if (acc.accountNumber == accNum)
                          {
                              obj.myAccounts.remove(acc);
+                             return;
                          }
                      }
                      System.out.println("Account deleted successfully.");
@@ -291,7 +269,8 @@ public class Employee {
              }
              else
              {
-                 System.out.println("/nNo client was found./n");
+                 System.out.println("\nNo client was found.\n");
+                 break;
              }
          }
 
@@ -299,7 +278,7 @@ public class Employee {
 
      //////////////////////////////////Files////////////////////////////////////////////////////////
      public String save(){
-         return username+"\n"+password+"\n" +id+"\n"+firstName+"\n"+lastName+
+         return id+"\n"+password+"\n" +firstName+"\n"+lastName+
                  "\n"+address+"\n"+position+"\n"+graduatedCollage+"\n"+yearOfGraduation+"\n"+totalGrade+"\n"+status+"\n";
 
      }
@@ -337,7 +316,7 @@ public class Employee {
                 String totalGrade = reader.readLine();
                 boolean status = Boolean.parseBoolean(reader.readLine());
 
-                emps.add(new Employee(line, password, id, firstName, lastName, address, position,
+                emps.add(new Employee(password, id, firstName, lastName, address, position,
                         graduatedCollage, yearOfGraduation, totalGrade, status));
 
             }
@@ -347,9 +326,8 @@ public class Employee {
             throw new RuntimeException(e);
         }
     }
-    public Employee(String username, String password, int id, String firstName, String lastName, String address,
+    public Employee(String password, int id, String firstName, String lastName, String address,
                String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
-        this.username = username;
         this.password = password;
         this.id = id;
         this.firstName = firstName;
@@ -362,3 +340,24 @@ public class Employee {
         this.status=status;
     }
 }
+//    // This function is used to check if the username and password of the client are correct
+//    Boolean UPcheckerForClient(String user, String pass, Client[] clients) {
+//
+//        for (int i = 0; i < clients.length; i++) {
+//            if (clients[i].username.equals(user) && clients[i].password.equals(pass)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
+//    Boolean employeeUPChecker(Client[] clients) {
+//        for (int i = 0; i < clients.length; i++) {
+//            if (clients[i].username == this.username && clients[i].password == this.password) {
+//                return true;
+//            }
+//
+//        }
+//
+//        return false;
+//    }

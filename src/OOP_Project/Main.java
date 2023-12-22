@@ -18,12 +18,11 @@ public class Main {
 
 
         clients2.add(new Client(2022170873, "Youssef", "Mahmoud", "j", "1", 1060113886));
-
-        clients2.add(new Client(2022170873, "aly", "maklad", "loe", "1231", 1060113886));
+        clients2.add(new Client(2022170825, "aly", "maklad", "loe", "1231", 1060113886));
         clients2.add(new Client(2022170850, "ahmed", "attia", "a", "2", 1060113886));
-        clients2.add(new Client(2022170873, "omar", "amged", "mego", "1233", 1060113886));
+        clients2.add(new Client(2022170829, "omar", "amged", "mego", "1233", 1060113886));
 
-        employees.add(new Employee("dude", "streamgamed", 100));
+        employees.add(new Employee( "dude", 100));
         employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
        // employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
@@ -35,17 +34,17 @@ public class Main {
             System.out.println("press 3 to sign in as a Admin");
             int signAs = scanner.nextInt();
             boolean signInStatus = false;
-            boolean signAsClient = true;
-            while (signAsClient) {
+            boolean signInLoop = true;
+            while (signInLoop) {
                 if (signAs == 1) {
                     System.out.println("Sign in as a Client\n===================");
-                    System.out.print("Enter Username:");
-                    String Username = scanner.next();
+                    System.out.print("Enter Client ID:");
+                    int clientID = scanner.nextInt();
                     System.out.print("Enter Password:");
                     String Password = scanner.next();
                     int clientindex = -1;
                     for (int i = 0; i < clients2.size(); i++) {
-                        if (Username.equals(clients2.get(i).username) && Password.equals(clients2.get(i).password)) {
+                        if (clientID == clients2.get(i).ID && Password.equals(clients2.get(i).password)) {
                             signInStatus = true;
                             clientindex = i;
                             break;
@@ -92,7 +91,6 @@ public class Main {
                                         System.out.print("\nChoice: ");
                                         int accountOperation = scanner.nextInt();
                                         if (accountOperation == 1) {
-                                            System.out.println("check");
                                             clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(1, allTransaction, clients2);
                                         } else if (accountOperation == 2) {
                                             clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(2, allTransaction, clients2);
@@ -118,7 +116,7 @@ public class Main {
 
 
                             } else if (clientOperationChoice == 4) {
-                                signAsClient=false;
+                                signInLoop=false;
                                 break;
                             }
                         }
@@ -133,13 +131,13 @@ public class Main {
                 }
 
                 else if (signAs == 2) {
-                    System.out.print("Enter Username:");
-                    String Username = scanner.next();
+                    System.out.print("Enter ID:");
+                    int employeeID = scanner.nextInt();
                     System.out.print("Enter Password:");
                     String Password = scanner.next();
                     int empindex = -1;
                     for (int i = 0; i < employees.size(); i++) {
-                        if (Username.equals(employees.get(i).username) && Password.equals(employees.get(i).password)) {
+                        if (employeeID == employees.get(i).id && Password.equals(employees.get(i).password)) {
                             signInStatus = true;
                             empindex = i;
                             break;
@@ -179,22 +177,14 @@ public class Main {
                                     }
 
                                 }
-                            } else if (empOperationsChoice == 5) {
-                            } else if (empOperationsChoice == 6) {
-                            } else if (empOperationsChoice == 7) {
+                            } else if (empOperationsChoice == 5) {employees.get(empindex).EmployeeSearchForClient(clients2);
+                            } else if (empOperationsChoice == 6) {employees.get(empindex).EmployeeDeletingAccount(clients2);
+                            }else if (empOperationsChoice==7){employees.get(empindex).EmployeeMakingTransaction(clients2,allTransaction);
+                            } else if (empOperationsChoice == 8) {signInLoop=false;
+                                break;
                             } else {
                                 System.out.println("Please try again!");
                             }
-                            //h7tago wna b3ed al create account ll client
-
-//                        System.out.println("Do you want to Create another account?");
-//                        System.out.println("1:Yes\n2:NO");
-//                        if (scanner.nextInt() == 1) {
-//                            continue;
-//                        } else if (scanner.nextInt() == 2) {
-//                            break;
-//                        } else {
-//                            System.out.println("wrong Input,Try Again!");
 //                        }
                         }
                     }
@@ -219,6 +209,16 @@ public class Main {
         }
     }
 }
+                            //h7tago wna b3ed al create account ll client
+
+//                        System.out.println("Do you want to Create another account?");
+//                        System.out.println("1:Yes\n2:NO");
+//                        if (scanner.nextInt() == 1) {
+//                            continue;
+//                        } else if (scanner.nextInt() == 2) {
+//                            break;
+//                        } else {
+//                            System.out.println("wrong Input,Try Again!");
             // Client[] clients_arr = new Client[2];
 
 //        clients_arr[0] = new Client();
