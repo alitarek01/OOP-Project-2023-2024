@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.time.LocalDateTime;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 public class Account {
-    protected int accountNumber;
+    int accountNumber;
     double balance;
     protected int choice ;
     private static int counter=10000;
@@ -24,7 +24,9 @@ public class Account {
 
     //Constructor
     public Account( double balance) {
-        this.accountNumber = ++counter ;
+        accountNumber=counter;
+        ++counter;
+
         this.balance = balance;
     }
 
@@ -60,8 +62,7 @@ public class Account {
         return accountNumber == other.accountNumber;
     }
 
-    public void makeTransaction (int transactionType,ArrayList <transaction> AllTransaction) {
-        System.out.println("choose your transaction type \n press 1 to make a deposit \n press 2 to make a Withdraw \n press 3 to make a transfer  ");
+    public void makeTransaction (int transactionType,ArrayList <transaction> AllTransaction,ArrayList<Client> clients) {
         double transactionAmount ;
         int recipientAccountNumber;
         LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
@@ -69,38 +70,62 @@ public class Account {
         String formattedDate = myDateObj.format(myFormatObj);
         boolean addNote;
         String transactionNote;
+        Account recipientAccount=null;
+        boolean recipientFound =false;
         if (transactionType == 1)
         {
 
             System.out.println("enter the amount you want to deposit ");
             transactionAmount = type.nextDouble();
-            AllTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Deposit"));
+            AllTransaction.add(new transaction( accountNumber,this,formattedDate, transactionAmount,"Deposit",0));
 
         }
         else if (transactionType == 2) {
             System.out.println("enter the amount you want to Withdraw ");
             transactionAmount = type.nextDouble();
-            AllTransaction.add(new transaction( accountNumber ,formattedDate, transactionAmount,"Withdraw"));
+            AllTransaction.add(new transaction( accountNumber , this ,formattedDate, transactionAmount,"Withdraw",0));
         }
         else if (transactionType == 3){
-            System.out.println("Enter the amount you want to Transfer ");
-            transactionAmount = type.nextDouble();
+            while(true) {
+                System.out.println("Enter the recipient Account number:");
+                recipientAccountNumber = type.nextInt();
+                for (int x = 0; x < clients.size(); x++) {
+                    for (int z = 0; z < clients.get(x).myAccounts.size(); z++) {
+                        if (clients.get(x).myAccounts.get(z).accountNumber == recipientAccountNumber) {
+                            recipientAccount = clients.get(x).myAccounts.get(z);
+                            recipientFound = true;
+                            System.out.println("recipient found");
+                            break;
+                        }
+                    }
+                    if (recipientFound) {
+                        break;
+                    }
+                }
+                if (recipientFound) {
 
-            System.out.println("Enter the recipient Account number:");
-            recipientAccountNumber=type.nextInt();
+                    System.out.println("Enter the amount you want to Transfer ");
+                    transactionAmount = type.nextDouble();
 
-            System.out.println("\nPress 1 if you want to add note");
-            addNote = type.nextBoolean();
 
-            if(addNote) {
-                System.out.println("Write Note for the transaction:");
-                transactionNote = type.next();
-                AllTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"Transfer",
-                        transactionNote,  recipientAccountNumber));
-            }
-            else {
-                AllTransaction.add(new transaction(accountNumber,  formattedDate, transactionAmount,"Transfer",
-                        "",  recipientAccountNumber));
+                    System.out.println("\nPress 1 if you want to add note");
+                    if (type.nextInt()==1){addNote=true;}
+                    else{addNote=false;}
+
+                    if (addNote) {
+                        System.out.println("Write Note for the transaction:");
+                        transactionNote = type.next();
+                        AllTransaction.add(new transaction(accountNumber, this,formattedDate,transactionAmount,"Transfer",
+                                transactionNote,recipientAccountNumber,recipientAccount,0));
+                    } else {
+                        AllTransaction.add(new transaction(accountNumber, this, formattedDate, transactionAmount, "Transfer",
+                                "", recipientAccountNumber, recipientAccount, 0));
+                    }
+                    break;
+                } else {
+                    System.out.println("recipient Account number not found");
+                    return;
+                }
             }
         }
     }

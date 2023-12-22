@@ -53,7 +53,7 @@ public class transaction {
         this.transactionDate = transactionDate;
         this.transactionAmount = transactionAmount;
         this.employeeId = employeeId;
-
+        this.transactionType = transactionType;
 
         if (transactionType.equals("Deposit")) {
             handleDeposit(account);

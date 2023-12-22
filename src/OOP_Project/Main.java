@@ -17,14 +17,15 @@ public class Main {
 
 
 
-        clients2.add(new Client(2022170873, "Youssef", "Mahmoud", "joe", "1230", 1060113886));
+        clients2.add(new Client(2022170873, "Youssef", "Mahmoud", "j", "1", 1060113886));
 
         clients2.add(new Client(2022170873, "aly", "maklad", "loe", "1231", 1060113886));
-        clients2.add(new Client(2022170873, "ahmed", "attia", "mido", "1232", 1060113886));
+        clients2.add(new Client(2022170850, "ahmed", "attia", "a", "2", 1060113886));
         clients2.add(new Client(2022170873, "omar", "amged", "mego", "1233", 1060113886));
 
         employees.add(new Employee("dude", "streamgamed", 100));
         employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
+       // employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
@@ -52,7 +53,8 @@ public class Main {
                     }
                     if (signInStatus) {
                         System.out.println("\nSigned in Successfully\n");
-                        while(true) {
+                        boolean clientOperationLoop =true;
+                        while(clientOperationLoop) {
                             System.out.println("This is Operations that you can do on your account:");
 
                             System.out.println("1-Display Details of Your account");
@@ -76,36 +78,42 @@ public class Main {
                                 System.out.print("Choose Account (1,2,3,4): ");
                                 int chooseAccount = scanner.nextInt();
                                 if (chooseAccount == 1 || chooseAccount == 2 || chooseAccount == 3 || chooseAccount == 4) {
-                                    int currentAccNum = clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountNumber;
-                                    System.out.println("----------------------------");
-                                    System.out.println("Account " + chooseAccount + " info:");
-                                    clients2.get(clientindex).myAccounts.get(chooseAccount - 1).DisplayInfo();
-                                    System.out.println("----------------------------\n\n");
-                                    System.out.println("press 1 to Deposit");
-                                    System.out.println("press 2 to Withdraw");
-                                    System.out.println("press 3 to make a transaction");
-                                    System.out.println("press 4 to show transaction history");
-                                    System.out.print("\nChoice: ");
-                                    int accountOperation = scanner.nextInt();
-                                    if (accountOperation == 1) {
-                                        System.out.println("check");
-                                        clients2.get(clientindex).myAccounts.get(chooseAccount-1).makeTransaction(1, allTransaction);
-                                    }
-                                    if (accountOperation == 2) {
-                                        clients2.get(clientindex).myAccounts.get(chooseAccount-1).makeTransaction(2, allTransaction);
-                                    }
-                                    if (accountOperation == 3) {
-                                        clients2.get(clientindex).myAccounts.get(chooseAccount-1).makeTransaction(3, allTransaction);
-                                    }
-                                    if (accountOperation == 4) {
-                                        for (OOP_Project.transaction transaction : allTransaction) {
-                                            if (currentAccNum == transaction.getCustomerId() || currentAccNum == transaction.getRecipientId()) {
-                                                //if transaction between two persons call func1 else call func2 know by function type
+                                    while(true) {
+                                        int currentAccNum = clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountNumber;
+                                        System.out.println("----------------------------");
+                                        System.out.println("Account " + chooseAccount + " info:");
+                                        clients2.get(clientindex).myAccounts.get(chooseAccount - 1).DisplayInfo();
+                                        System.out.println("----------------------------\n\n");
+                                        System.out.println("press 1 to Deposit");
+                                        System.out.println("press 2 to Withdraw");
+                                        System.out.println("press 3 to make a transaction");
+                                        System.out.println("press 4 to show transaction history");
+                                        System.out.println("press 5 to return to client operations");
+                                        System.out.print("\nChoice: ");
+                                        int accountOperation = scanner.nextInt();
+                                        if (accountOperation == 1) {
+                                            System.out.println("check");
+                                            clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(1, allTransaction, clients2);
+                                        } else if (accountOperation == 2) {
+                                            clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(2, allTransaction, clients2);
+                                        } else if (accountOperation == 3) {
+                                            clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(3, allTransaction, clients2);
+                                        } else if (accountOperation == 4) {
+                                            for (int m = 0; m < allTransaction.size(); m++) {
+                                                if (allTransaction.get(m).getCustomerId() == currentAccNum || allTransaction.get(m).getRecipientId() == currentAccNum) {
+                                                    System.out.println(allTransaction.get(m).toString());
+                                                }
                                             }
+                                        } else if (accountOperation == 5) {
+                                            break;
+                                        } else {
+                                            System.out.println("Wrong Input, Please try again!");
+                                            System.out.print("\nChoice: ");
+                                            accountOperation = scanner.nextInt();
+
                                         }
                                     }
 
-                                    //mkae transaction,deposit,withdraw,show transaction history
                                 }
 
 

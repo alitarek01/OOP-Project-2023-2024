@@ -133,10 +133,10 @@ public class Employee {
             while (true) {
                 System.out.println("Enter the username and password of the client ");
                 System.out.println("Username:");
-                clientUsername = scanner.nextLine();
+                clientUsername = scanner.next();
 
                 System.out.println("Password:");
-                clientPassword = scanner.nextLine();
+                clientPassword = scanner.next();
                 if (clients2.get(clientIndex).username.equals(clientUsername) && clients2.get(clientIndex).password.equals(clientPassword)) {
                     System.out.println("Press 1 to Create saving account\nPress 2 to Create current account\nPress 0 to cancel:");
                     int inputAccountType;
