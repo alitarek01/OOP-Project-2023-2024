@@ -2,16 +2,10 @@ package OOP_Project;
 
 public class CurrentAccount extends Account {
     protected static final double MIN_BALANCE = 3000;
-<<<<<<< HEAD
+
     public CurrentAccount(double balance )
     {
-        super( balance);
-=======
-      public CurrentAccount(double balance )
-      {
-          super( balance,"Current Account");
->>>>>>> d7dba2fd7af9463531794d2d44ce307dfe11d8ca
-
+        super( balance,"Current Account");
     }
 
     public CurrentAccount(int accountNumber, double balance) {

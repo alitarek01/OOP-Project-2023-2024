@@ -2,6 +2,8 @@ package OOP_Project;
 
 import java.time.LocalDateTime;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Account {
     int accountNumber;
     double balance;
@@ -164,7 +166,7 @@ public class Account {
 
 
 
-     /* public void AskTypeOfAccount( String accountHolder, double balance)
+    /* public void AskTypeOfAccount( String accountHolder, double balance)
     {
         System.out.println("Choose The Type Of Account ");
         System.out.println("For Saving Account Choose 1 \n For Current Account Choose 2");
@@ -184,6 +186,5 @@ public class Account {
             System.out.println("Invalid Choice Please Try Again");
         }
 
-    }*/
     }*/
 //second constructor

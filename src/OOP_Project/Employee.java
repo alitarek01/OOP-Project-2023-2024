@@ -267,9 +267,9 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
      {
          System.out.println("Please enter the ID and password of the Client account.");
          System.out.println("Enter 0 in the ID if you want to cancel");
-         System.out.println("ID: ");int userID = in.nextInt();
+         System.out.println("ID: ");int userID = scanner.nextInt();
          if (userID ==0 ){return;}
-         System.out.println("Password: ");String pass = in.next();
+         System.out.println("Password: ");String pass = scanner.next();
          for (Client obj: clients2)
          {
              if (obj.ID==userID && obj.password.equals(pass))
@@ -285,10 +285,10 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
                  }
 
                  System.out.println("Enter the account number of the account you want to delete:");
-                 int accNum = in.nextInt();
+                 int accNum = scanner.nextInt();
 
                  System.out.println("Enter 1 to confirm deletion or 0 to cancel.");
-                 int ans = in.nextInt();
+                 int ans = scanner.nextInt();
                  if (ans == 1)
                  {
                      for (Account acc:obj.myAccounts)
@@ -491,16 +491,16 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
         String status = this.status ? "Authorized" : "Not Authorized";
 
         return "Employee{" +
-                "id=" + id +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", position='" + position + '\'' +
-                ", graduatedCollage='" + graduatedCollage + '\'' +
-                ", yearOfGraduation=" + yearOfGraduation +
-                ", totalGrade='" + totalGrade + '\'' +
-                ", status=" + status +
+                "id=" + id + "\n" +
+                ", password='" + password + "\n" +
+                ", firstName='" + firstName + "\n" +
+                ", lastName='" + lastName + "\n" +
+                ", address='" + address + "\n" +
+                ", position='" + position + "\n" +
+                ", graduatedCollage='" + graduatedCollage + "\n" +
+                ", yearOfGraduation=" + yearOfGraduation + "\n" +
+                ", totalGrade='" + totalGrade + "\n" +
+                ", status=" + status + "\n" +
                 '}';
     }
 }
