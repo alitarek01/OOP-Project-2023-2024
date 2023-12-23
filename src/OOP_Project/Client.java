@@ -13,10 +13,10 @@ public class Client {
     String password;
     long telephoneNumber;
     boolean stateOfTheAccount = true;
-   public static int acc_num=0;
-   public Account [] MyAccounts = new Account[4];
-   public ArrayList<Account> myAccounts = new ArrayList<>();
-   Scanner scanner = new Scanner(System.in);
+    public static int acc_num=0;
+    public Account [] MyAccounts = new Account[4];
+    public ArrayList<Account> myAccounts = new ArrayList<>();
+    Scanner scanner = new Scanner(System.in);
 
 
    // written by ali
@@ -42,7 +42,7 @@ public class Client {
     //Methods
 
     //● Edit personal information.
-     void EditPersonalInformation (){
+    void EditPersonalInformation (){
         int choice;
         while(true) {
             System.out.println("=================================");
@@ -207,7 +207,7 @@ public class Client {
     }
 
     public Client(int ID, String firstName, String lastName, String username, String password,
-                  long telephoneNumber, boolean stateOfTheAccount, ArrayList<Account> myAccounts) {
+                long telephoneNumber, boolean stateOfTheAccount, ArrayList<Account> myAccounts) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;

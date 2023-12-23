@@ -224,7 +224,7 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
 
 
     void EmployeeSearchForClient(ArrayList <Client> clients2 )
-     {
+    {
         while(true) {
             System.out.println("Enter 1 to search for the client by ID or 2 to search by account number.");
             System.out.println("Enter 0 to cancel.");
@@ -263,61 +263,53 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
                 System.out.println("Wrong input");
             }
         }
-     }
+    }
 
 
-     void EmployeeDeletingAccount(ArrayList <Client> clients2)
-     {
-         System.out.println("Please enter the ID and password of the Client account.");
-         System.out.println("Enter 0 in the ID if you want to cancel");
-         System.out.println("ID: ");int userID = in.nextInt();
-         if (userID ==0 ){return;}
-         System.out.println("Password: ");String pass = in.next();
-         for (Client obj: clients2)
-         {
-             if (obj.ID==userID && obj.password.equals(pass))
-             {
-
-                 for (Account acc:obj.myAccounts)
-                 {
-                     System.out.println("--------------------------------");
-                     System.out.println("     Account Number: " + acc.accountNumber);
-                     System.out.println("     Balance: $" + acc.balance);
-                     System.out.println("--------------------------------");
-
-                 }
-
-                 System.out.println("Enter the account number of the account you want to delete:");
-                 int accNum = in.nextInt();
-
-                 System.out.println("Enter 1 to confirm deletion or 0 to cancel.");
-                 int ans = in.nextInt();
-                 if (ans == 1)
-                 {
-                     for (Account acc:obj.myAccounts)
-                     {
-                         if (acc.accountNumber == accNum)
-                         {
-                             obj.myAccounts.remove(acc);
-                             return;
-                         }
-                     }
-                     System.out.println("Account deleted successfully.");
-
-                 } else if (ans == 0) {
-                     return;
-                 }
-
-
-             }
-             else
-             {
-                 System.out.println("\nNo client was found.\n");
-                 break;
-             }
-         }
-
-     }
+    void EmployeeDeletingAccount(ArrayList <Client> clients2)
+    {
+        System.out.println("Please enter the ID and password of the Client account.");
+        System.out.println("Enter 0 in the ID if you want to cancel");
+        System.out.println("ID: ");int userID = in.nextInt();
+        if (userID ==0 ){return;}
+            System.out.println("Password: ");String pass = in.next();
+            for (Client obj: clients2)
+            {
+                if (obj.ID==userID && obj.password.equals(pass))
+                {
+                    for (Account acc:obj.myAccounts)
+                    {
+                        System.out.println("--------------------------------");
+                        System.out.println("     Account Number: " + acc.accountNumber);
+                        System.out.println("     Balance: $" + acc.balance);
+                        System.out.println("--------------------------------");
+                    }
+                    System.out.println("Enter the account number of the account you want to delete:");
+                    int accNum = in.nextInt();
+                    System.out.println("Enter 1 to confirm deletion or 0 to cancel.");
+                    int ans = in.nextInt();
+                    if (ans == 1)
+                    {
+                        for (Account acc:obj.myAccounts)
+                        {
+                            if (acc.accountNumber == accNum)
+                            {
+                                obj.myAccounts.remove(acc);
+                                return;
+                            }
+                        }
+                        System.out.println("Account deleted successfully.");
+                    } else if (ans == 0) {
+                        return;
+                    }
+                }
+                else
+                {
+                    System.out.println("\nNo client was found.\n");
+                    break;
+                }
+            }
+    }
 
     void EmployeeMakingTransaction(ArrayList <Client> clients , ArrayList<transaction>allTransaction)
     {
@@ -366,20 +358,31 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
                 while (test2) {
                     System.out.println("press 1 to Deposit");
                     System.out.println("press 2 to Withdraw");
-                    System.out.println("press 3 to make a transaction");
+                    System.out.println("press 3 to make a transfer");
                     System.out.println("press 0 to return");
                     System.out.print("\nChoice: ");
                     int accountOperation = scanner.nextInt();
                     if (accountOperation == 1) {
-                        System.out.println("check");
+                        try{
                         tempClient.myAccounts.get(accountNum - 1).makeTransaction(1, allTransaction, clients);
+                        }catch (TransactionException exp){
+                            System.out.println(exp.getMessage());
+                        }
                         test2 = false;
                     } else if (accountOperation == 2) {
-                        tempClient.myAccounts.get(accountNum - 1).makeTransaction(2, allTransaction, clients);
+                        try{
+                            tempClient.myAccounts.get(accountNum - 1).makeTransaction(2, allTransaction, clients);
+                        }catch (TransactionException exp){
+                            System.out.println(exp.getMessage());
+                        }
                         test2 = false;
 
                     } else if (accountOperation == 3) {
-                        tempClient.myAccounts.get(accountNum - 1).makeTransaction(3, allTransaction, clients);
+                        try{
+                            tempClient.myAccounts.get(accountNum - 1).makeTransaction(3, allTransaction, clients);
+                        }catch (TransactionException exp){
+                            System.out.println(exp.getMessage());
+                        }
                         test2 = false;
 
                     } else if (accountOperation == 0) {
@@ -415,11 +418,11 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
     }
 
      //////////////////////////////////Files////////////////////////////////////////////////////////
-     public String save(){
-         return id+"\n"+password+"\n" +firstName+"\n"+lastName+
-                 "\n"+address+"\n"+position+"\n"+graduatedCollage+"\n"+yearOfGraduation+"\n"+totalGrade+"\n"+status+"\n";
+    public String save(){
+        return id+"\n"+password+"\n" +firstName+"\n"+lastName+
+                "\n"+address+"\n"+position+"\n"+graduatedCollage+"\n"+yearOfGraduation+"\n"+totalGrade+"\n"+status+"\n";
 
-     }
+    }
     public static void saveEmp(ArrayList<Employee> emps){
 
         try {
@@ -465,7 +468,7 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
         }
     }
     public Employee(String password, int id, String firstName, String lastName, String address,
-               String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
+            String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
         this.password = password;
         this.id = id;
         this.firstName = firstName;

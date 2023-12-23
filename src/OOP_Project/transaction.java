@@ -17,7 +17,7 @@ public class transaction {
 
 
     public transaction(int customerId, Account account, String transactionDate, double transactionAmount,String transactionType,
-    String transactionDescription, int recipientId, Account recipAccount, int employeeId) {
+                    String transactionDescription, int recipientId, Account recipAccount, int employeeId) throws TransactionException{
         this.transactionId = counter++;
         this.customerId = customerId;
         this.transactionDate = transactionDate;
@@ -34,20 +34,20 @@ public class transaction {
                     this.transactionStatus = true;
                 } else {
                     this.transactionStatus = false;
-                    System.out.println("Insufficient balance.");
+                    throw new TransactionException("Insufficient balance.");
                 }
             } else {
                 this.transactionStatus = false;
-                System.out.println("Invalid transfer amount.");
+                throw new TransactionException("Invalid transfer amount.");
             }
         }else{
             this.transactionStatus = false;
-            System.out.println("Customer account number can not be equal to Recipient account number.");
+            throw new TransactionException("Customer account number cannot be equal to Recipient account number.");
         }
     }
 
     public transaction(int customerId, Account account, String transactionDate, double transactionAmount,
-    String transactionType, int employeeId) {
+                    String transactionType, int employeeId) {
         this.transactionId = counter++;
         this.customerId = customerId;
         this.transactionDate = transactionDate;
@@ -56,24 +56,29 @@ public class transaction {
         this.transactionType = transactionType;
 
         if (transactionType.equals("Deposit")) {
-            handleDeposit(account);
+            try{handleDeposit(account);}catch (TransactionException exp){
+                System.out.println(exp.getMessage());
+            }
         } else {
-            handleWithdrawal(account);
+            try{handleWithdrawal(account);}catch (TransactionException exp){
+                System.out.println(exp.getMessage());
+            }
         }
     }
 
-    private void handleDeposit(Account account) {
+    private void handleDeposit(Account account) throws TransactionException {
         if (transactionAmount > 0) {
             this.transactionStatus = true;
             transactionDescription = "Deposit to account";
             account.updateBalance(transactionAmount);
         } else {
             this.transactionStatus = false;
-            System.out.println("Invalid deposit amount.");
+            throw new TransactionException("Invalid transfer amount.");
+
         }
     }
 
-    private void handleWithdrawal(Account account) {
+    private void handleWithdrawal(Account account) throws TransactionException {
         if (transactionAmount > 0) {
             if (account.checkSufficientBalance(transactionAmount)) {
                 this.transactionStatus = true;
@@ -81,27 +86,21 @@ public class transaction {
                 account.updateBalance(-transactionAmount);
             } else {
                 this.transactionStatus = false;
-                System.out.println("Insufficient balance.");
+                throw new TransactionException("Insufficient Balance.");
+
             }
         } else {
             this.transactionStatus = false;
-            System.out.println("Invalid withdrawal amount.");
+            throw new TransactionException("Invalid transfer amount.");
         }
     }
 
-    // private int findAccountIndex(int customerId) {
-    //     for (int i = 0; i < Account.size(); i++) {
-    //         if (Account.get(i).getAccountNumber() == customerId) {
-    //             return i;
-    //         }
-    //     }
-    //     return -1; // Customer not found
-    // }
+
 
     public int getemployeeId() {
         return employeeId;
     }
-    
+
     public void setemployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
@@ -109,7 +108,7 @@ public class transaction {
     public int getTransactionId() {
         return transactionId;
     }
-    
+
     public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
     }
@@ -167,51 +166,51 @@ public class transaction {
         if(transactionType.equals("Transfer")){
             if(employeeId == 0){
                 return "Transaction{" +
-                "transactionId='" + transactionId + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", transactionDate=" + transactionDate +
-                ", transactionAmount=" + transactionAmount +
-                ", transactionType='" + transactionType + '\'' +
-                ", transactionDescription='" + transactionDescription + '\'' +
-                ", RecipientId='" + recipientId + '\'' +
-                ", transactionStatus='" + status + '\'' +
-                '}';
+                        "transactionId='" + transactionId + '\n' +
+                        ", customerId='" + customerId + '\n' +
+                        ", transactionDate=" + transactionDate + '\n' +
+                        ", transactionAmount=" + transactionAmount + '\n' +
+                        ", transactionType='" + transactionType + '\n' +
+                        ", transactionDescription='" + transactionDescription + '\n' +
+                        ", RecipientId='" + recipientId + '\n' +
+                        ", transactionStatus='" + status + '\n' +
+                        '}';
             }else{
                 return "Transaction{" +
-                "transactionId='" + transactionId + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", transactionDate=" + transactionDate +
-                ", transactionAmount=" + transactionAmount +
-                ", transactionType='" + transactionType + '\'' +
-                ", transactionDescription='" + transactionDescription + '\'' +
-                ", RecipientId='" + recipientId + '\'' +
-                ", employeeId='" + employeeId +
-                ", transactionStatus='" + status + '\'' +
-                '}';
+                        "transactionId='" + transactionId + '\n' +
+                        ", customerId='" + customerId + '\n' +
+                        ", transactionDate=" + transactionDate + '\n' +
+                        ", transactionAmount=" + transactionAmount + '\n' +
+                        ", transactionType='" + transactionType + '\n' +
+                        ", transactionDescription='" + transactionDescription + '\n' +
+                        ", RecipientId='" + recipientId + '\n' +
+                        ", employeeId='" + employeeId + '\n' +
+                        ", transactionStatus='" + status + '\n' +
+                        '}';
             }
         }
         else{
             if(employeeId == 0){
                 return "Transaction{" +
-                "transactionId='" + transactionId + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", transactionDate=" + transactionDate +
-                ", transactionAmount=" + transactionAmount +
-                ", transactionType='" + transactionType + '\'' +
-                ", transactionDescription='" + transactionDescription + '\'' +
-                ", transactionStatus='" + status + '\'' +
-                '}';
+                        "transactionId='" + transactionId + '\n' +
+                        ", customerId='" + customerId + '\n' +
+                        ", transactionDate=" + transactionDate + '\n' +
+                        ", transactionAmount=" + transactionAmount + '\n' +
+                        ", transactionType='" + transactionType + '\n' +
+                        ", transactionDescription='" + transactionDescription + '\n' +
+                        ", transactionStatus='" + status + '\n' +
+                        '}';
             }else{
                 return "Transaction{" +
-                "transactionId='" + transactionId + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", transactionDate=" + transactionDate +
-                ", transactionAmount=" + transactionAmount +
-                ", transactionType='" + transactionType + '\'' +
-                ", transactionDescription='" + transactionDescription + '\'' +
-                ", employeeId='" + employeeId +
-                ", transactionStatus='" + status + '\'' +
-                '}';
+                        "transactionId='" + transactionId + '\n' +
+                        ", customerId='" + customerId + '\n' +
+                        ", transactionDate=" + transactionDate + '\n' +
+                        ", transactionAmount=" + transactionAmount + '\n' +
+                        ", transactionType='" + transactionType + '\n' +
+                        ", transactionDescription='" + transactionDescription + '\n' +
+                        ", employeeId='" + employeeId + '\n' +
+                        ", transactionStatus='" + status + '\n' +
+                        '}';
             }
         }
     }
@@ -254,7 +253,7 @@ public class transaction {
                 transactionDate+"\n"+ transactionAmount+"\n"+ transactionType+"\n"+ transactionDescription+"\n";
     }
     public transaction(int customerId, String transactionDate, double transactionAmount,String transactionType,
-                       String transactionDescription, int recipientId,int TransactionID) {
+                    String transactionDescription, int recipientId,int TransactionID) {
         this.transactionId = TransactionID;
         this.customerId = customerId;
         this.transactionDate = transactionDate;
@@ -264,5 +263,3 @@ public class transaction {
         this.recipientId = recipientId;}
 
 }
-
-

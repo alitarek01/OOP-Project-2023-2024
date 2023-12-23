@@ -85,17 +85,29 @@ public class Main {
                                         System.out.println("----------------------------\n\n");
                                         System.out.println("press 1 to Deposit");
                                         System.out.println("press 2 to Withdraw");
-                                        System.out.println("press 3 to make a transaction");
+                                        System.out.println("press 3 to make a transfer");
                                         System.out.println("press 4 to show transaction history");
                                         System.out.println("press 5 to return to client operations");
                                         System.out.print("\nChoice: ");
                                         int accountOperation = scanner.nextInt();
                                         if (accountOperation == 1) {
-                                            clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(1, allTransaction, clients2);
+                                            try {
+                                                clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(1, allTransaction, clients2);
+                                            }catch (TransactionException exp){
+                                                System.out.println(exp.getMessage());
+                                            }
                                         } else if (accountOperation == 2) {
-                                            clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(2, allTransaction, clients2);
+                                            try {
+                                                clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(2, allTransaction, clients2);
+                                            }catch (TransactionException exp){
+                                                System.out.println(exp.getMessage());
+                                            }
                                         } else if (accountOperation == 3) {
-                                            clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(3, allTransaction, clients2);
+                                            try {
+                                                clients2.get(clientindex).myAccounts.get(chooseAccount - 1).makeTransaction(3, allTransaction, clients2);
+                                            }catch (TransactionException exp){
+                                                System.out.println(exp.getMessage());
+                                            }
                                         } else if (accountOperation == 4) {
                                             for (int m = 0; m < allTransaction.size(); m++) {
                                                 if (allTransaction.get(m).getCustomerId() == currentAccNum || allTransaction.get(m).getRecipientId() == currentAccNum) {

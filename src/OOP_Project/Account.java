@@ -1,9 +1,9 @@
 package OOP_Project;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.time.LocalDateTime;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Account {
     int accountNumber;
     double balance;
@@ -19,7 +19,6 @@ public class Account {
     }
 
     Scanner type = new Scanner(System.in) ;
-    //ArrayList <transaction> accountTransaction = new ArrayList<>();
 
 
     //Constructor
@@ -33,7 +32,7 @@ public class Account {
 
 
     public void  updateBalance (double amount){
-            this.balance += amount ;
+        this.balance += amount ;
     }
 
     public boolean checkSufficientBalance (double amount){
@@ -62,7 +61,7 @@ public class Account {
         return accountNumber == other.accountNumber;
     }
 
-    public void makeTransaction (int transactionType,ArrayList <transaction> AllTransaction,ArrayList<Client> clients) {
+    public void makeTransaction (int transactionType,ArrayList <transaction> AllTransaction,ArrayList<Client> clients) throws TransactionException {
         double transactionAmount ;
         int recipientAccountNumber;
         LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
@@ -115,16 +114,20 @@ public class Account {
                     if (addNote) {
                         System.out.println("Write Note for the transaction:");
                         transactionNote = type.next();
-                        AllTransaction.add(new transaction(accountNumber, this,formattedDate,transactionAmount,"Transfer",
-                                transactionNote,recipientAccountNumber,recipientAccount,0));
+                        try{
+                            AllTransaction.add(new transaction(accountNumber, this,formattedDate,transactionAmount,"Transfer",
+                                    transactionNote,recipientAccountNumber,recipientAccount,0));}catch(TransactionException exp){
+                            System.out.println(exp.getMessage());
+                        }
                     } else {
-                        AllTransaction.add(new transaction(accountNumber, this, formattedDate, transactionAmount, "Transfer",
-                                "", recipientAccountNumber, recipientAccount, 0));
+                        try{AllTransaction.add(new transaction(accountNumber, this, formattedDate, transactionAmount, "Transfer",
+                                "", recipientAccountNumber, recipientAccount, 0));}catch(TransactionException exp){
+                            System.out.println(exp.getMessage());
+                        }
                     }
                     break;
                 } else {
-                    System.out.println("recipient Account number not found");
-                    return;
+                    throw new TransactionException("recipient Account number not found");
                 }
             }
         }
@@ -182,4 +185,4 @@ public class Account {
         }
 
     }*/
-    //second constructor
+//second constructor
