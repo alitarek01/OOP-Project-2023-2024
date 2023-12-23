@@ -147,37 +147,80 @@ public class Employee {
     }
 
 
-    boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
-        int clientIndex = -1;
-        boolean clientFounded = false;
-        for (int i = 0; i < clients2.size(); i++) {
-            if (clients2.get(i).ID == ID) {
-                clientFounded = true;
-                clientIndex = i;
-                break;
-            }
+//    boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
+//        int clientIndex = -1;
+//        boolean clientFounded = false;
+//        for (int i = 0; i < clients2.size(); i++) {
+//            if (clients2.get(i).ID == ID) {
+//                clientFounded = true;
+//                clientIndex = i;
+//                break;
+//            }
+//        }
+//        if (clientFounded) {
+//            while (true) {
+//                System.out.println("Press 1 to change Client's username\nPress 2 to change Client's password");  // ask him what to change
+//                int editInfoInput = scanner.nextInt();
+//                if (editInfoInput == 1) {
+//                    System.out.println("Enter new Username:");
+//                    clients2.get(clientIndex).username = scanner.nextLine();
+//                    return true;
+//                } else if (editInfoInput == 2) {
+//                    clients2.get(clientIndex).password = scanner.nextLine();
+//                    return true;
+//                } else {
+//                    System.out.println("Wrong Input!, try Again");
+//                }
+//            }
+//        } else {
+//            System.out.println("ID not found\nTry Again!");
+//            return false;
+//        }
+//
+//    }
+boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
+    int clientIndex = -1;
+    boolean clientFounded = false;
+    for (int i = 0; i < clients2.size(); i++) {
+        if (clients2.get(i).ID == ID) {
+            clientFounded = true;
+            clientIndex = i;
+            break;
         }
-        if (clientFounded) {
-            while (true) {
+    }
+    if (clientFounded) {
+        while (true) {
+
+            System.out.println("Please enter the id and password of the client account.");
+            System.out.println("ID:");int id = in.nextInt();
+            System.out.println("Password:");String pass = in.next();
+            if (clientUPAuthentication(clients2 , id , pass) != null)
+            {
                 System.out.println("Press 1 to change Client's username\nPress 2 to change Client's password");  // ask him what to change
                 int editInfoInput = scanner.nextInt();
                 if (editInfoInput == 1) {
-                    System.out.println("Enter new Username:");
-                    clients2.get(clientIndex).username = scanner.nextLine();
+                    System.out.print("Enter new Username:");
+                    clients2.get(clientIndex).username = scanner.next();
                     return true;
                 } else if (editInfoInput == 2) {
-                    clients2.get(clientIndex).password = scanner.nextLine();
+                    System.out.print("Enter new password:");
+                    clients2.get(clientIndex).password = scanner.next();
                     return true;
                 } else {
                     System.out.println("Wrong Input!, try Again");
                 }
             }
-        } else {
-            System.out.println("ID not found\nTry Again!");
-            return false;
-        }
+            else{
+                System.out.println("Username or password are wrong please try again");
+            }
 
+        }
+    } else {
+        System.out.println("ID not found\nTry Again!");
+        return false;
     }
+
+}
 
 
     void EmployeeSearchForClient(ArrayList <Client> clients2 )
@@ -275,6 +318,101 @@ public class Employee {
          }
 
      }
+
+    void EmployeeMakingTransaction(ArrayList <Client> clients , ArrayList<transaction>allTransaction)
+    {
+        boolean test3 = true;
+        while (test3) {
+
+            System.out.println("Please enter the id and password of the client account or 0 for the id to cancel.");
+            System.out.println("ID:");int id = in.nextInt();
+            if (id == 0) {
+                break;
+            }
+            System.out.println("Password:");String pass = in.next();
+            Client tempClient = clientUPAuthentication(clients, id , pass);
+            if (tempClient != null)
+            {
+                test3 = false;
+                boolean test = true;
+                int accountNum = 0;
+
+                while (test)
+                {
+                    int i = 1;
+
+                    System.out.println("Choose one of your accounts:");
+
+
+                    for (Account acc : tempClient.myAccounts)
+                    {
+                        System.out.println(i + "-Account no.= " + acc.accountNumber);
+                        i++;
+                    }
+
+                    int n = scanner.nextInt();
+
+                    if (n<=i && n>0) {
+                        test = false;
+                        accountNum = n;
+                    }
+                    else{
+                        System.out.println("Please enter a number from the range.");
+                    }
+                }
+
+
+                boolean test2 = true;
+                while (test2) {
+                    System.out.println("press 1 to Deposit");
+                    System.out.println("press 2 to Withdraw");
+                    System.out.println("press 3 to make a transaction");
+                    System.out.println("press 0 to return");
+                    System.out.print("\nChoice: ");
+                    int accountOperation = scanner.nextInt();
+                    if (accountOperation == 1) {
+                        System.out.println("check");
+                        tempClient.myAccounts.get(accountNum - 1).makeTransaction(1, allTransaction, clients);
+                        test2 = false;
+                    } else if (accountOperation == 2) {
+                        tempClient.myAccounts.get(accountNum - 1).makeTransaction(2, allTransaction, clients);
+                        test2 = false;
+
+                    } else if (accountOperation == 3) {
+                        tempClient.myAccounts.get(accountNum - 1).makeTransaction(3, allTransaction, clients);
+                        test2 = false;
+
+                    } else if (accountOperation == 0) {
+                        return;
+                    } else {
+                        System.out.println("Wrong Input, Please try again!");
+
+
+                    }
+                }
+
+
+            }
+            else
+            {
+                System.out.println("ID or password is incorrect please try again.");
+                test3 = true;
+            }
+        }
+
+
+    }
+
+    private Client clientUPAuthentication(ArrayList<Client>client , int id, String pass)
+    {
+        for (Client obj : client)
+        {
+            if (obj.password.equals(pass) && obj.ID == id) {
+                return obj;
+            }
+        }
+        return null;
+    }
 
      //////////////////////////////////Files////////////////////////////////////////////////////////
      public String save(){

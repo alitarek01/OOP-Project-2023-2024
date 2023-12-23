@@ -24,7 +24,7 @@ public class Main {
 
         employees.add(new Employee( "dude", 100));
         employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
-       // employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
+        employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
@@ -153,7 +153,8 @@ public class Main {
                             System.out.println("4-Edit a client account");
                             System.out.println("5-Search for client by (Name or account number)");
                             System.out.println("6-Delete client account");
-                            System.out.println("7-Sign out");
+                            System.out.println("7-Make Transaction");
+                            System.out.println("8-Sign out");
 
                             System.out.println("Choice: ");
                             int empOperationsChoice = scanner.nextInt();
