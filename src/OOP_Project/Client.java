@@ -266,10 +266,11 @@ public class Client {
         return
                 "\n\n________________________________________________________" +
                 "\nID :" + ID +
-                "\nFirstName :" + firstName + '\'' +
-                "\nLastName :'" + lastName + '\'' +
-                "\nTelephoneNumber :" + telephoneNumber +
-                "\nStateOfTheAccount :" + stateOfTheAccount +
+                "\nUsername: " + username   +
+                "\nFirstName: " + firstName +
+                "\nLastName: '" + lastName  +
+                "\nTelephoneNumber: " + telephoneNumber +
+                "\nStateOfTheAccount: " + stateOfTheAccount +
                 "\n\n________________________________________________________"
                 ;
     }

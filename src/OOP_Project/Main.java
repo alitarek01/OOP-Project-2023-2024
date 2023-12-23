@@ -9,10 +9,11 @@ public class Main {
 //        clients[1] = new Client(2022170873, "aly", "maklad", "loe", "1231", 1060113886);
 //        clients[2] = new Client(2022170873, "ahmed", "attia", "mido", "1232", 1060113886);
 //        clients[3] = new Client(2022170873, "omar", "amged", "mego", "1233", 1060113886);
-
+        Admin admin =new Admin();
         ArrayList<Client> clients2 = new ArrayList<>();
         ArrayList<Employee> employees = new ArrayList<>();
         ArrayList <transaction> allTransaction = new ArrayList<>();
+
 
 
 
@@ -23,8 +24,8 @@ public class Main {
         clients2.add(new Client(2022170829, "omar", "amged", "mego", "1233", 1060113886));
 
         employees.add(new Employee( "dude", 100));
-        employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
-        employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
+      //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
+      //  employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
@@ -32,6 +33,7 @@ public class Main {
             System.out.println("press 1 to sign in as a Client");
             System.out.println("press 2 to sign in as a Employee");
             System.out.println("press 3 to sign in as a Admin");
+            System.out.print("\nChoice: ");
             int signAs = scanner.nextInt();
             boolean signInStatus = false;
             boolean signInLoop = true;
@@ -154,6 +156,11 @@ public class Main {
                             empindex = i;
                             break;
                         }
+
+                    }
+                    if (signInStatus && !employees.get(empindex).status){
+                        System.out.println("Employee is not Authorized");
+                        break;
                     }
                     if (signInStatus) {
                         System.out.println("\nSigned in Successfully\n");
@@ -202,13 +209,42 @@ public class Main {
                         }
                     }
                     else {
-                        System.out.println("Wrong Username or Password");
+                        System.out.println("Wrong ID or Password");
                         System.out.println("Please try again!");
                         continue;
 
                     }
                 }
                 else if (signAs == 3) {
+                    System.out.println("\nSign in as a Admin\n===================");
+                    System.out.print("Enter Username:");
+                    String Username = scanner.next();
+                    System.out.print("Enter Password:");
+                    String Password = scanner.next();
+
+                    if (Username.equals(admin.username)&&Username.equals(admin.password)){
+                        System.out.println("\nSigned in Successfully\n---------------------");
+                        System.out.println("This is Operations that you can do as an Admin:");
+                        System.out.println("press 1 to Authorize the new employees’ accounts");
+                        System.out.println("press 2 to Display all the employees.");
+                        System.out.println("press 3 to Display all the clients.");
+                        System.out.println("press 4 to Show all transactions done by (date/ client/ employee)");
+                        System.out.println("press 5 to Sign out");
+                        System.out.print("\nChoice: ");
+                        int adminOperation= scanner.nextInt();
+                        if (adminOperation==1){admin.authorizeEmployee(employees);}
+                        if (adminOperation==2){admin.DisplayEmployees(employees);}
+                        if (adminOperation==3){admin.DisplayClients(clients2);}
+                        if (adminOperation==4){admin.showTransactions(employees,clients2,allTransaction);}
+                        if (adminOperation==5){break;}
+
+                    }
+                    else {
+                        System.out.println("\nWrong Username or Password");
+                        System.out.println("Please try again!\n\n");
+                        continue;
+
+                    }
 
                 }
 
