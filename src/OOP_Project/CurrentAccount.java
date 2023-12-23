@@ -4,7 +4,7 @@ public class CurrentAccount extends Account {
     protected static final double MIN_BALANCE = 3000;
       public CurrentAccount(double balance )
       {
-          super( balance);
+          super( balance,"Current Account");
 
       }
 

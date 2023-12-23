@@ -13,12 +13,9 @@ import java.util.Scanner;
 public class Employee {
 
     Scanner scanner = new Scanner(System.in);
-    private static Scanner in = new Scanner(System.in);
 
-
-    //String username;
-    String password;
     int id;
+    String password;
     String firstName;
     String lastName;
     String address;
@@ -89,7 +86,7 @@ public class Employee {
         String password = scanner.next();
         System.out.println("Enter Client's telephoneNumber:");
         long telephoneNumber = scanner.nextLong();
-        clients2.add(new Client(ID, firstName, lastName, username, password, telephoneNumber));
+        clients2.add(new Client(ID, firstName, lastName,username, password, telephoneNumber));
         EmployeeCreatingAccount(clients2,ID);
 
     }
@@ -192,8 +189,8 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
         while (true) {
 
             System.out.println("Please enter the id and password of the client account.");
-            System.out.println("ID:");int id = in.nextInt();
-            System.out.println("Password:");String pass = in.next();
+            System.out.println("ID:");int id = scanner.nextInt();
+            System.out.println("Password:");String pass = scanner.next();
             if (clientUPAuthentication(clients2 , id , pass) != null)
             {
                 System.out.println("Press 1 to change Client's username\nPress 2 to change Client's password");  // ask him what to change
@@ -229,10 +226,10 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
             System.out.println("Enter 1 to search for the client by ID or 2 to search by account number.");
             System.out.println("Enter 0 to cancel.");
             System.out.println("Input:");
-            int x = in.nextInt();
+            int x = scanner.nextInt();
             if (x == 1) {
                 System.out.println("Please enter the ID of the client:");
-                int ID = in.nextInt();
+                int ID = scanner.nextInt();
                 for (Client obj : clients2) {
                     if (obj.ID == ID) {
                         System.out.println(obj.toString());
@@ -244,7 +241,7 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
             } else if (x == 2) {
                 boolean found = false;
                 System.out.println("Please enter the account number of the client:");
-                int n = in.nextInt();
+                int n = scanner.nextInt();
                 for (Client obj : clients2) {
                     for (Account acc : obj.myAccounts) {
                         if (acc.accountNumber == n) {
@@ -270,9 +267,9 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
      {
          System.out.println("Please enter the ID and password of the Client account.");
          System.out.println("Enter 0 in the ID if you want to cancel");
-         System.out.println("ID: ");int userID = in.nextInt();
+         System.out.println("ID: ");int userID = scanner.nextInt();
          if (userID ==0 ){return;}
-         System.out.println("Password: ");String pass = in.next();
+         System.out.println("Password: ");String pass = scanner.next();
          for (Client obj: clients2)
          {
              if (obj.ID==userID && obj.password.equals(pass))
@@ -288,10 +285,10 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
                  }
 
                  System.out.println("Enter the account number of the account you want to delete:");
-                 int accNum = in.nextInt();
+                 int accNum = scanner.nextInt();
 
                  System.out.println("Enter 1 to confirm deletion or 0 to cancel.");
-                 int ans = in.nextInt();
+                 int ans = scanner.nextInt();
                  if (ans == 1)
                  {
                      for (Account acc:obj.myAccounts)
@@ -325,11 +322,11 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
         while (test3) {
 
             System.out.println("Please enter the id and password of the client account or 0 for the id to cancel.");
-            System.out.println("ID:");int id = in.nextInt();
+            System.out.println("ID:");int id = scanner.nextInt();
             if (id == 0) {
                 break;
             }
-            System.out.println("Password:");String pass = in.next();
+            System.out.println("Password:");String pass = scanner.next();
             Client tempClient = clientUPAuthentication(clients, id , pass);
             if (tempClient != null)
             {
@@ -476,6 +473,24 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
         this.yearOfGraduation = yearOfGraduation;
         this.totalGrade = totalGrade;
         this.status=status;
+    }
+
+    @Override
+    public String toString() {
+        String status = this.status ? "Authorized" : "Not Authorized";
+
+        return "Employee{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", position='" + position + '\'' +
+                ", graduatedCollage='" + graduatedCollage + '\'' +
+                ", yearOfGraduation=" + yearOfGraduation +
+                ", totalGrade='" + totalGrade + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
 //    // This function is used to check if the username and password of the client are correct

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDateTime;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
-public class Account {
+public abstract class Account {
     int accountNumber;
     double balance;
     protected int choice ;
     private static int counter=10000;
+    String accountType;
 
     public static void setCounter(int index) {
         counter=index;
@@ -23,10 +24,10 @@ public class Account {
 
 
     //Constructor
-    public Account( double balance) {
+    public Account( double balance,String accountType) {
         accountNumber=counter;
         ++counter;
-
+        this.accountType =accountType;
         this.balance = balance;
     }
 
@@ -135,6 +136,7 @@ public class Account {
 
     public void DisplayInfo() {
         System.out.println("--------------------------------");
+        System.out.println("Account Type: " + accountType);
         System.out.println("Account Number: " + accountNumber);
         System.out.println("Balance: $" + balance);
         System.out.println("--------------------------------");
