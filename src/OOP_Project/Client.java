@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Double.*;
 public class Client {
-    //Client: (ID, FirstName, LastName, Account number (must be unique),Username, Password, Telephone number,
-    // State of the account (Active or closed), Type of the account, Balance)
     public int ID;
     String firstName;
     String lastName;
@@ -18,7 +16,6 @@ public class Client {
     Scanner scanner = new Scanner(System.in);
 
 
-   // written by ali
 
     //Constructors
     public Client(int ID, String firstName, String lastName, String username, String password, long telephoneNumber) {
@@ -32,12 +29,6 @@ public class Client {
 
     }
 
-    //For testing
-    public Client(int ID, String username, String password) {
-        this.ID = ID;
-        this.username = username;
-        this.password = password;
-    }
     //Methods
 
     //● Edit personal information.
@@ -47,7 +38,7 @@ public class Client {
             System.out.println("=================================");
             System.out.println("Press 1 to change your First Name");
             System.out.println("Press 2 to change your Last Name");
-            System.out.println("Press 3 to change your Telephone Number\n\nchoice:\n");
+            System.out.println("Press 3 to change your Telephone Number\nchoice:");
             choice = scanner.nextInt();
             if (choice == 1) {
                 System.out.print("Enter New First Name: ");
@@ -85,23 +76,7 @@ public class Client {
     }
 
 
-    //● Transfer money to another client's account.
-    //● Show transaction history.
 
-    //● Take a deposit from his account.
-//    CurrentAccount [] C_accounts = new CurrentAccount[3];;
-//    SavingAccount [] S_accounts = new SavingAccount[3];
-//    void create_C_account(int balance){
-//        //MyAccounts[acc_num] = new  CurrentAccount(balance,acc_num);
-//
-//        acc_num++;
-//    }
-//    void create_S_account(int balance){
-//        MyAccounts[acc_num] = new SavingAccount(balance,acc_num);
-//        acc_num++;
-//    }
-
-    //Getters
 
     public int getID() {
         return ID;
@@ -176,9 +151,6 @@ public class Client {
                 ArrayList<Account> clientAccounts=new ArrayList<>();
 
                 while (!(temp= reader.readLine()).equals("#")) {
-
-//                    int accountNumber=Integer.parseInt(temp);
-//                    String balancestr=reader.readLine();
                     double balance=Double.parseDouble(temp);
                     String type=reader.readLine();
                     if (type.equals("Saving Account")){
@@ -187,8 +159,18 @@ public class Client {
                     else if (type.equals("Current Account")) {
                         clientAccounts.add(new CurrentAccount(balance));
                     }
-
-
+//                    if(Boolean.parseBoolean(reader.readLine())){
+//                        int loanDurationInMonths=Integer.parseInt(reader.readLine());
+//                         double loanAmount=Double.parseDouble(reader.readLine());
+//                         double clientBalance=Double.parseDouble(reader.readLine());
+//                        ArrayList<Installment> installments=new ArrayList<>();
+//                         while (!(reader.readLine().equals("@"))){
+//                             int installmentNumber=Integer.parseInt(reader.readLine());
+//                              boolean paid=Boolean.parseBoolean(reader.readLine());
+//                              double installmentAmount=Double.parseDouble(reader.readLine());
+//                             installments.add(new Installment(installmentNumber,paid,installmentAmount));
+//                        }
+//                    }
 
                 }
                 clients.add(new Client(clientID, firstName, lastName, username, password,
@@ -237,9 +219,20 @@ public class Client {
                         //writer.write(account.getAccountNumber() + "\n");
                         writer.write(account.getBalance() + "\n");
                         writer.write(account.getAccountType() + "\n");
-
-
-
+//                        if(account.accountLoan!=null||account.accountLoan.loanStatus)
+//                        {
+//                            writer.write("true");
+//                            writer.write(account.accountLoan.loanDurationInMonths);
+//                            writer.write(String.valueOf(account.accountLoan.loanAmount));
+//                            writer.write(String.valueOf(account.accountLoan.clientBalance));
+//                            for (Installment installment: account.accountLoan.installments){
+//                                writer.write(installment.installmentNumber);
+//                                writer.write(String.valueOf(installment.paid));
+//                                writer.write(String.valueOf(installment.installmentAmount));
+//                            }
+//                            writer.write("@");
+//                        }
+//                        else writer.write("false");
                     }
 
                     // Add a marker to indicate the end of the accounts for this client
@@ -262,7 +255,7 @@ public class Client {
                 "\nUsername: " + username   +
                 "\nFirstName: " + firstName +
                 "\nLastName: " + lastName  +
-                "\nTelephoneNumber: " + telephoneNumber +
+                "\nTelephoneNumber: 0" + telephoneNumber +
                 "\nStateOfTheAccount: " + stateOfTheAccount +
                 "\n\n________________________________________________________"
                 ;

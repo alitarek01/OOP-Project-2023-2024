@@ -480,7 +480,6 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
                     writer.write(e.save());}
             }
             writer.close();
-            System.out.println("written to files successfully");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

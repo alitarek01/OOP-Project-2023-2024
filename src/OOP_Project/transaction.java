@@ -214,25 +214,25 @@ public class transaction {
         else{
             if(employeeId == 0){
                 return "Transaction{" +'\n' +
-                        "transactionId='" + transactionId + '\n' +
-                        ", customerId='" + customerId + '\n' +
+                        "transactionId=" + transactionId + '\n' +
+                        ", customerId=" + customerId + '\n' +
                         ", transactionDate=" + transactionDate + '\n' +
                         ", transactionAmount=" + transactionAmount + '\n' +
-                        ", transactionType='" + transactionType + '\n' +
-                        ", transactionDescription='" + transactionDescription + '\n' +
-                        ", transactionStatus='" + status + '\n' +
+                        ", transactionType=" + transactionType + '\n' +
+                        ", transactionDescription=" + transactionDescription + '\n' +
+                        ", transactionStatus=" + status + '\n' +
                         '}';
             }else{
-                return "Transaction{" +'\n' +
-                        "transactionId='" + transactionId + '\n' +
-                        ", customerId='" + customerId + '\n' +
+                return '\n' +
+                        "transactionId=" + transactionId + '\n' +
+                        ", customerId=" + customerId + '\n' +
                         ", transactionDate=" + transactionDate + '\n' +
                         ", transactionAmount=" + transactionAmount + '\n' +
-                        ", transactionType='" + transactionType + '\n' +
-                        ", transactionDescription='" + transactionDescription + '\n' +
-                        ", employeeId='" + employeeId + '\n' +
-                        ", transactionStatus='" + status + '\n' +
-                        '}';
+                        ", transactionType=" + transactionType + '\n' +
+                        ", transactionDescription=" + transactionDescription + '\n' +
+                        ", employeeId=" + employeeId + '\n' +
+                        ", transactionStatus=" + status + '\n'
+                        ;
             }
         }
     }

@@ -4,7 +4,7 @@ import java.time.LocalDate;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 import java.util.ArrayList;
 import java.util.Scanner;
-    abstract public class Account {
+    public abstract  class Account {
         int accountNumber;
         double balance;
         protected int choice;
@@ -13,6 +13,9 @@ import java.util.Scanner;
 
         public Loan accountLoan;
         Scanner type = new Scanner(System.in);
+            LocalDate myDateObj = LocalDate.now();  // Create a date object
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String formattedDate = myDateObj.format(myFormatObj);
 
 
         //Constructor
@@ -21,6 +24,7 @@ import java.util.Scanner;
             ++counter;
             this.accountType = accountType;
             this.balance = balance;
+            Loan loan = new Loan(0, 0);
         }
 
 
@@ -55,9 +59,6 @@ import java.util.Scanner;
         public void makeTransaction(int transactionType, ArrayList<transaction> AllTransaction, ArrayList<Client> clients) throws TransactionException {
             double transactionAmount;
             int recipientAccountNumber;
-            LocalDate myDateObj = LocalDate.now();  // Create a date object
-            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            String formattedDate = myDateObj.format(myFormatObj);
             boolean addNote;
             String transactionNote;
             Account recipientAccount = null;
@@ -138,6 +139,7 @@ import java.util.Scanner;
                         if (loanDuration <= 120 && loanDuration >= 0) {
 
                             accountLoan = new Loan(loanDuration, loanAmount);
+                            accountLoan.loanStatus = true;
                             balance = accountLoan.addLoanAmountToBalance(balance);
                             return;
                         } else {
@@ -152,7 +154,21 @@ import java.util.Scanner;
             }
         }
 
-        public void payInstallment() {
+        public void payInstallment(ArrayList<transaction> AllTransaction) {
+            boolean installmentdone=false;
+            for (int a = 0; a < accountLoan.loanDurationInMonths; a++) {
+                if(accountLoan.installments.get(a).paid){installmentdone=true;}
+                else {
+                    installmentdone = false;
+                    break;
+                }
+            }
+            if(installmentdone){
+                System.out.println("all Installments done");
+               // accountLoan=null;
+                accountLoan.loanStatus=false;
+                return;
+            }
             System.out.println("This is you Loan Installments\n-----------------------");
             accountLoan.display_loan_history();
             System.out.println("Press 1 to pay installments");
@@ -161,6 +177,8 @@ import java.util.Scanner;
                 for (int j = 0; j < accountLoan.loanDurationInMonths; j++) {
                     if (!accountLoan.installments.get(j).paid) {
                         balance = accountLoan.payInstallment(j + 1, balance);
+                        AllTransaction.add(new transaction(accountNumber, this, formattedDate, accountLoan.installments.get(j).installmentAmount, "Installment", 0));
+
                         break;
 
                     }
