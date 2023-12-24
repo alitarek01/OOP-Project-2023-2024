@@ -1,6 +1,7 @@
 package OOP_Project;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;  // import the LocalDate class
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,8 +37,9 @@ public class CurrentAccount extends Account {
         }
     }
 
-    public CurrentAccount( double balance) {
-        super(balance,"Current Account");
+    public CurrentAccount( double balance,String accountType, LocalDate creationDate) {
+        super(balance,accountType,creationDate);
+
     }
 
     protected boolean checkMinimumBalance() {

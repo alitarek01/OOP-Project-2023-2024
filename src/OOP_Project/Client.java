@@ -161,13 +161,15 @@ public class Client {
                     String dateString = reader.readLine();
 
                     // Parse the date string into a Date object
-                    Date date = Account.parseDate(dateString);
+                    //LocalDate date = Account.parseDate(dateString);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    LocalDate date = LocalDate.parse(dateString, formatter);
                     String type=reader.readLine();
                     if (type.equals("Saving Account")){
-                        clientAccounts.add(new SavingAccount(balance , date));
+                        clientAccounts.add(new SavingAccount(balance ,"Saving Account", date));
                     }
                     else if (type.equals("Current Account")) {
-                        clientAccounts.add(new CurrentAccount(balance , date));
+                        clientAccounts.add(new CurrentAccount(balance ,"Current Account", date));
                     }
 //                    if(Boolean.parseBoolean(reader.readLine())){
 //                        int loanDurationInMonths=Integer.parseInt(reader.readLine());

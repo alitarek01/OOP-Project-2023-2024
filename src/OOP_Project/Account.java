@@ -24,16 +24,23 @@ import java.util.Scanner;
 
 
         //Constructor
-        public Account(double balance, String accountType , LocalDate date) {
+        public Account(double balance, String accountType) {
             accountNumber = counter;
             ++counter;
             this.accountType = accountType;
             this.balance = balance;
+            this.creationDate = LocalDate.now();
             Loan loan = new Loan(0, 0);
-            this.creationDate = date;
+            //this.creationDate = date;
         }
 
-
+        public Account(double balance,String accountType, LocalDate creationDate) {
+            this.accountNumber = counter++;
+            this.balance = balance;
+            this.creationDate = creationDate;
+            this.accountType = accountType;
+            Loan loan = new Loan(0, 0);
+        }
         public void updateBalance(double amount) {
             this.balance += amount;
         }
@@ -231,10 +238,7 @@ import java.util.Scanner;
         }
 
 
-        public Account(int accountNumber, double balance) {
-            this.accountNumber = accountNumber;
-            this.balance = balance;
-        }
+
 
         public static Date parseDate(String dateString) throws ParseException {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

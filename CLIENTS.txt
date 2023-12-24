@@ -6,14 +6,19 @@ jack
 10601138886
 true
 36520.011
+25-10-2023
 Saving Account
 4000.011
+17-5-2020
 Saving Account
 12000.0
+4-6-2019
 Current Account
 1620.0
+14-8-2017
 Current Account
 210720.0
+18-6-2010
 Saving Account
 #
 2022170850
@@ -24,6 +29,7 @@ tito
 1060113886
 true
 9000.0
+18-7-2022
 Current Account
 #
 124
@@ -34,6 +40,7 @@ lkasahf
 1984371179843
 true
 6000.0
+14-7-2025
 Saving Account
 #
 1
@@ -44,6 +51,7 @@ akjsdh
 81918
 true
 5599.0
+4-9-2018
 Saving Account
 #
 2022170810
@@ -54,5 +62,6 @@ jo
 2983747
 true
 9280.0
+7-8-2015
 Saving Account
 #
