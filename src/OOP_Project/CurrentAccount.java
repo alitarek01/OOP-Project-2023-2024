@@ -27,7 +27,7 @@ public class CurrentAccount extends Account {
                 LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
                 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                 String formattedDate = myDateObj.format(myFormatObj);
-                allTransactions.add(new transaction(super.accountNumber,this,formattedDate,super.getBalance()*Fees_Rate,"Fees",0));
+                allTransactions.add(new transaction(super.accountNumber,this,formattedDate,super.getBalance()*Fees_Rate,"Fees",employeeId));
             }
             else {
                 super.balance = in.nextDouble();
@@ -35,8 +35,8 @@ public class CurrentAccount extends Account {
         }
     }
 
-    public CurrentAccount(int accountNumber, double balance) {
-        super(accountNumber, balance);
+    public CurrentAccount( double balance) {
+        super(balance,"Current Account");
     }
 
     protected boolean checkMinimumBalance() {
