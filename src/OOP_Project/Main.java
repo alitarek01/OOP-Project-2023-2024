@@ -81,7 +81,7 @@ public class Main {
                                             System.out.println("press 6 to show Loan History");
                                             System.out.println("press 7 to show transaction history");
                                             System.out.println("press 8 to return to client operations");
-                                            if (clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountType.equals("Saving")) {
+                                            if (clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountType.equals("Saving Account")) {
                                                 System.out.println("press 9 to show account interest");
                                             }
                                             System.out.print("\nChoice: ");

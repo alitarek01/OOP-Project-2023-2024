@@ -1,9 +1,12 @@
 package OOP_Project;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;  // import the LocalDate class
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
     public abstract  class Account{
         int accountNumber;
@@ -17,15 +20,17 @@ import java.util.Scanner;
             LocalDate myDateObj = LocalDate.now();  // Create a date object
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             String formattedDate = myDateObj.format(myFormatObj);
+            LocalDate creationDate;
 
 
         //Constructor
-        public Account(double balance, String accountType) {
+        public Account(double balance, String accountType , LocalDate date) {
             accountNumber = counter;
             ++counter;
             this.accountType = accountType;
             this.balance = balance;
             Loan loan = new Loan(0, 0);
+            this.creationDate = date;
         }
 
 
@@ -197,6 +202,7 @@ import java.util.Scanner;
             System.out.println("Account Type: " + accountType);
             System.out.println("Account Number: " + accountNumber);
             System.out.println("Balance: $" + balance);
+            System.out.println("Date : " + formattedDate);
             System.out.println("--------------------------------");
         }
 
@@ -230,7 +236,10 @@ import java.util.Scanner;
             this.balance = balance;
         }
 
-
+        public static Date parseDate(String dateString) throws ParseException {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            return dateFormat.parse(dateString);
+        }
     }
 
 

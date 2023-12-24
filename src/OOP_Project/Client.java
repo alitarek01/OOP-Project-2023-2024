@@ -1,6 +1,10 @@
 package OOP_Project;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 public class Client {
     public int ID;
@@ -136,7 +140,7 @@ public class Client {
     ///////////////////////////////////////Files/////////////////////////////////////////////////////////
     public static void readClient(ArrayList<Client> clients){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("CLIENTS.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\alit7\\OneDrive\\Documents\\NetBeansProjects\\OOP Project\\src\\OOP_Project\\CLIENTS.txt"));
 
             String temp;
             while ((temp= reader.readLine())!= null){
@@ -151,12 +155,19 @@ public class Client {
 
                 while (!(temp= reader.readLine()).equals("#")) {
                     double balance=Double.parseDouble(temp);
+//                    LocalDate myDateObj = LocalDate.now();  // Create a date object
+//                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//                    String formattedDate = myDateObj.format(myFormatObj);
+                    String dateString = reader.readLine();
+
+                    // Parse the date string into a Date object
+                    Date date = Account.parseDate(dateString);
                     String type=reader.readLine();
                     if (type.equals("Saving Account")){
-                        clientAccounts.add(new SavingAccount(balance));
+                        clientAccounts.add(new SavingAccount(balance , date));
                     }
                     else if (type.equals("Current Account")) {
-                        clientAccounts.add(new CurrentAccount(balance));
+                        clientAccounts.add(new CurrentAccount(balance , date));
                     }
 //                    if(Boolean.parseBoolean(reader.readLine())){
 //                        int loanDurationInMonths=Integer.parseInt(reader.readLine());
@@ -217,6 +228,7 @@ public class Client {
                     for (Account account : client.getMyAccounts()) {
                         //writer.write(account.getAccountNumber() + "\n");
                         writer.write(account.getBalance() + "\n");
+                        writer.write(account.formattedDate + "\n");
                         writer.write(account.getAccountType() + "\n");
 //                        if(account.accountLoan!=null||account.accountLoan.loanStatus)
 //                        {

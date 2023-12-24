@@ -241,7 +241,7 @@ public class transaction {
 
     public static void ReadTransactions(ArrayList<transaction> transactions) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("TRANSACTIONS.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\alit7\\OneDrive\\Documents\\NetBeansProjects\\OOP Project\\src\\OOP_Project\\TRANSACTIONS.txt"));
             String line;
             while ((line = reader.readLine()) != null)
             {
