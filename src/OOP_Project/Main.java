@@ -180,11 +180,11 @@ public class Main {
                             if (empOperationsChoice == 1) {
                                 employees.get(empindex).EmployeeEditInfo();
                             } else if (empOperationsChoice == 2) {
-                                employees.get(empindex).createAClient(clients2);
+                                employees.get(empindex).createAClient(clients2,allTransaction);
                             } else if (empOperationsChoice == 3) {
                                 while (true) {
                                     System.out.println("Enter Client ID: ");
-                                    if (employees.get(empindex).EmployeeCreatingAccount(clients2, scanner.nextInt())) {
+                                    if (employees.get(empindex).EmployeeCreatingAccount(clients2, scanner.nextInt(),allTransaction)) {
                                         break;
                                     }
 
@@ -222,7 +222,7 @@ public class Main {
                     System.out.print("Enter Password:");
                     String Password = scanner.next();
 
-                    if (Username.equals(admin.username)&&Username.equals(admin.password)){
+                    if (Username.equals(admin.username)&&Password.equals(admin.password)){
                         System.out.println("\nSigned in Successfully\n---------------------");
                         System.out.println("This is Operations that you can do as an Admin:");
                         System.out.println("press 1 to Authorize the new employees’ accounts");

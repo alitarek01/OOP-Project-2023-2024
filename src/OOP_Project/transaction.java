@@ -1,6 +1,10 @@
 package OOP_Project;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class transaction {
@@ -79,10 +83,28 @@ public class transaction {
     }
 
     private void handleWithdrawal(Account account) throws TransactionException {
+        
         if (transactionAmount > 0) {
             if (account.checkSufficientBalance(transactionAmount)) {
                 this.transactionStatus = true;
-                transactionDescription = "Withdrawal from account";
+                if(transactionType.equals("Installment")){
+                    int i = 0;
+                    int installmentindx;
+                    for ( Installment itr: account.accountloan.installments) {
+                        if(!itr.paid){
+                            installmentindx = i;
+                            break;
+                        }
+                        i++;
+                    }
+                    transactionDescription = "Installment number " + installmentindx;
+                }
+                else if(transactionType.equals("Withdrawl")){
+                    transactionDescription = "Withdrawal from account";
+                }
+                else{
+                    transactionDescription = "Current Account Fees";
+                }
                 account.updateBalance(-transactionAmount);
             } else {
                 this.transactionStatus = false;
@@ -110,7 +132,7 @@ public class transaction {
     }
 
     public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+        this.transactionId = transactionId;//leh
     }
 
     public int getCustomerId() {

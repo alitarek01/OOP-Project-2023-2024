@@ -89,7 +89,7 @@ public class Admin {
                     System.out.println("Invalid Choice. Please choose a number between 1-3!\n");
                     validChoice = false;
                     scanner.next(); // Consume the invalid input
-                    break;
+                    break;//
                 }
             }
             if (choice == 1) {
@@ -101,7 +101,7 @@ public class Admin {
                 }
                 targetID = scanner.nextInt();
                 for (transaction trans : transactions) {
-                    if (trans.getCustomerId() == targetID) {
+                    if (trans.getCustomerId() == targetID) {// i should increment, || recpient id, use to string
                         System.out.println("  " + i + " - Sender ID: " + trans.getCustomerId() + "\n     " +
                             "Recipient ID: " + trans.getRecipientId() + "\n     " +
                             "Amount: " + trans.getTransactionAmount() + "\n     " +
@@ -119,7 +119,7 @@ public class Admin {
                 }
                 targetID = scanner.nextInt();
                 for (transaction trans : transactions) {
-                    if (trans.getemployeeId() == targetID) {
+                    if (trans.getemployeeId() == targetID) {// i should increment, use to string
                         System.out.println("  " + i + " - Sender ID: " + trans.getCustomerId() + "\n     " +
                             "Recipient ID: " + trans.getRecipientId() + "\n     " +
                             "Amount: " + trans.getTransactionAmount() + "\n     " +
@@ -181,7 +181,7 @@ public class Admin {
 
                 date = day + "/" + month + "/" + year;
                 for (transaction trans : transactions) {
-                    if (trans.getTransactionDate().equals(date)) {
+                    if (trans.getTransactionDate().equals(date)) {// i should increment, use to string
                         System.out.println("  " + i + " - Sender ID: " + trans.getCustomerId() + "\n     " +
                             "Recipient ID: " + trans.getRecipientId() + "\n     " +
                             "Amount: " + trans.getTransactionAmount() + "\n     " +
