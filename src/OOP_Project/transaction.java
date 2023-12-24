@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class transaction {
-    private static int counter = 0;
+    private static int counter = 1;
     private int transactionId;
     private int customerId;
     private int recipientId;
-    private int employeeId;
+    private int employeeId=0;
     private boolean transactionStatus ;
     private String transactionDate;
     private double transactionAmount;
@@ -99,7 +99,7 @@ public class transaction {
                     }
                     transactionDescription = "Installment number " + installmentindx;
                 }
-                else if(transactionType.equals("Withdrawl")){
+                else if(transactionType.equals("Withdrawal")){
                     transactionDescription = "Withdrawal from account";
                 }
                 else{
@@ -187,7 +187,7 @@ public class transaction {
         String status = transactionStatus ? "Successful" : "Failed";
         if(transactionType.equals("Transfer")){
             if(employeeId == 0){
-                return "Transaction{" +
+                return "Transaction{" + '\n' +
                         "transactionId='" + transactionId + '\n' +
                         ", customerId='" + customerId + '\n' +
                         ", transactionDate=" + transactionDate + '\n' +
@@ -198,7 +198,7 @@ public class transaction {
                         ", transactionStatus='" + status + '\n' +
                         '}';
             }else{
-                return "Transaction{" +
+                return "Transaction{" + '\n'+
                         "transactionId='" + transactionId + '\n' +
                         ", customerId='" + customerId + '\n' +
                         ", transactionDate=" + transactionDate + '\n' +
@@ -213,7 +213,7 @@ public class transaction {
         }
         else{
             if(employeeId == 0){
-                return "Transaction{" +
+                return "Transaction{" +'\n' +
                         "transactionId='" + transactionId + '\n' +
                         ", customerId='" + customerId + '\n' +
                         ", transactionDate=" + transactionDate + '\n' +
@@ -223,7 +223,7 @@ public class transaction {
                         ", transactionStatus='" + status + '\n' +
                         '}';
             }else{
-                return "Transaction{" +
+                return "Transaction{" +'\n' +
                         "transactionId='" + transactionId + '\n' +
                         ", customerId='" + customerId + '\n' +
                         ", transactionDate=" + transactionDate + '\n' +
@@ -240,11 +240,10 @@ public class transaction {
     public static void ReadTransactions(ArrayList<transaction> transactions) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("TRANSACTIONS.txt"));
-            int line;
-            while ((line = Integer.parseInt(reader.readLine())) != -1)
+            String line;
+            while ((line = reader.readLine()) != null)
             {
-                int transactionId;
-                int customerId=Integer.parseInt(reader.readLine());
+                int customerId=Integer.parseInt(line);
                 int recipientId=Integer.parseInt(reader.readLine());
                 int employeeId=Integer.parseInt(reader.readLine());
                 boolean transactionStatus=Boolean.parseBoolean(reader.readLine()) ;
@@ -252,26 +251,41 @@ public class transaction {
                 double transactionAmount=Double.parseDouble(reader.readLine());
                 String transactionType= reader.readLine();           //deposit,withdraw,transfer
                 String transactionDescription= reader.readLine();
-                transactions.add(new transaction(customerId,transactionDate,transactionAmount,transactionType,
-                        transactionDescription,recipientId,line));
+                transactions.add(new transaction(customerId,recipientId,employeeId,transactionStatus,
+                        transactionDate,transactionAmount,transactionType,transactionDescription));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public transaction(int customerId, int recipientId, int employeeId, boolean transactionStatus, String transactionDate,
+                       double transactionAmount, String transactionType, String transactionDescription) {
+        this.transactionId=counter++;
+        this.customerId = customerId;
+        this.recipientId = recipientId;
+        this.employeeId = employeeId;
+        this.transactionStatus = transactionStatus;
+        this.transactionDate = transactionDate;
+        this.transactionAmount = transactionAmount;
+        this.transactionType = transactionType;
+        this.transactionDescription = transactionDescription;
+    }
+
     public static void saveTransactions(ArrayList<transaction> transactions){
         try {
             BufferedWriter writer =new BufferedWriter(new FileWriter("TRANSACTIONS.txt"));
             for (transaction t: transactions) {
                 writer.write(t.save());
             }
+            writer.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public  String save(){
-        return transactionId+"\n"+ customerId+"\n"+ recipientId+"\n"+ employeeId+"\n"+ transactionStatus+"\n"+
+        return  customerId+"\n"+ recipientId+"\n"+ employeeId+"\n"+ transactionStatus+"\n"+
                 transactionDate+"\n"+ transactionAmount+"\n"+ transactionType+"\n"+ transactionDescription+"\n";
     }
     public transaction(int customerId, String transactionDate, double transactionAmount,String transactionType,

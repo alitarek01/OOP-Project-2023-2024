@@ -1,6 +1,6 @@
 package OOP_Project;
 
-import java.time.LocalDateTime;  // import the LocalDate class
+import java.time.LocalDate;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -55,8 +55,8 @@ import java.util.Scanner;
         public void makeTransaction(int transactionType, ArrayList<transaction> AllTransaction, ArrayList<Client> clients) throws TransactionException {
             double transactionAmount;
             int recipientAccountNumber;
-            LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
-            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            LocalDate myDateObj = LocalDate.now();  // Create a date object
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             String formattedDate = myDateObj.format(myFormatObj);
             boolean addNote;
             String transactionNote;

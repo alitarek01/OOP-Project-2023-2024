@@ -261,7 +261,7 @@ public class Client {
                 "\nID :" + ID +
                 "\nUsername: " + username   +
                 "\nFirstName: " + firstName +
-                "\nLastName: '" + lastName  +
+                "\nLastName: " + lastName  +
                 "\nTelephoneNumber: " + telephoneNumber +
                 "\nStateOfTheAccount: " + stateOfTheAccount +
                 "\n\n________________________________________________________"

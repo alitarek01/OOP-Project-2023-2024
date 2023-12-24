@@ -1,0 +1,24 @@
+10000
+0
+0
+true
+24-12-2023
+500.0
+Deposit
+Deposit to account
+10000
+0
+0
+true
+24-12-2023
+30020.0
+Deposit
+Deposit to account
+10005
+0
+1
+true
+24-12-2023
+180.0
+Fees
+Current Account Fees

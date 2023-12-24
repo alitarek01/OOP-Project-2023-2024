@@ -5,7 +5,7 @@ Mr.J
 1
 10601138886
 true
-3000.011
+36520.011
 Saving Account
 4000.011
 Saving Account
@@ -13,6 +13,10 @@ Saving Account
 Current Account
 12000.0
 Current Account
+1620.0
+Current Account
+234222.0
+Saving Account
 #
 2022170850
 ahmed
