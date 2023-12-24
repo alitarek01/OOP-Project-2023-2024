@@ -89,8 +89,8 @@ public class transaction {
                 this.transactionStatus = true;
                 if(transactionType.equals("Installment")){
                     int i = 0;
-                    int installmentindx;
-                    for ( Installment itr: account.accountloan.installments) {
+                    int installmentindx = 0;
+                    for ( Installment itr: account.accountLoan.installments) {
                         if(!itr.paid){
                             installmentindx = i;
                             break;
