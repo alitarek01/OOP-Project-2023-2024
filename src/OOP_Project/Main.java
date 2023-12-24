@@ -1,4 +1,5 @@
 package OOP_Project;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDateTime;
@@ -10,13 +11,14 @@ public class Main {
             ArrayList<Client> clients2 = new ArrayList<>();
             ArrayList<Employee> employees = new ArrayList<>();
             ArrayList <transaction> allTransaction = new ArrayList<>();
-            Client.readClient(clients2);
-            Employee.readEmp(employees);
-            transaction.ReadTransactions(allTransaction);
+
 
 
 
             while (true) {
+                Client.readClient(clients2);
+                Employee.readEmp(employees);
+                transaction.ReadTransactions(allTransaction);
                 System.out.println("press 1 to sign in as a Client");
                 System.out.println("press 2 to sign in/up as a Employee");
                 System.out.println("press 3 to sign in as a Admin");
@@ -124,7 +126,7 @@ public class Main {
                                                 break;
                                             }
                                             else if(accountOperation == 9){
-                                                LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
+                                                LocalDate myDateObj = LocalDate.now();  // Create a date object
                                                 clients2.get(clientindex).myAccounts.get(chooseAccount - 1).CalculateInterest(myDateObj);
 
                                             } else {

@@ -140,7 +140,7 @@ public class Client {
     ///////////////////////////////////////Files/////////////////////////////////////////////////////////
     public static void readClient(ArrayList<Client> clients){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\alit7\\OneDrive\\Documents\\NetBeansProjects\\OOP Project\\src\\OOP_Project\\CLIENTS.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("CLIENTS.txt"));
 
             String temp;
             while ((temp= reader.readLine())!= null){
@@ -162,7 +162,7 @@ public class Client {
 
                     // Parse the date string into a Date object
                     //LocalDate date = Account.parseDate(dateString);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate date = LocalDate.parse(dateString, formatter);
                     String type=reader.readLine();
                     if (type.equals("Saving Account")){
@@ -230,7 +230,11 @@ public class Client {
                     for (Account account : client.getMyAccounts()) {
                         //writer.write(account.getAccountNumber() + "\n");
                         writer.write(account.getBalance() + "\n");
-                        writer.write(account.formattedDate + "\n");
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                        // Format the current date to a string
+                        String formattedDate = account.creationDate.format(formatter);
+                        writer.write(formattedDate + "\n");
                         writer.write(account.getAccountType() + "\n");
 //                        if(account.accountLoan!=null||account.accountLoan.loanStatus)
 //                        {

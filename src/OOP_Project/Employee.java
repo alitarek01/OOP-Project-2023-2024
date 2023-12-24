@@ -441,7 +441,7 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
 
     public static void readEmp(ArrayList<Employee> emps) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\alit7\\OneDrive\\Documents\\NetBeansProjects\\OOP Project\\src\\OOP_Project\\EMPLOYEES.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("EMPLOYEES.txt"));
             String line;
 
             while ((line = reader.readLine()) != null) {

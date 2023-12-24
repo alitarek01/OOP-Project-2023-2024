@@ -18,18 +18,18 @@ public class SavingAccount extends Account {
 
 
 
-    @Override
-    public void CalculateInterest(LocalDateTime currentDate ) {
+
+    public void CalculateInterest(LocalDate currentDate ) {
         YearMonth yearMonth1 = YearMonth.from(currentDate);
         YearMonth yearMonth2 = YearMonth.from(super.creationDate);
         long monthsDifference = ChronoUnit.MONTHS.between(yearMonth1, yearMonth2);
 
-        double interest = balance * interestRate * monthsDifference ;
+        double interest = balance * interestRate *-1 * monthsDifference ;
         if(monthsDifference != 0) {
             balance += interest;
             System.out.println("Interest added: $" + interest);
             System.out.println("New balance: $" + balance);
-            accountDate = currentDate;
+            creationDate = currentDate;
         }
         else {
             System.out.println("No Interest");

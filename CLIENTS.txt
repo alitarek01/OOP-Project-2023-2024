@@ -5,21 +5,24 @@ jack
 1
 10601138886
 true
-36520.011
-25-10-2023
+39500.0438976
+2023-12-25
 Saving Account
 4000.011
-17-5-2020
+2020-05-17
 Saving Account
 12000.0
-4-6-2019
+2019-06-04
 Current Account
 1620.0
-14-8-2017
+2017-08-14
 Current Account
-210720.0
-18-6-2010
+472012.79999999993
+2010-06-18
 Saving Account
+1620.0
+2023-12-25
+Current Account
 #
 2022170850
 ahmed
@@ -29,7 +32,7 @@ tito
 1060113886
 true
 9000.0
-18-7-2022
+2022-07-18
 Current Account
 #
 124
@@ -40,7 +43,7 @@ lkasahf
 1984371179843
 true
 6000.0
-14-7-2025
+2025-07-14
 Saving Account
 #
 1
@@ -51,7 +54,7 @@ akjsdh
 81918
 true
 5599.0
-4-9-2018
+2018-09-04
 Saving Account
 #
 2022170810
@@ -62,6 +65,73 @@ jo
 2983747
 true
 9280.0
-7-8-2015
+2015-08-07
+Saving Account
+#
+2022170873
+Youssef
+Mahmoud
+jack
+1
+10601138886
+true
+39500.0438976
+2023-12-25
+Saving Account
+4000.011
+2020-05-17
+Saving Account
+12000.0
+2019-06-04
+Current Account
+1620.0
+2017-08-14
+Current Account
+472012.79999999993
+2010-06-18
+Saving Account
+#
+2022170850
+ahmed
+attia
+tito
+2
+1060113886
+true
+9000.0
+2022-07-18
+Current Account
+#
+124
+ajhfd
+alksdh
+lkasahf
+5
+1984371179843
+true
+6000.0
+2025-07-14
+Saving Account
+#
+1
+qkja
+asdjh
+akjsdh
+9
+81918
+true
+5599.0
+2018-09-04
+Saving Account
+#
+2022170810
+mohamed
+ragheb
+jo
+5
+2983747
+true
+9280.0
+2015-08-07
 Saving Account
 #

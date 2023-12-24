@@ -18,8 +18,10 @@ import java.util.Scanner;
         public Loan accountLoan;
         Scanner type = new Scanner(System.in);
             LocalDate myDateObj = LocalDate.now();  // Create a date object
-            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            String formattedDate = myDateObj.format(myFormatObj);
+       //     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        String formattedDate = myDateObj.format(formatter);
             LocalDate creationDate;
 
 
@@ -68,7 +70,7 @@ import java.util.Scanner;
 
             return accountNumber == other.accountNumber;
         }
-        public void CalculateInterest(LocalDateTime currentDate){}
+        public void CalculateInterest(LocalDate currentDate){}
         public void makeTransaction(int transactionType, ArrayList<transaction> AllTransaction, ArrayList<Client> clients) throws TransactionException {
             double transactionAmount;
             int recipientAccountNumber;
@@ -209,7 +211,7 @@ import java.util.Scanner;
             System.out.println("Account Type: " + accountType);
             System.out.println("Account Number: " + accountNumber);
             System.out.println("Balance: $" + balance);
-            System.out.println("Date : " + formattedDate);
+            System.out.println("Date : " + creationDate);
             System.out.println("--------------------------------");
         }
 

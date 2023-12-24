@@ -17,7 +17,7 @@ public class CurrentAccount extends Account {
             System.out.println("balance less than min balance, fees would be applied");
             System.out.println("1 - To continue");
             System.out.println("2 - To change balance");
-            try (Scanner in = new Scanner(System.in)) {
+             Scanner in = new Scanner(System.in);
                 int choice = in.nextInt();
                 while(choice != 1 && choice != 2){
                     System.out.println("invalid choice");
@@ -35,7 +35,7 @@ public class CurrentAccount extends Account {
                 }
             }
         }
-    }
+
 
     public CurrentAccount( double balance,String accountType, LocalDate creationDate) {
         super(balance,accountType,creationDate);
