@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 
 public class SavingAccount extends Account {
-    protected final double interestRate = 0.02;
+    protected static double interestRate = 0.02;
     protected LocalDateTime accountDate  ;
     public SavingAccount(  double balance  ) {
         super(balance,"Saving Account");
