@@ -35,7 +35,7 @@ public class Main {
         //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
         while (true) {
             System.out.println("press 1 to sign in as a Client");
-            System.out.println("press 2 to sign in as a Employee");
+            System.out.println("press 2 to sign in/up as a Employee");
             System.out.println("press 3 to sign in as a Admin");
             System.out.println("press 4 to save clients");
             System.out.print("\nChoice: ");
@@ -157,6 +157,15 @@ public class Main {
                 }
 
                 else if (signAs == 2) {
+
+boolean empTest = true;
+while (empTest) 
+{
+    System.out.println("Enter 1 to sign in , 2 to sign up , or 0 to return to the main page.");
+    System.out.println("Ans:");int ans = scanner.nextInt();
+    if (ans == 1)
+    {
+        
                     System.out.print("Enter ID:");
                     int employeeID = scanner.nextInt();
                     System.out.print("Enter Password:");
@@ -226,6 +235,24 @@ public class Main {
                         continue;
 
                     }
+    }
+    else if(ans == 2)
+    {
+        Employee.CreatingEmployeeAccount(employees);
+        empTest = false;
+    }
+    else if(ans == 0)
+    {
+        empTest = false;
+        
+    }
+    else
+    {
+        System.out.println("Please enter a valid number.");
+    }
+}
+
+
                 }
                 else if (signAs == 3) {
                     System.out.println("\nSign in as a Admin\n===================");

@@ -189,6 +189,35 @@ public class Employee {
 //        }
 //
 //    }
+
+
+private static final Scanner in = new Scanner(System.in);
+
+
+public static void CreatingEmployeeAccount(ArrayList<Employee>employees)
+{
+    System.out.println("Please enter the following infornation.");
+    System.out.println("First name:");String fName = in.next();
+    System.out.println("Enter Last name:");String lName = in.next();
+    System.out.println("Password:");String pass = in.next();
+    System.out.println("Address:");String add = in.next();
+    System.out.println("Position:");String pos = in.next();
+    System.out.println("Graduated collage:");String col = in.next();
+    System.out.println("Year of graduation:");int year = in.nextInt();
+    System.out.println("Total grades:");String grades = in.next();
+
+    
+    employees.add(new Employee(pass ,fName , lName , add , pos ,col , year , grades , false));
+    System.out.println("\n---------------------");
+    System.out.println("Account created successfully but waiting for validation from the admin.");
+    System.out.println("---------------------\n");
+
+    
+}
+
+
+
+
 boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
     int clientIndex = -1;
     boolean clientFounded = false;
