@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 public class Main {
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
             Admin admin =new Admin();
             ArrayList<Client> clients2 = new ArrayList<>();
             ArrayList<Employee> employees = new ArrayList<>();
             ArrayList <transaction> allTransaction = new ArrayList<>();
+        try (Scanner scanner = new Scanner(System.in)) {
 
 
 
