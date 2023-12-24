@@ -124,7 +124,9 @@ public class Main {
                                             if (clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountLoan != null) {
                                                 clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountLoan.display_loan_history();
                                             }
-                                            else{continue;}
+                                            else{
+                                                System.out.println("There is no loan");
+                                                continue;}
                                         }
                                          else if (accountOperation == 7) {
                                             for (int m = 0; m < allTransaction.size(); m++) {

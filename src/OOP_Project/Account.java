@@ -24,6 +24,7 @@ import java.util.Scanner;
             ++counter;
             this.accountType = accountType;
             this.balance = balance;
+            Loan loan = new Loan(0, 0);
         }
 
 
@@ -138,6 +139,7 @@ import java.util.Scanner;
                         if (loanDuration <= 120 && loanDuration >= 0) {
 
                             accountLoan = new Loan(loanDuration, loanAmount);
+                            accountLoan.loanStatus = true;
                             balance = accountLoan.addLoanAmountToBalance(balance);
                             return;
                         } else {
@@ -162,7 +164,9 @@ import java.util.Scanner;
                 }
             }
             if(installmentdone){
-                System.out.println("all Installements done");
+                System.out.println("all Installments done");
+               // accountLoan=null;
+                accountLoan.loanStatus=false;
                 return;
             }
             System.out.println("This is you Loan Installments\n-----------------------");

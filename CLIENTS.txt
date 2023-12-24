@@ -1,7 +1,7 @@
 2022170873
 Youssef
 Mahmoud
-Mr.J
+jack
 1
 10601138886
 true
@@ -9,13 +9,11 @@ true
 Saving Account
 4000.011
 Saving Account
-6000.0
-Current Account
 12000.0
 Current Account
 1620.0
 Current Account
-200000.0
+210720.0
 Saving Account
 #
 2022170850
@@ -27,4 +25,34 @@ tito
 true
 9000.0
 Current Account
+#
+124
+ajhfd
+alksdh
+lkasahf
+5
+1984371179843
+true
+6000.0
+Saving Account
+#
+1
+qkja
+asdjh
+akjsdh
+9
+81918
+true
+5599.0
+Saving Account
+#
+2022170810
+mohamed
+ragheb
+jo
+5
+2983747
+true
+9280.0
+Saving Account
 #

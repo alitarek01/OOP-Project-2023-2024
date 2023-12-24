@@ -151,9 +151,6 @@ public class Client {
                 ArrayList<Account> clientAccounts=new ArrayList<>();
 
                 while (!(temp= reader.readLine()).equals("#")) {
-
-//                    int accountNumber=Integer.parseInt(temp);
-//                    String balancestr=reader.readLine();
                     double balance=Double.parseDouble(temp);
                     String type=reader.readLine();
                     if (type.equals("Saving Account")){
@@ -162,8 +159,18 @@ public class Client {
                     else if (type.equals("Current Account")) {
                         clientAccounts.add(new CurrentAccount(balance));
                     }
-
-
+//                    if(Boolean.parseBoolean(reader.readLine())){
+//                        int loanDurationInMonths=Integer.parseInt(reader.readLine());
+//                         double loanAmount=Double.parseDouble(reader.readLine());
+//                         double clientBalance=Double.parseDouble(reader.readLine());
+//                        ArrayList<Installment> installments=new ArrayList<>();
+//                         while (!(reader.readLine().equals("@"))){
+//                             int installmentNumber=Integer.parseInt(reader.readLine());
+//                              boolean paid=Boolean.parseBoolean(reader.readLine());
+//                              double installmentAmount=Double.parseDouble(reader.readLine());
+//                             installments.add(new Installment(installmentNumber,paid,installmentAmount));
+//                        }
+//                    }
 
                 }
                 clients.add(new Client(clientID, firstName, lastName, username, password,
@@ -212,9 +219,20 @@ public class Client {
                         //writer.write(account.getAccountNumber() + "\n");
                         writer.write(account.getBalance() + "\n");
                         writer.write(account.getAccountType() + "\n");
-
-
-
+//                        if(account.accountLoan!=null||account.accountLoan.loanStatus)
+//                        {
+//                            writer.write("true");
+//                            writer.write(account.accountLoan.loanDurationInMonths);
+//                            writer.write(String.valueOf(account.accountLoan.loanAmount));
+//                            writer.write(String.valueOf(account.accountLoan.clientBalance));
+//                            for (Installment installment: account.accountLoan.installments){
+//                                writer.write(installment.installmentNumber);
+//                                writer.write(String.valueOf(installment.paid));
+//                                writer.write(String.valueOf(installment.installmentAmount));
+//                            }
+//                            writer.write("@");
+//                        }
+//                        else writer.write("false");
                     }
 
                     // Add a marker to indicate the end of the accounts for this client
