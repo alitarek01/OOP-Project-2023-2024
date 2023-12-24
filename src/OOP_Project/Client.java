@@ -174,15 +174,17 @@ public class Client {
                 long telephoneNumber=Long.parseLong(reader.readLine());
                 boolean stateOfTheAccount = Boolean.parseBoolean(reader.readLine());
                 ArrayList<Account> clientAccounts=new ArrayList<>();
-                temp= reader.readLine();
-                while (temp!=null&&!(temp.equals("#"))) {
-                    //int accountNumber=Integer.parseInt(temp);
-                    double balance= Double.parseDouble(temp);
+
+                while (!(temp= reader.readLine()).equals("#")) {
+
+//                    int accountNumber=Integer.parseInt(temp);
+//                    String balancestr=reader.readLine();
+                    double balance=Double.parseDouble(temp);
                     String type=reader.readLine();
-                    if (type.equals("Saving")){
+                    if (type.equals("Saving Account")){
                         clientAccounts.add(new SavingAccount(balance));
                     }
-                    else if (type.equals("Current")) {
+                    else if (type.equals("Current Account")) {
                         clientAccounts.add(new CurrentAccount(balance));
                     }
 
@@ -220,7 +222,7 @@ public class Client {
     public static void SaveClient(ArrayList<Client> clients){
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("OOP_Project/CLIENTS.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("CLIENTS.txt"));
             for (Client client : clients) {
                 if (client != null) {
                     writer.write(client.ID + "\n");

@@ -23,7 +23,7 @@ public class Employee {
     String graduatedCollage;
     int yearOfGraduation;
     String totalGrade;
-    boolean status=false; //to allow admin to authorize Employees' accounts
+    boolean status=true; //to allow admin to authorize Employees' accounts
     static int counter = 1;
 
 
@@ -34,7 +34,8 @@ public class Employee {
         this.id = id;
     }
 
-    Employee(String password, String firstName, String lastName, String address, String position, String graduatedCollage, int yearOfGraduation, String totalGrade) {
+    public Employee(String password, String firstName, String lastName, String address,
+            String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
         this.id = counter;
         this.password = password;
         this.firstName = firstName;
@@ -45,8 +46,21 @@ public class Employee {
         this.yearOfGraduation = yearOfGraduation;
         this.totalGrade = totalGrade;
         counter++;
-
+        this.status=status;
     }
+//    public Employee(String password, int id, String firstName, String lastName, String address,
+//            String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
+//        this.password = password;
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.address = address;
+//        this.position = position;
+//        this.graduatedCollage = graduatedCollage;
+//        this.yearOfGraduation = yearOfGraduation;
+//        this.totalGrade = totalGrade;
+//        this.status=status;
+//    }
 
     // Methods
     void EmployeeEditInfo() {
@@ -424,7 +438,7 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
 
      //////////////////////////////////Files////////////////////////////////////////////////////////
     public String save(){
-        return id+"\n"+password+"\n" +firstName+"\n"+lastName+
+        return password+"\n" +firstName+"\n"+lastName+
                 "\n"+address+"\n"+position+"\n"+graduatedCollage+"\n"+yearOfGraduation+"\n"+totalGrade+"\n"+status+"\n";
 
     }
@@ -451,8 +465,8 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                String password = reader.readLine();
-                int id = Integer.parseInt(reader.readLine());
+                String password = line;
+               // int id = Integer.parseInt(reader.readLine());
                 String firstName = reader.readLine();
                 String lastName = reader.readLine();
                 String address = reader.readLine();
@@ -462,7 +476,7 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
                 String totalGrade = reader.readLine();
                 boolean status = Boolean.parseBoolean(reader.readLine());
 
-                emps.add(new Employee(password, id, firstName, lastName, address, position,
+                emps.add(new Employee(password, firstName, lastName, address, position,
                         graduatedCollage, yearOfGraduation, totalGrade, status));
 
             }
@@ -471,19 +485,6 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    public Employee(String password, int id, String firstName, String lastName, String address,
-            String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
-        this.password = password;
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.position = position;
-        this.graduatedCollage = graduatedCollage;
-        this.yearOfGraduation = yearOfGraduation;
-        this.totalGrade = totalGrade;
-        this.status=status;
     }
 
     @Override

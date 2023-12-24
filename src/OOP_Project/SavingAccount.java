@@ -16,9 +16,7 @@ public class SavingAccount extends Account {
         DateTimeFormatter accountDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     }
 
-    public SavingAccount(int accountNumber, double balance) {
-        super(accountNumber, balance);
-    }
+
 
     public void CalculateInterest(LocalDateTime currentDate ) {
         YearMonth yearMonth1 = YearMonth.from(currentDate);
