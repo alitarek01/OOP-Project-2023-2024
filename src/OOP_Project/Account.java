@@ -4,7 +4,7 @@ import java.time.LocalDate;  // import the LocalDate class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 import java.util.ArrayList;
 import java.util.Scanner;
-    public class Account {
+    abstract public class Account {
         int accountNumber;
         double balance;
         protected int choice;
