@@ -119,13 +119,11 @@ public class Employee {
         }
         if (clientFounded) {
             while (true) {
-                System.out.println("Enter the ID and password of the client ");
-                System.out.println("ID:");
-                clientID = scanner.nextInt();
+                System.out.println("Enter password of the client ");
 
                 System.out.println("Password:");
                 clientPassword = scanner.next();
-                if (clients2.get(clientIndex).ID==clientID && clients2.get(clientIndex).password.equals(clientPassword)) {
+                if (clients2.get(clientIndex).ID==ID && clients2.get(clientIndex).password.equals(clientPassword)) {
                     System.out.println("Press 1 to Create saving account\nPress 2 to Create current account\nPress 0 to cancel:");
                     int inputAccountType;
                     inputAccountType = scanner.nextInt();
@@ -134,12 +132,14 @@ public class Employee {
                     System.out.println("enter initial balance:");
                         initialbalance = scanner.nextDouble();
                         clients2.get(clientIndex).myAccounts.add(new SavingAccount(initialbalance));
+                        System.out.println("account created succefully");
                         return true;
 
                     } else if (inputAccountType == 2) {
                         System.out.println("enter initial balance:");
                         initialbalance = scanner.nextDouble();
                         clients2.get(clientIndex).myAccounts.add(new CurrentAccount(initialbalance,allTransaction,this.id));
+                        System.out.println("account created succefully");
                         return true;
 
                     }

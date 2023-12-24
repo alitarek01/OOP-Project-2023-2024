@@ -16,6 +16,7 @@ public class Main {
 
         Client.readClient(clients2);
         Employee.readEmp(employees);
+        transaction.ReadTransactions(allTransaction);
 
 
 
@@ -262,21 +263,33 @@ while (empTest)
                     String Password = scanner.next();
 
                     if (Username.equals(admin.username)&&Password.equals(admin.password)){
-                        System.out.println("\nSigned in Successfully\n---------------------");
-                        System.out.println("This is Operations that you can do as an Admin:");
-                        System.out.println("press 1 to Authorize the new employees’ accounts");
-                        System.out.println("press 2 to Display all the employees.");
-                        System.out.println("press 3 to Display all the clients.");
-                        System.out.println("press 4 to Show all transactions done by (date/ client/ employee)");
-                        System.out.println("press 5 to Sign out");
-                        System.out.print("\nChoice: ");
-                        int adminOperation= scanner.nextInt();
-                        if (adminOperation==1){admin.authorizeEmployee(employees);}
-                        if (adminOperation==2){admin.DisplayEmployees(employees);}
-                        if (adminOperation==3){admin.DisplayClients(clients2);}
-                        if (adminOperation==4){admin.showTransactions(employees,clients2,allTransaction);}
-                        if (adminOperation==5){break;}
-
+                        while(true) {
+                            System.out.println("\nSigned in Successfully\n---------------------");
+                            System.out.println("This is Operations that you can do as an Admin:");
+                            System.out.println("press 1 to Authorize the new employees’ accounts");
+                            System.out.println("press 2 to Display all the employees.");
+                            System.out.println("press 3 to Display all the clients.");
+                            System.out.println("press 4 to Show all transactions done by (date/ client/ employee)");
+                            System.out.println("press 5 to Sign out");
+                            System.out.print("\nChoice: ");
+                            int adminOperation = scanner.nextInt();
+                            if (adminOperation == 1) {
+                                admin.authorizeEmployee(employees);
+                            }
+                            if (adminOperation == 2) {
+                                admin.DisplayEmployees(employees);
+                            }
+                            if (adminOperation == 3) {
+                                admin.DisplayClients(clients2);
+                            }
+                            if (adminOperation == 4) {
+                                admin.showTransactions(employees, clients2, allTransaction);
+                            }
+                            if (adminOperation == 5) {
+                                signInLoop=false;
+                                break;
+                            }
+                        }
                     }
                     else {
                         System.out.println("\nWrong Username or Password");
@@ -289,6 +302,7 @@ while (empTest)
                 else if (signAs == 4){
                     Client.SaveClient(clients2);
                     Employee.saveEmp(employees);
+                    transaction.saveTransactions(allTransaction);
 
                     break;
                 }
