@@ -223,16 +223,16 @@ public class transaction {
                         ", transactionStatus='" + status + '\n' +
                         '}';
             }else{
-                return "Transaction{" +'\n' +
-                        "transactionId='" + transactionId + '\n' +
-                        ", customerId='" + customerId + '\n' +
+                return '\n' +
+                        "transactionId=" + transactionId + '\n' +
+                        ", customerId=" + customerId + '\n' +
                         ", transactionDate=" + transactionDate + '\n' +
                         ", transactionAmount=" + transactionAmount + '\n' +
-                        ", transactionType='" + transactionType + '\n' +
-                        ", transactionDescription='" + transactionDescription + '\n' +
-                        ", employeeId='" + employeeId + '\n' +
-                        ", transactionStatus='" + status + '\n' +
-                        '}';
+                        ", transactionType=" + transactionType + '\n' +
+                        ", transactionDescription=" + transactionDescription + '\n' +
+                        ", employeeId=" + employeeId + '\n' +
+                        ", transactionStatus=" + status + '\n'
+                        ;
             }
         }
     }

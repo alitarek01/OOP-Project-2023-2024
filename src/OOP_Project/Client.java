@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Double.*;
 public class Client {
-    //Client: (ID, FirstName, LastName, Account number (must be unique),Username, Password, Telephone number,
-    // State of the account (Active or closed), Type of the account, Balance)
     public int ID;
     String firstName;
     String lastName;
@@ -18,7 +16,6 @@ public class Client {
     Scanner scanner = new Scanner(System.in);
 
 
-   // written by ali
 
     //Constructors
     public Client(int ID, String firstName, String lastName, String username, String password, long telephoneNumber) {
@@ -32,12 +29,6 @@ public class Client {
 
     }
 
-    //For testing
-    public Client(int ID, String username, String password) {
-        this.ID = ID;
-        this.username = username;
-        this.password = password;
-    }
     //Methods
 
     //● Edit personal information.
@@ -47,7 +38,7 @@ public class Client {
             System.out.println("=================================");
             System.out.println("Press 1 to change your First Name");
             System.out.println("Press 2 to change your Last Name");
-            System.out.println("Press 3 to change your Telephone Number\n\nchoice:\n");
+            System.out.println("Press 3 to change your Telephone Number\nchoice:");
             choice = scanner.nextInt();
             if (choice == 1) {
                 System.out.print("Enter New First Name: ");
@@ -85,23 +76,7 @@ public class Client {
     }
 
 
-    //● Transfer money to another client's account.
-    //● Show transaction history.
 
-    //● Take a deposit from his account.
-//    CurrentAccount [] C_accounts = new CurrentAccount[3];;
-//    SavingAccount [] S_accounts = new SavingAccount[3];
-//    void create_C_account(int balance){
-//        //MyAccounts[acc_num] = new  CurrentAccount(balance,acc_num);
-//
-//        acc_num++;
-//    }
-//    void create_S_account(int balance){
-//        MyAccounts[acc_num] = new SavingAccount(balance,acc_num);
-//        acc_num++;
-//    }
-
-    //Getters
 
     public int getID() {
         return ID;
@@ -262,7 +237,7 @@ public class Client {
                 "\nUsername: " + username   +
                 "\nFirstName: " + firstName +
                 "\nLastName: " + lastName  +
-                "\nTelephoneNumber: " + telephoneNumber +
+                "\nTelephoneNumber: 0" + telephoneNumber +
                 "\nStateOfTheAccount: " + stateOfTheAccount +
                 "\n\n________________________________________________________"
                 ;

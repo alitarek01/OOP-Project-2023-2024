@@ -13,7 +13,6 @@ public class Main {
         ArrayList<Client> clients2 = new ArrayList<>();
         ArrayList<Employee> employees = new ArrayList<>();
         ArrayList <transaction> allTransaction = new ArrayList<>();
-
         Client.readClient(clients2);
         Employee.readEmp(employees);
         transaction.ReadTransactions(allTransaction);
@@ -26,8 +25,8 @@ public class Main {
 //        clients2.add(new Client(2022170829, "omar", "amged", "mego", "1233", 1060113886));
 
         //employees.add(new Employee( "dude", 100));
-        employees.add(new Employee("0", "omar", "amged", "seko seko", "t3ala neko",
-                "kolyt alsbaka", 2030, "F",true));
+//        employees.add(new Employee("0", "omar", "amged", "Giza", "Senior",
+//                "Computer Science", 2030, "A",true));
 
             //employees.get(0).EmployeeCreatingAccount(clients2,2022170873,allTransaction);
       //  employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
@@ -38,7 +37,7 @@ public class Main {
             System.out.println("press 1 to sign in as a Client");
             System.out.println("press 2 to sign in/up as a Employee");
             System.out.println("press 3 to sign in as a Admin");
-            System.out.println("press 4 to save clients");
+            System.out.println("press 4 to save Changes");
             System.out.print("\nChoice: ");
             int signAs = scanner.nextInt();
             boolean signInStatus = false;
@@ -82,9 +81,9 @@ public class Main {
                                     clients2.get(clientindex).myAccounts.get(j).DisplayInfo();
                                 }
                                 System.out.println("=========================");
-                                System.out.print("Choose Account (1,2,3,4): ");
+                                System.out.print("Choose Account: ");
                                 int chooseAccount = scanner.nextInt();
-                                if (chooseAccount == 1 || chooseAccount == 2 || chooseAccount == 3 || chooseAccount == 4) {
+                                if (chooseAccount <=clients2.get(clientindex).myAccounts.size() &&chooseAccount>0) {
                                     while(true) {
                                         int currentAccNum = clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountNumber;
                                         System.out.println("----------------------------");
@@ -120,9 +119,13 @@ public class Main {
                                                 System.out.println(exp.getMessage());
                                             }
                                         }else if (accountOperation==4) {clients2.get(clientindex).myAccounts.get(chooseAccount - 1).takeLoan();}
-                                        else if (accountOperation==5) {clients2.get(clientindex).myAccounts.get(chooseAccount - 1).payInstallment();}
-                                        else if (accountOperation==6) {clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountLoan.display_loan_history();}
-
+                                        else if (accountOperation==5) {clients2.get(clientindex).myAccounts.get(chooseAccount - 1).payInstallment(allTransaction);}
+                                        else if (accountOperation==6) {
+                                            if (clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountLoan != null) {
+                                                clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountLoan.display_loan_history();
+                                            }
+                                            else{continue;}
+                                        }
                                          else if (accountOperation == 7) {
                                             for (int m = 0; m < allTransaction.size(); m++) {
                                                 if (allTransaction.get(m).getCustomerId() == currentAccNum || allTransaction.get(m).getRecipientId() == currentAccNum) {
@@ -159,99 +162,96 @@ public class Main {
 
                 else if (signAs == 2) {
 
-boolean empTest = true;
-while (empTest) 
-{
-    System.out.println("Enter 1 to sign in , 2 to sign up , or 0 to return to the main page.");
-    System.out.println("Ans:");int ans = scanner.nextInt();
-    if (ans == 1)
-    {
-        
-                    System.out.print("Enter ID:");
-                    int employeeID = scanner.nextInt();
-                    System.out.print("Enter Password:");
-                    String Password = scanner.next();
-                    int empindex = -1;
-                    for (int i = 0; i < employees.size(); i++) {
-                        if (employeeID == employees.get(i).id && Password.equals(employees.get(i).password)) {
-                            signInStatus = true;
-                            empindex = i;
-                            break;
-                        }
+                    boolean empTest = true;
+                    while (empTest) {
+                        System.out.println("Enter 1 to sign in , 2 to sign up , or 0 to return to the main page.");
+                        System.out.println("Ans:");
+                        int ans = scanner.nextInt();
+                        if (ans == 1) {
 
-                    }
-                    if (signInStatus && !employees.get(empindex).status){
-                        System.out.println("Employee is not Authorized");
-                        break;
-                    }
-                    if (signInStatus) {
-                        System.out.println("\nSigned in Successfully\n");
-                        while(true) {
-                            System.out.println("This is Operations that you can do on your account:");
-                            System.out.println("1-Edit his personal information");
-                            System.out.println("2-Create a client account");
-                            System.out.println("3-Create an account for a client");
-                            System.out.println("4-Edit a client account");
-                            System.out.println("5-Search for client by (Name or account number)");
-                            System.out.println("6-Delete client account");
-                            System.out.println("7-Make Transaction");
-                            System.out.println("8-Sign out");
-
-                            System.out.println("Choice: ");
-                            int empOperationsChoice = scanner.nextInt();
-                            if (empOperationsChoice == 1) {
-                                employees.get(empindex).EmployeeEditInfo();
-                            } else if (empOperationsChoice == 2) {
-                                employees.get(empindex).createAClient(clients2,allTransaction);
-                            } else if (empOperationsChoice == 3) {
-                                while (true) {
-                                    System.out.println("Enter Client ID: ");
-                                    if (employees.get(empindex).EmployeeCreatingAccount(clients2, scanner.nextInt(),allTransaction)) {
-                                        break;
-                                    }
-
+                            System.out.print("Enter ID:");
+                            int employeeID = scanner.nextInt();
+                            System.out.print("Enter Password:");
+                            String Password = scanner.next();
+                            int empindex = -1;
+                            for (int i = 0; i < employees.size(); i++) {
+                                if (employeeID == employees.get(i).id && Password.equals(employees.get(i).password)) {
+                                    signInStatus = true;
+                                    empindex = i;
+                                    break;
                                 }
-                            } else if (empOperationsChoice == 4) {
-                                while (true) {
-                                    System.out.println("Enter Client ID: ");
-                                    if (employees.get(empindex).EmployeeEditClient(clients2, scanner.nextInt())) {
-                                        break;
-                                    }
 
-                                }
-                            } else if (empOperationsChoice == 5) {employees.get(empindex).EmployeeSearchForClient(clients2);
-                            } else if (empOperationsChoice == 6) {employees.get(empindex).EmployeeDeletingAccount(clients2);
-                            }else if (empOperationsChoice==7){employees.get(empindex).EmployeeMakingTransaction(clients2,allTransaction);
-                            } else if (empOperationsChoice == 8) {signInLoop=false;
-                                break;
-                            } else {
-                                System.out.println("Please try again!");
                             }
+                            if (signInStatus && !employees.get(empindex).status) {
+                                System.out.println("Employee is not Authorized");
+                                break;
+                            }
+                            if (signInStatus) {
+                                System.out.println("\nSigned in Successfully\n");
+                                while (true) {
+                                    System.out.println("This is Operations that you can do on your account:");
+                                    System.out.println("1-Edit his personal information");
+                                    System.out.println("2-Create a client account");
+                                    System.out.println("3-Create an account for a client");
+                                    System.out.println("4-Edit a client account");
+                                    System.out.println("5-Search for client by (Name or account number)");
+                                    System.out.println("6-Delete client account");
+                                    System.out.println("7-Make Transaction");
+                                    System.out.println("8-Sign out");
+
+                                    System.out.println("Choice: ");
+                                    int empOperationsChoice = scanner.nextInt();
+                                    if (empOperationsChoice == 1) {
+                                        employees.get(empindex).EmployeeEditInfo();
+                                    } else if (empOperationsChoice == 2) {
+                                        employees.get(empindex).createAClient(clients2, allTransaction);
+                                    } else if (empOperationsChoice == 3) {
+                                        while (true) {
+                                            System.out.println("Enter Client ID: ");
+                                            if (employees.get(empindex).EmployeeCreatingAccount(clients2, scanner.nextInt(), allTransaction)) {
+                                                break;
+                                            }
+
+                                        }
+                                    } else if (empOperationsChoice == 4) {
+                                        while (true) {
+                                            System.out.println("Enter Client ID: ");
+                                            if (employees.get(empindex).EmployeeEditClient(clients2, scanner.nextInt())) {
+                                                break;
+                                            }
+
+                                        }
+                                    } else if (empOperationsChoice == 5) {
+                                        employees.get(empindex).EmployeeSearchForClient(clients2);
+                                    } else if (empOperationsChoice == 6) {
+                                        employees.get(empindex).EmployeeDeletingAccount(clients2);
+                                    } else if (empOperationsChoice == 7) {
+                                        employees.get(empindex).EmployeeMakingTransaction(clients2, allTransaction);
+                                    } else if (empOperationsChoice == 8) {
+                                        signInLoop = false;
+                                        break;
+                                    } else {
+                                        System.out.println("Please try again!");
+                                    }
 //                        }
+                                }
+                            } else {
+                                System.out.println("Wrong ID or Password");
+                                System.out.println("Please try again!");
+                                continue;
+
+                            }
+                        } else if (ans == 2) {
+                            Employee.CreatingEmployeeAccount(employees);
+                            empTest = false;
+                        } else if (ans == 0) {
+                            empTest = false;
+                            signInLoop = false;
+
+                        } else {
+                            System.out.println("Please enter a valid number.");
                         }
                     }
-                    else {
-                        System.out.println("Wrong ID or Password");
-                        System.out.println("Please try again!");
-                        continue;
-
-                    }
-    }
-    else if(ans == 2)
-    {
-        Employee.CreatingEmployeeAccount(employees);
-        empTest = false;
-    }
-    else if(ans == 0)
-    {
-        empTest = false;
-        
-    }
-    else
-    {
-        System.out.println("Please enter a valid number.");
-    }
-}
 
 
                 }

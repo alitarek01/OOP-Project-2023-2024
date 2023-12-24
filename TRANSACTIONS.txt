@@ -22,3 +22,11 @@ true
 180.0
 Fees
 Current Account Fees
+10005
+0
+0
+true
+24-12-2023
+34222.0
+Withdraw
+Current Account Fees

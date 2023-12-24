@@ -7,75 +7,12 @@ ASU
 2024
 A+
 true
-dude
-null
-null
-null
-null
-null
-0
-null
-true
 0
 omar
 amged
-seko seko
-t3ala neko
-kolyt alsbaka
+Giza
+Senior
+Computer Science
 2030
-F
+A
 true
-0
-omar
-amged
-seko seko
-t3ala neko
-kolyt alsbaka
-2030
-F
-true
-0
-omar
-amged
-seko seko
-t3ala neko
-kolyt alsbaka
-2030
-F
-true
-0
-omar
-amged
-seko seko
-t3ala neko
-kolyt alsbaka
-2030
-F
-true
-0
-omar
-amged
-seko seko
-t3ala neko
-kolyt alsbaka
-2030
-F
-true
-0
-omar
-amged
-seko seko
-t3ala neko
-kolyt alsbaka
-2030
-F
-true
-0
-omar
-amged
-seko seko
-t3ala neko
-kolyt alsbaka
-2030
-F
-false
