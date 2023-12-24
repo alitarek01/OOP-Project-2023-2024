@@ -2,7 +2,7 @@ package OOP_Project;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.lang.Double.*;
 public class Client {
     //Client: (ID, FirstName, LastName, Account number (must be unique),Username, Password, Telephone number,
     // State of the account (Active or closed), Type of the account, Balance)
@@ -14,7 +14,6 @@ public class Client {
     long telephoneNumber;
     boolean stateOfTheAccount = true;
     public static int acc_num=0;
-    public Account [] MyAccounts = new Account[4];
     public ArrayList<Account> myAccounts = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
@@ -177,20 +176,16 @@ public class Client {
                 ArrayList<Account> clientAccounts=new ArrayList<>();
                 temp= reader.readLine();
                 while (temp!=null&&!(temp.equals("#"))) {
-                    int accountNumber=Integer.parseInt(temp);
-                    double balance=Double.parseDouble(reader.readLine());
+                    //int accountNumber=Integer.parseInt(temp);
+                    double balance= Double.parseDouble(temp);
                     String type=reader.readLine();
-                    if (type.equals("saving")){
-                        clientAccounts.add(new SavingAccount(accountNumber,balance));
+                    if (type.equals("Saving")){
+                        clientAccounts.add(new SavingAccount(balance));
                     }
-                    else if (type.equals("current")) {
-                        clientAccounts.add(new CurrentAccount(accountNumber,balance));
+                    else if (type.equals("Current")) {
+                        clientAccounts.add(new CurrentAccount(balance));
                     }
-                     //int lastindex=accountNumber;
 
-                    //setLastIndex(accountNumber);
-                    if(Account.getCounter()<accountNumber)
-                    Account.setCounter(accountNumber);
 
 
                 }
@@ -225,7 +220,7 @@ public class Client {
     public static void SaveClient(ArrayList<Client> clients){
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("CLIENTS.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("OOP_Project/CLIENTS.txt"));
             for (Client client : clients) {
                 if (client != null) {
                     writer.write(client.ID + "\n");
@@ -235,16 +230,12 @@ public class Client {
                     writer.write(client.password + "\n");
                     writer.write(client.telephoneNumber + "\n");
                     writer.write(client.stateOfTheAccount + "\n");
-
-                    ArrayList<Account> clientAccounts = client.getMyAccounts();
-                    for (Account account : clientAccounts) {
-                        writer.write(account.getAccountNumber() + "\n");
+                   // ArrayList<Account> clientAccounts = client.getMyAccounts();
+                    for (Account account : client.getMyAccounts()) {
+                        //writer.write(account.getAccountNumber() + "\n");
                         writer.write(account.getBalance() + "\n");
-                        if (account instanceof SavingAccount) {
-                            writer.write("saving\n");
-                        } else if (account instanceof CurrentAccount) {
-                            writer.write("current\n");
-                        }
+                        writer.write(account.getAccountType() + "\n");
+
 
 
                     }

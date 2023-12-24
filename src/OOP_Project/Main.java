@@ -14,17 +14,18 @@ public class Main {
         ArrayList<Employee> employees = new ArrayList<>();
         ArrayList <transaction> allTransaction = new ArrayList<>();
 
+        Client.readClient(clients2);
 
 
 
 
-        clients2.add(new Client(2022170873, "Youssef", "Mahmoud", "j", "1", 1060113886));
-        clients2.add(new Client(2022170825, "aly", "maklad", "loe", "1231", 1060113886));
-        clients2.add(new Client(2022170850, "ahmed", "attia", "a", "2", 1060113886));
-        clients2.add(new Client(2022170829, "omar", "amged", "mego", "1233", 1060113886));
+//        clients2.add(new Client(2022170873, "Youssef", "Mahmoud", "j", "1", 1060113886));
+//        clients2.add(new Client(2022170825, "aly", "maklad", "loe", "1231", 1060113886));
+//        clients2.add(new Client(2022170850, "ahmed", "attia", "a", "2", 1060113886));
+//        clients2.add(new Client(2022170829, "omar", "amged", "mego", "1233", 1060113886));
 
         employees.add(new Employee( "dude", 100));
-      //  employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
+        employees.get(0).EmployeeCreatingAccount(clients2,2022170873);
       //  employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
@@ -33,6 +34,7 @@ public class Main {
             System.out.println("press 1 to sign in as a Client");
             System.out.println("press 2 to sign in as a Employee");
             System.out.println("press 3 to sign in as a Admin");
+            System.out.println("press 4 to save clients");
             System.out.print("\nChoice: ");
             int signAs = scanner.nextInt();
             boolean signInStatus = false;
@@ -88,8 +90,11 @@ public class Main {
                                         System.out.println("press 1 to Deposit");
                                         System.out.println("press 2 to Withdraw");
                                         System.out.println("press 3 to make a transfer");
-                                        System.out.println("press 4 to show transaction history");
-                                        System.out.println("press 5 to return to client operations");
+                                        System.out.println("press 4 to take a Loan");
+                                        System.out.println("press 5 to pay an Installment");
+                                        System.out.println("press 6 to show Loan History");
+                                        System.out.println("press 7 to show transaction history");
+                                        System.out.println("press 8 to return to client operations");
                                         System.out.print("\nChoice: ");
                                         int accountOperation = scanner.nextInt();
                                         if (accountOperation == 1) {
@@ -110,13 +115,17 @@ public class Main {
                                             }catch (TransactionException exp){
                                                 System.out.println(exp.getMessage());
                                             }
-                                        } else if (accountOperation == 4) {
+                                        }else if (accountOperation==4) {clients2.get(clientindex).myAccounts.get(chooseAccount - 1).takeLoan();}
+                                        else if (accountOperation==5) {clients2.get(clientindex).myAccounts.get(chooseAccount - 1).payInstallment();}
+                                        else if (accountOperation==6) {clients2.get(clientindex).myAccounts.get(chooseAccount - 1).accountLoan.display_loan_history();}
+
+                                         else if (accountOperation == 7) {
                                             for (int m = 0; m < allTransaction.size(); m++) {
                                                 if (allTransaction.get(m).getCustomerId() == currentAccNum || allTransaction.get(m).getRecipientId() == currentAccNum) {
                                                     System.out.println(allTransaction.get(m).toString());
                                                 }
                                             }
-                                        } else if (accountOperation == 5) {
+                                        } else if (accountOperation == 8) {
                                             break;
                                         } else {
                                             System.out.println("Wrong Input, Please try again!");
@@ -247,12 +256,16 @@ public class Main {
                     }
 
                 }
+                else if (signAs == 4){            Client.SaveClient(clients2);
+                }
 
                 else{break;}
 
 
 
+
             }
+
 
 
         }

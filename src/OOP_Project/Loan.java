@@ -1,54 +1,68 @@
 package OOP_Project;
 
+import java.util.ArrayList;
+
 public class Loan {
     public  int loanDurationInMonths;
     public double loanAmount;
     public double clientBalance;
-    public Installment[] installments;
+    public boolean loanStatus = false;
+    public ArrayList <Installment> installments = new ArrayList<>();
 
-    public Loan(int loanDurationInMonths, double loanAmount, double ClientBalance) {
+    public Loan(int loanDurationInMonths, double loanAmount) {
         this.loanDurationInMonths = loanDurationInMonths;
         this.loanAmount = loanAmount;
-        this.clientBalance = ClientBalance;
-        this.installments = new Installment[loanDurationInMonths];
+        loanStatus = true;
         initializeInstallments();
+
     }
 
     private void initializeInstallments() {
-        for (int i = 0; i < loanDurationInMonths; i++) {
-            installments[i] = new Installment(i + 1,false);
+        for (int j = 0; j < loanDurationInMonths; j++) {
+            installments.add( new Installment(j + 1,false,calculateInstallmentAmount()));
         }
+
     }
 
-    public void payInstallment(int installmentNumber,boolean paid) {
+    public double payInstallment(int installmentNumber,double clientBalance) {
 
-        if (installmentNumber <= loanDurationInMonths && installmentNumber > 0&& paid==false) {
-            double installmentAmount = calculateInstallmentAmount();
-            if (clientBalance >= installmentAmount) {
-                clientBalance -= installmentAmount;
-                installments[installmentNumber - 1].setPaid(true);
+        if (installmentNumber <= loanDurationInMonths && installmentNumber > 0 ) {
+            if (clientBalance >= installments.get(installmentNumber-1).installmentAmount) {
+                clientBalance -= installments.get(installmentNumber-1).installmentAmount;
+                installments.get(installmentNumber - 1).setPaid(true);
                 System.out.println("Installment " + installmentNumber + " paid successfully.");
+                return clientBalance;
             } else {
-                System.out.println("Failed Transaction " + installmentNumber);
+                System.out.println("Failed Transaction Number: " + installmentNumber);
+                return clientBalance;
             }
         }
+        return clientBalance;
     }
 public void  display_loan_history(){
-        for (int i=0; i<=loanDurationInMonths;i++)
+        for (int i=0; i<loanDurationInMonths;i++)
         {
-            System.out.println(installments[i].installmentNumber);
-            System.out.println();
-            System.out.println(installments[i].paid);
+            System.out.println("--------------------");
+            System.out.println("Installment No. "+installments.get(i).installmentNumber);
+            if (installments.get(i).paid) {
+                System.out.println("State: Paid");
+            }
+            else {
+                System.out.println("State: Unpaid");
+            }
+                System.out.println("--------------------");
         }
+
 }
 
 
     private double calculateInstallmentAmount() {
         return loanAmount / loanDurationInMonths;
     }
-    public void addLoanAmountToBalance() {
+    public double addLoanAmountToBalance(double clientBalance) {
         clientBalance += loanAmount;
         System.out.println("Loan amount added to the client's balance.");
+        return clientBalance;
     }
     public double getClientBalance() {
         return clientBalance;
