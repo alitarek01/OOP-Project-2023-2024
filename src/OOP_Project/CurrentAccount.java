@@ -16,21 +16,22 @@ public class CurrentAccount extends Account {
             System.out.println("balance less than min balance, fees would be applied");
             System.out.println("1 - To continue");
             System.out.println("2 - To change balance");
-            Scanner in = new Scanner(System.in);
-            int choice = in.nextInt();
-            while(choice != 1 && choice != 2){
-                System.out.println("invalid choice");
-                choice = in.nextInt();
-            }
-            if(choice == 1){
-                super.balance -= super.getBalance()*Fees_Rate;
-                LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
-                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                String formattedDate = myDateObj.format(myFormatObj);
-                allTransactions.add(new transaction(super.accountNumber,this,formattedDate,super.getBalance()*Fees_Rate,"Fees",employeeId));
-            }
-            else {
-                super.balance = in.nextDouble();
+            try (Scanner in = new Scanner(System.in)) {
+                int choice = in.nextInt();
+                while(choice != 1 && choice != 2){
+                    System.out.println("invalid choice");
+                    choice = in.nextInt();
+                }
+                if(choice == 1){
+                    super.balance -= super.getBalance()*Fees_Rate;
+                    LocalDateTime myDateObj = LocalDateTime.now();  // Create a date object
+                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                    String formattedDate = myDateObj.format(myFormatObj);
+                    allTransactions.add(new transaction(super.accountNumber,this,formattedDate,super.getBalance()*Fees_Rate,"Fees",employeeId));
+                }
+                else {
+                    super.balance = in.nextDouble();
+                }
             }
         }
     }

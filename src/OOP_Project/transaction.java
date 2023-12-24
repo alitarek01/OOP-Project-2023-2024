@@ -105,7 +105,9 @@ public class transaction {
                 else{
                     transactionDescription = "Current Account Fees";
                 }
-                account.updateBalance(-transactionAmount);
+                if(!transactionType.equals("Installment")){
+                    account.updateBalance(-transactionAmount);
+                }
             } else {
                 this.transactionStatus = false;
                 throw new TransactionException("Insufficient Balance.");
@@ -260,7 +262,7 @@ public class transaction {
     }
 
     public transaction(int customerId, int recipientId, int employeeId, boolean transactionStatus, String transactionDate,
-                       double transactionAmount, String transactionType, String transactionDescription) {
+                    double transactionAmount, String transactionType, String transactionDescription) {
         this.transactionId=counter++;
         this.customerId = customerId;
         this.recipientId = recipientId;

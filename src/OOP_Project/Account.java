@@ -1,10 +1,11 @@
 package OOP_Project;
 
 import java.time.LocalDate;  // import the LocalDate class
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 import java.util.ArrayList;
 import java.util.Scanner;
-    public abstract  class Account {
+    public abstract  class Account{
         int accountNumber;
         double balance;
         protected int choice;
@@ -55,7 +56,7 @@ import java.util.Scanner;
 
             return accountNumber == other.accountNumber;
         }
-
+        public void CalculateInterest(LocalDateTime currentDate){}
         public void makeTransaction(int transactionType, ArrayList<transaction> AllTransaction, ArrayList<Client> clients) throws TransactionException {
             double transactionAmount;
             int recipientAccountNumber;
@@ -97,6 +98,8 @@ import java.util.Scanner;
 
 
                         System.out.println("\nPress 1 if you want to add note");
+                        System.out.println("\nPress 0 for empty note");
+
                         if (type.nextInt() == 1) {
                             addNote = true;
                         } else {

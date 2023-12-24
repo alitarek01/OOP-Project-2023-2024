@@ -1,7 +1,4 @@
-package OOP_Project;/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+package OOP_Project;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -48,19 +45,6 @@ public class Employee {
         counter++;
         this.status=status;
     }
-//    public Employee(String password, int id, String firstName, String lastName, String address,
-//            String position, String graduatedCollage, int yearOfGraduation, String totalGrade,boolean status) {
-//        this.password = password;
-//        this.id = id;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.address = address;
-//        this.position = position;
-//        this.graduatedCollage = graduatedCollage;
-//        this.yearOfGraduation = yearOfGraduation;
-//        this.totalGrade = totalGrade;
-//        this.status=status;
-//    }
 
     // Methods
     void EmployeeEditInfo() {
@@ -106,7 +90,6 @@ public class Employee {
     }
 
     boolean EmployeeCreatingAccount(ArrayList<Client> clients2, int ID,ArrayList<transaction> allTransaction) {
-        int clientID;
         String clientPassword;
         int clientIndex = -1;
         boolean clientFounded = false;
@@ -158,37 +141,7 @@ public class Employee {
     }
 
 
-//    boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
-//        int clientIndex = -1;
-//        boolean clientFounded = false;
-//        for (int i = 0; i < clients2.size(); i++) {
-//            if (clients2.get(i).ID == ID) {
-//                clientFounded = true;
-//                clientIndex = i;
-//                break;
-//            }
-//        }
-//        if (clientFounded) {
-//            while (true) {
-//                System.out.println("Press 1 to change Client's username\nPress 2 to change Client's password");  // ask him what to change
-//                int editInfoInput = scanner.nextInt();
-//                if (editInfoInput == 1) {
-//                    System.out.println("Enter new Username:");
-//                    clients2.get(clientIndex).username = scanner.nextLine();
-//                    return true;
-//                } else if (editInfoInput == 2) {
-//                    clients2.get(clientIndex).password = scanner.nextLine();
-//                    return true;
-//                } else {
-//                    System.out.println("Wrong Input!, try Again");
-//                }
-//            }
-//        } else {
-//            System.out.println("ID not found\nTry Again!");
-//            return false;
-//        }
-//
-//    }
+
 
 
 private static final Scanner in = new Scanner(System.in);
@@ -289,7 +242,7 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
                     for (Account acc : obj.myAccounts) {
                         if (acc.accountNumber == n) {
                             found = true;
-                            obj.toString();
+                            System.out.println(obj.toString());
                             break;
                         }
                     }
@@ -307,57 +260,56 @@ boolean EmployeeEditClient(ArrayList<Client> clients2, int ID) {
 
 
     void EmployeeDeletingAccount(ArrayList <Client> clients2)
-     {
-         System.out.println("Please enter the ID and password of the Client account.");
-         System.out.println("Enter 0 in the ID if you want to cancel");
-         System.out.println("ID: ");int userID = scanner.nextInt();
-         if (userID ==0 ){return;}
-         System.out.println("Password: ");String pass = scanner.next();
-         for (Client obj: clients2)
-         {
-             if (obj.ID==userID && obj.password.equals(pass))
-             {
+    {
+        System.out.println("Please enter the ID and password of the Client account.");
+        System.out.println("Enter 0 in the ID if you want to cancel");
+        System.out.println("ID: ");int userID = scanner.nextInt();
+        if (userID ==0 ){return;}
+        System.out.println("Password: ");String pass = scanner.next();
+        for (Client obj: clients2)
+        {
+            if (obj.ID==userID && obj.password.equals(pass))
+            {
 
-                 for (Account acc:obj.myAccounts)
-                 {
-                     System.out.println("--------------------------------");
-                     System.out.println("     Account Number: " + acc.accountNumber);
-                     System.out.println("     Balance: $" + acc.balance);
-                     System.out.println("--------------------------------");
+                for (Account acc:obj.myAccounts)
+                {
+                    System.out.println("--------------------------------");
+                    System.out.println("     Account Number: " + acc.accountNumber);
+                    System.out.println("     Balance: $" + acc.balance);
+                    System.out.println("--------------------------------");
 
-                 }
+                }
 
-                 System.out.println("Enter the account number of the account you want to delete:");
-                 int accNum = scanner.nextInt();
+                System.out.println("Enter the account number of the account you want to delete:");
+                int accNum = scanner.nextInt();
 
-                 System.out.println("Enter 1 to confirm deletion or 0 to cancel.");
-                 int ans = scanner.nextInt();
-                 if (ans == 1)
-                 {
-                     for (Account acc:obj.myAccounts)
-                     {
-                         if (acc.accountNumber == accNum)
-                         {
-                             obj.myAccounts.remove(acc);
-                             return;
-                         }
-                     }
-                     System.out.println("Account deleted successfully.");
+                System.out.println("Enter 1 to confirm deletion or 0 to cancel.");
+                int ans = scanner.nextInt();
+                if (ans == 1)
+                {
+                    for (Account acc:obj.myAccounts)
+                    {
+                        if (acc.accountNumber == accNum)
+                        {
+                            obj.myAccounts.remove(acc);
+                            return;
+                        }
+                    }
+                    System.out.println("Account deleted successfully.");
 
-                 } else if (ans == 0) {
-                     return;
-                 }
+                } else if (ans == 0) {
+                    return;
+                }
 
 
-             }
-             else
-             {
-                 System.out.println("\nNo client was found.\n");
-                 break;
-             }
-         }
+            }else
+            {
+                System.out.println("\nNo client was found.\n");
+                break;
+            }
+        }
 
-     }
+    }
 
     void EmployeeMakingTransaction(ArrayList <Client> clients , ArrayList<transaction>allTransaction)
     {

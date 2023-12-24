@@ -2,7 +2,6 @@ package OOP_Project;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.lang.Double.*;
 public class Client {
     public int ID;
     String firstName;
