@@ -15,7 +15,7 @@ public class Main {
         ArrayList <transaction> allTransaction = new ArrayList<>();
 
         Client.readClient(clients2);
-
+        Employee.readEmp(employees);
 
 
 
@@ -24,8 +24,11 @@ public class Main {
 //        clients2.add(new Client(2022170850, "ahmed", "attia", "a", "2", 1060113886));
 //        clients2.add(new Client(2022170829, "omar", "amged", "mego", "1233", 1060113886));
 
-        employees.add(new Employee( "dude", 100));
-        employees.get(0).EmployeeCreatingAccount(clients2,2022170873,allTransaction);
+        //employees.add(new Employee( "dude", 100));
+        employees.add(new Employee("0", "omar", "amged", "seko seko", "t3ala neko",
+                "kolyt alsbaka", 2030, "F",true));
+
+            //employees.get(0).EmployeeCreatingAccount(clients2,2022170873,allTransaction);
       //  employees.get(0).EmployeeCreatingAccount(clients2,2022170850);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
         //employees.get(0).EmployeeCreatingAccount(clients2, 2022170873);
@@ -256,7 +259,11 @@ public class Main {
                     }
 
                 }
-                else if (signAs == 4){            Client.SaveClient(clients2);
+                else if (signAs == 4){
+                    Client.SaveClient(clients2);
+                    Employee.saveEmp(employees);
+
+                    break;
                 }
 
                 else{break;}

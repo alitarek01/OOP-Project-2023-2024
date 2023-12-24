@@ -3,8 +3,24 @@ Youssef
 Mahmoud
 Mr.J
 1
-010601138886
+10601138886
 true
-3000.0
-Saving
+3000.011
+Saving Account
+4000.011
+Saving Account
+6000.0
+Current Account
+12000.0
+Current Account
+#
+2022170850
+ahmed
+attia
+tito
+2
+1060113886
+true
+9000.0
+Current Account
 #
